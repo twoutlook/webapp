@@ -19,7 +19,8 @@ var jsonlint = require('jsonlint');     // to parse Json
 var urlSrc= "http://data.taipei/bus/BUSDATA";
 //成對要改
 var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6Im1hcmsiLCJzb21lIjoiYXJiaXRyYXJ5IiwiZGF0YSI6ImhlcmUifSwiaWF0IjoxNDUyOTQ5OTQ1fQ.68ett9WCwQzrY019k2vhLy_peiuGs-wf_Pantsu9htw";
-var fbRef = new Firebase("https://bus2016.firebaseio.com/");
+// var fbRef = new Firebase("https://bus2016.firebaseio.com/");
+var fbRef = new Firebase("https://glowing-inferno-7658.firebaseio.com/");
 
 // var MongoClient = require('mongodb').MongoClient;
 // var assert = require('assert');
@@ -121,10 +122,6 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             loc['lat']=bus.Latitude;
                             loc['lon']=bus.Longitude;
 
-                    
-
-
-
                             // TODO 這個在Azure是OK的,但是在本機會多出個小時?
                             var day = moment.unix(getTwUnixTimestamp(busDt)).format('YYYY-MM-DD HH:mm:ss');
 
@@ -140,8 +137,6 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                                   // console.log("ok");
                               }
                             });
-
-
 
 
                             var j={};
@@ -169,20 +164,20 @@ function fetch_one_set_and_show_json_problem(opt_set) {
 }
 
 
+  fetch_one_set_and_show_json_problem( get_option(urlSrc) );
 
-
-fbRef.authWithCustomToken(token, function(error, authData) {
-  if (error) {
-    console.log("fbRef Login Failed!", error);
-  } else {
-    console.log("fbRef Login Succeeded! To start schedule!", authData);
-    var j = schedule.scheduleJob('* * * * *', function(){ // per min
-    var timeStampByMin=getTimeStampByMin()
-      // console.log("timeStampByMin => " + timeStampByMin+" DO NOTHING HERE!");
-
-      // fbRef.set(null);
-      fetch_one_set_and_show_json_problem( get_option(urlSrc) );
-    })
-
-  }
-});
+// fbRef.authWithCustomToken(token, function(error, authData) {
+//   if (error) {
+//     console.log("fbRef Login Failed!", error);
+//   } else {
+//     console.log("fbRef Login Succeeded! To start schedule!", authData);
+//     var j = schedule.scheduleJob('* * * * *', function(){ // per min
+//     var timeStampByMin=getTimeStampByMin()
+//       // console.log("timeStampByMin => " + timeStampByMin+" DO NOTHING HERE!");
+//
+//       // fbRef.set(null);
+//       fetch_one_set_and_show_json_problem( get_option(urlSrc) );
+//     })
+//
+//   }
+// });
