@@ -55,7 +55,10 @@
         }
        </style>
 <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
-
+<style type="text/css">
+     html, body { height: 100%; margin: 0; padding: 0; }
+     #map { height: 100%; }
+   </style>
     </head>
     <body  ng-controller="SampleCtrl">
 
@@ -103,7 +106,7 @@
                                 <button class="btn btn-success" ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
                             </td></tr>
                         <tr> <td>
-                                <button class="btn btn-warning" ng-click="check2(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button>
+                                <button class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button>
 
                         <tr> <td>
                     </table>
@@ -153,5 +156,21 @@
                 </div>
             </div>
         </div>
+  <div id="map"></div>
+      <script type="text/javascript">
+
+  var map;
+  function initMap(lat,lng) {
+    map = new google.maps.Map(document.getElementById('map'), {
+      // center: {lat: -34.397, lng: 150.644},
+      center: {lat: lat, lng: lng},
+      zoom: 14
+    });
+  }
+
+      </script>
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc&callback=initMap">
+      </script>
     </body>
 </html>
