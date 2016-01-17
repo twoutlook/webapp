@@ -39,13 +39,13 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
 
     return [year, month, day].join('-');
 }
-  console.log("...DOING   $scope.messages2");
+
   // $scope.messages2=null;
   var day1 = new Date("2016-01-18");
   for (var i=1;i<366;i++){
     var dat=day1.addDays(i);
 
-    console.log(formatDate(dat));
+    // console.log(formatDate(dat));
     var dat=formatDate(dat);
     var temp={carNum:dat};
     // var temp={carHour:hr};
@@ -120,13 +120,26 @@ function checkDdl(obj) {
 }
 
 
+
+
   $scope.results={};
   $scope.check = function (selectCar,selectDate,selectHour) {
-    console.log("DOING  =>"+selectCar+" "+selectDate+" "+selectHour);
-
+      console.log("===============DOING  =>"+selectCar+" "+selectDate+" "+selectHour);
+//https://www.firebase.com/docs/web/libraries/angular/guide/synchronized-arrays.html
 
       var ref2=ref.child(selectCar);
-        $scope.results = $firebaseArray(ref2);
+
+      // var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).on("child_added", function(snapshot) {
+      var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour);
+
+      // .on("child_added", function(snapshot) {
+      //     console.log(snapshot.key() + " was " + snapshot.val().dt + " meters tall");
+      // });
+
+      $scope.results = $firebaseArray(query);
+
+
+
   }
 
 
