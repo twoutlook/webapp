@@ -13,7 +13,7 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   ];
 
     $scope.messages2 =[
-  
+
     {carNum:'2016-01-17'},
     {carNum:'2016-01-18'},
   ];
@@ -60,7 +60,7 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
     {carHour:'02'}
   ];
   // console.log("...DOING   $scope.ddlHour");
-  for (var i=3;i<23;i++){
+  for (var i=3;i<24;i++){
     // console.log("i="+i);
     var hr=i;
     if (i<10){
