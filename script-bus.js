@@ -119,7 +119,9 @@ function checkDdl(obj) {
   return jsonArr
 }
 
-
+function getEndStr(startStr) {
+  console.log("...checkDdl");
+}
 
 
   $scope.results={};
@@ -130,11 +132,14 @@ function checkDdl(obj) {
       var ref2=ref.child(selectCar);
 
       // var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).on("child_added", function(snapshot) {
-      var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour);
+      var startStr=selectDate+" "+selectHour;
+      var endStr=startStr+":59:59";
 
-      // .on("child_added", function(snapshot) {
-      //     console.log(snapshot.key() + " was " + snapshot.val().dt + " meters tall");
-      // });
+    //  var endStr="2016-01-17 21"
+      console.log("startStr="+startStr);
+        console.log("endStr="+endStr);
+      var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).endAt(endStr);
+      // var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour);
 
       $scope.results = $firebaseArray(query);
 
