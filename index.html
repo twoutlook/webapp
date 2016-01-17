@@ -50,11 +50,11 @@
         /*http://blog.crazyegg.com/2012/07/11/website-color-palettes/*/
         body{
             /*background-color:#F3FAB6*/
-            background-color:#F9f9f9
-
+            background-color:#F9f9f9;
+            font-family: 'Droid Sans Mono' ;
         }
        </style>
-
+<link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 
     </head>
     <body  ng-controller="SampleCtrl">
@@ -71,9 +71,10 @@
                <table style='table-layout:auto; text-align:left' class="table table-condensed"  >
                             <tr><td>
                                 <div>
+
                                     <label for="selectCar"><i>1.</i> 選擇公車【車牌】: </label>
                                     <select name="selectCar" id="selectCar" ng-model="data.selectCar"  >
-                                        <option ng-repeat="msg in messages" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
+                                        <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp;{{msg.$value}} </option>
                                     </select>
                                 </div>
                             </td></tr>

@@ -3,14 +3,15 @@ var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function($scope, $firebaseArray) {
   var ref = new Firebase("https://bus2016.firebaseio.com/");
 
-  //$scope.messages = $firebaseArray(ref);
+  var refList=ref.child('list');
+  $scope.messages = $firebaseArray(refList);
 
-  $scope.messages =[
-    {carNum:'001-FY'},
-    {carNum:'001-FP'},
-    {carNum:'002-FQ'},
-
-  ];
+  // $scope.messages =[
+  //   {carNum:'001-FY'},
+  //   {carNum:'001-FP'},
+  //   {carNum:'002-FQ'},
+  //
+  // ];
 
     $scope.messages2 =[
 
