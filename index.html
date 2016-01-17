@@ -21,6 +21,8 @@
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
+
+    <script src="js/jquery.min.js"></script>
         <!-- Custom CSS -->
         <!--<link href="css/clean-blog.min.css" rel="stylesheet">-->
 
@@ -73,7 +75,7 @@
                     <h4 style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊</h4>
                <table style='table-layout:auto; text-align:left' class="table table-condensed"  >
                             <tr><td>
-                                <div>
+                                <div id="sect1">
 
                                     <label for="selectCar"><i>1.</i> 選擇公車【車牌】: </label>
                                     <select name="selectCar" id="selectCar" ng-model="data.selectCar"  >
@@ -82,7 +84,7 @@
                                 </div>
                             </td></tr>
                         <tr> <td>
-                                <div>
+                                <div  id="sect2">
                                     <label for="selectDate"><i>2.</i> 選擇日期【一天】:</label>
                                     <select name="selectDate" id="selectDate" ng-model="data.selectDate"  >
                                         <option ng-repeat="msg in messages2" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
@@ -92,7 +94,7 @@
                         <tr> <td>
 
 
-                                <div>
+                                <div  id="sect3">
                                     <label for="selectHour"><i>3.</i> 選擇時間【小時】: </label>
                                     <select name="selectHour" id="selectHour" ng-model="data.selectHour"  >
                                         <!-- <option ng-repeat="msg in messages " value=" {{msg.$id}} "> {{msg.$id}}  </option> -->
@@ -103,16 +105,43 @@
                             </td></tr>
                         <tr> <td>
 
-                                <button class="btn btn-success" ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
-                            </td></tr>
+                          <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
+                          <button  id="hideData" class="btn btn-success" >隱藏行駛記錄</button>
+                          <script>
+                          $(document).ready(function(){
+                              $("#hideData").click(function(){
+                                  $("#data").hide();
+                              });
+                              $("#showData").click(function(){
+                                  $("#data").show();
+                              });
+
+                              $("#hideMap").click(function(){
+                                  $("#map").hide();
+                                  $("#sect1").show();
+                                    $("#sect2").show();
+                                      $("#sect3").show();
+                                        $("#data").hide();
+                              });
+                              $("#showMap").click(function(){
+                                  $("#map").show();
+                                      $("#sect1").hide();
+                                        $("#sect2").hide();
+                                          $("#sect3").hide();
+                                            $("#data").hide();
+                              });
+                          });
+</script>
+                      </td></tr>
                         <tr> <td>
-                                <button class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button>
+                          <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button>
+                          <button  id="hideMap" class="btn btn-warning" >隱藏地圖標示</button>
 
                         <tr> <td>
                     </table>
 
 
-
+                    <div id="data">
                    <table style='table-layout:auto; text-align:left' class="table table-condensed"  >
                    <tr>
                             <th>
@@ -147,7 +176,7 @@
 
 
                     </table>
-
+                  </div>
                     <!--<ul ng-repeat="msg in results"  >-->
                     <!--    <li> {{1+$index}} [{{msg.$id}}]  {{msg.dt}} ({{msg.lat}}, {{msg.lon}})</li>-->
                     <!--</ul>-->
