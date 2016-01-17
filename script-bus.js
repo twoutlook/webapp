@@ -11,23 +11,66 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
     {carNum:'002-FQ'},
 
   ];
-   
+
     $scope.messages2 =[
-    {carNum:'2016-01-16'},
+  
     {carNum:'2016-01-17'},
     {carNum:'2016-01-18'},
-
   ];
 
-  
+//http://stackoverflow.com/questions/563406/add-days-to-datetime
+  Date.prototype.addDays = function(days)
+  {
+      var dat = new Date(this.valueOf());
+      dat.setDate(dat.getDate() + days);
+      return dat;
+  }
+
+  //http://stackoverflow.com/questions/23593052/format-javascript-date-to-yyyy-mm-dd
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+  console.log("...DOING   $scope.messages2");
+  // $scope.messages2=null;
+  var day1 = new Date("2016-01-18");
+  for (var i=0;i<366;i++){
+    var dat=day1.addDays(i);
+
+    console.log(formatDate(dat));
+    var dat=formatDate(dat);
+    var temp={carNum:dat};
+    // var temp={carHour:hr};
+    $scope.messages2.push(temp);
+  }
+
+
+
+
   $scope.ddlHour=[
     {carHour:'00'},
     {carHour:'01'},
     {carHour:'02'}
   ];
-  
+  // console.log("...DOING   $scope.ddlHour");
+  for (var i=3;i<23;i++){
+    // console.log("i="+i);
+    var hr=i;
+    if (i<10){
+      hr="0"+i;
+    }
+    var temp={carHour:hr};
+    $scope.ddlHour.push(temp);
+  }
 
-  
+
 
 
 
@@ -46,14 +89,14 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
         ddlDate[childData.dt.substr(0,13)]=true;
         // console.log(key);
         console.log(ddlDate);
-       
-    
-        
+
+
+
     //    $scope.ddlDate=checkDdl(ddlDate);
         // console.log(childData);
-        
+
       });
-      
+
     });
   }
 
@@ -69,7 +112,7 @@ function checkDdl(obj) {
   for (var key in obj){
     console.log(key+" =>"+obj[key]);
     jsonArr.push({dt:key});
-   
+
   }
    console.log("====="+JSON.stringify(jsonArr));
   return jsonArr
