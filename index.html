@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <br>
-                  <button class="btn btn-primary btn-lg" >bus font 公車每小時實際行走記錄</button>
+                  <button class="btn btn-primary btn-lg" >TODO moving marker 公車每小時實際行走記錄</button>
 
                     <!-- <h2>公車每小時實際行走記錄</h2> -->
                     <h4 style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊</h4>
@@ -118,17 +118,17 @@
 
                               $("#hideMap").click(function(){
                                   $("#map").hide();
-                                  $("#sect1").show();
-                                    $("#sect2").show();
-                                      $("#sect3").show();
-                                        $("#data").hide();
+                                  // $("#sect1").show();
+                                  //   $("#sect2").show();
+                                  //     $("#sect3").show();
+                                  //       $("#data").hide();
                               });
                               $("#showMap").click(function(){
                                   $("#map").show();
-                                      $("#sect1").hide();
-                                        $("#sect2").hide();
-                                          $("#sect3").hide();
-                                            $("#data").hide();
+                                      // $("#sect1").hide();
+                                      //   $("#sect2").hide();
+                                      //     $("#sect3").hide();
+                                      //       $("#data").hide();
                               });
                           });
 </script>
@@ -188,13 +188,28 @@
   <div id="map"></div>
       <script type="text/javascript">
 
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+
+
   var map;
   function initMap(lat,lng) {
+     var myLatLng = {lat: lat, lng: lng};
     map = new google.maps.Map(document.getElementById('map'), {
       // center: {lat: -34.397, lng: 150.644},
-      center: {lat: lat, lng: lng},
+      center: myLatLng,
       zoom: 14
     });
+
+//http://jsfiddle.net/pmrotule/9tfq5sqc/8/
+// moving marker
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: iconBase + 'bus.png'
+    });
+
+
   }
 
       </script>
