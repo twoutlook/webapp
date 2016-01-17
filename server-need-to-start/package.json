@@ -1,0 +1,26 @@
+{
+  "name": "h1",
+  "version": "1.0.0",
+  "engines": {
+    "node": "4.2.2"
+  },
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^1.0.12",
+    "debug": "^2.2.0",
+    "firebase": "^2.3.2",
+    "firebase-token-generator": "^2.0.0",
+    "jsonlint": "^1.6.2",
+    "moment": "^2.11.1",
+    "mongodb": "^2.1.4",
+    "node-schedule": "^0.6.0",
+    "request": "^2.67.0",
+    "zlib": "^1.0.5"
+  }
+}
