@@ -1,0 +1,16 @@
+/*
+
+{"EssentialInfo":{"Location":{"name":"臺北市","CenterName":"臺北市動態資訊中心"},
+"UpdateTime":"2016-01-18 19:37:47","CoordinateSystem":"WGS84"},
+"BusInfo":[{"ProviderID":1100.0,"StationID":11150.0,"BusID":"337-FP","CarType":"1",
+"CarID":222233738.0,"DutyStatus":"1","BusStatus":"0","RouteID":111520.0,"GoBack":"1",
+"Longitude":121.568413,"Latitude":25.027451,"Speed":18.268129,"Azimuth":180.479996,
+"DataTime":"\/Date(1453117056000+0800)\/"}
+
+http://www.onlineconversion.com/unix_time.htm
+Mon, 18 Jan 2016 11:37:36 GMT
+
+"\/Date(1453117056000+0800)\/"
+2016-01-18 19:37:36
+
+*/

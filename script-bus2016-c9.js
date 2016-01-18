@@ -84,6 +84,7 @@ $scope.messages2=[];
 
 
 $scope.step1 = function (selectCar) {
+    $scope.messages2=[];
   console.log("???...DOING step1, selectCar =>"+selectCar);
 
   var refCar=ref.child(selectCar);
@@ -110,7 +111,7 @@ $scope.step1 = function (selectCar) {
       }
     }
     console.log(ddl2);
-    $scope.messages2=[];
+
     for (var i = 0; i < ddl2.length; i++) {
 
         var temp={carNum:ddl2[i]};
