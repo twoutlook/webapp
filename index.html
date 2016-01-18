@@ -50,11 +50,12 @@
                 </select>
             </div>
             <div class="row">
-                <button class="btn btn-danger " >{{BusID}}</button>
+                <button ng-click="busClick(data.selectCar)" class="btn btn-danger " >{{BusID}}</button>
                 <button class="btn btn-info " >({{Latitude}},{{Longitude}})</button>
                 <button class="btn btn-warning " >{{DataTimeV2}}</button>
             </div>
         </div>
+        {{ results}}
         <div id="map"></div>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc">

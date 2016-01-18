@@ -26,7 +26,7 @@
         <!-- Date.format -->
         <script src="biz-js/date.format.js"></script>
         <script src="biz-js/mark-util.js"></script>
-        <script src="biz-js/mark-bus-current-c9.js"></script>
+        <script src="biz-js/mark-bus-day-c9.js"></script>
         <style>
             body{
                 background-color:#F9f9f9;
@@ -42,7 +42,7 @@
     <body  ng-controller="SampleCtrl">
         <div class="container">
             <div class="row">
-                <button class="btn btn-primary " >主題:今天公車跑那裡?</button>
+                <button class="btn btn-primary " >主題:公車整天跑那裡?</button>
                 <button class="btn btn-success" > by 諾得捷思隊</button>
                 <button class="btn btn-danger " >選擇車牌號碼 (計 {{messages.length}} 筆) </button>
                 <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)" >

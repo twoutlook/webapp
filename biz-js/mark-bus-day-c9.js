@@ -1,4 +1,5 @@
 // Mark, 2016/1/18 23:54
+console.log("=== mark-bus-day-c9.js ===");
 var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 //
 var urlFirebase = "https://bus2016-c9.firebaseio.com/";
@@ -10,13 +11,6 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var refBusInfoOrder = refBusInfo.orderByChild("BusID");
     //
     $scope.messages = $firebaseArray(refBusInfoOrder);
-
-
-    $scope.BusID="001-FQ";
-
-
-
-
     //
     $scope.step1 = function (selectCar) {
         var refBus = refBusInfo.child( selectCar);
@@ -50,49 +44,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         });
     }
 
+  
 
-
-    $scope.busClick =function (selectCar){
-       // TODO
-       var busNum="001-FQ";
-       var busDate="2016-01-18";
-       var startStr = busDate ;
-       var endStr = startStr + " 23:59:59";
-       console.log("startStr=" + startStr);
-       console.log("endStr=" + endStr);
-
-       var rul9=urlFirebase+"/"+busNum;
-       console.log("rul9=" + rul9);
-       var ref9 = new Firebase(rul9);
-
-       var query = ref9.orderByChild("dt").startAt(startStr).endAt(endStr);
-       var cnt=0;
-
-       var myLatLng = {lat: 25.032945, lng: 121.613313};
-       var map = new google.maps.Map(document.getElementById('map'), {
-           center: myLatLng,
-           zoom: 16
-       });
-       query.on("child_added", function (snapshot, prevChildKey) {
-          var val=snapshot.val() ;
-          cnt++;
-          console.log(cnt+" "+val.dt+" "+val.lat+" "+val.lon);
-
-          if (cnt==0){
-
-          }
-          //
-          var myLatLng = {lat: val.lat, lng: val.lon};
-          var marker = new google.maps.Marker({
-              position: myLatLng,
-              map: map,
-              icon: iconBase + 'placemark_circle_highlight.png'
-          });
-
-
-
-       });
-    }
 
     $scope.check = function (selectCar, selectDate, selectHour) {
         console.log("===============DOING  =>" + selectCar + " " + selectDate + " " + selectHour);
