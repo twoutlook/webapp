@@ -2,7 +2,8 @@
 // console.log("...bus-current-c9");
 
 
-
+var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+var map;
 
 var app = angular.module("sampleApp", ["firebase"]);
 
