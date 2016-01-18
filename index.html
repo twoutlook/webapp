@@ -81,10 +81,11 @@
 
                                     <label for="selectCar"><i>1.</i> 選擇公車【車牌】: </label>
                                     <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)">
-                                        <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp;{{msg.$value}} </option>
+                                        <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp;{{msg.$value}} #{{1+$index}}</option>
                                     </select>
+                                      計 {{messages.length}} 筆
                                 </div>
-                                現有 {{messages.length}} 筆
+
                             </td></tr>
                         <tr> <td>
                                 <div  id="sect2">
@@ -92,7 +93,9 @@
                                     <select name="selectDate" id="selectDate" ng-model="data.selectDate"  >
                                         <option ng-repeat="msg in messages2" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
                                     </select>
+                                      只列出【{{data.selectCar}}】有的日期
                                 </div>
+
                                   <!-- 現有 {{messages2.length}} 筆 -->
                             </td></tr>
                         <tr> <td>
@@ -104,9 +107,10 @@
                                         <!-- <option ng-repeat="msg in messages " value=" {{msg.$id}} "> {{msg.$id}}  </option> -->
                                         <option ng-repeat="ddl in ddlHour" value=" {{ddl.carHour}} "> {{ddl.carHour}}  </option>
                                     </select>
-
+                                    只列出【{{data.selectCar}}】【{{data.selectDate}}】有的時間
                                     <!--<button ng-click="step3(data.selectHour)">確認時間</button>-->
                                 </div>
+
                                 <!-- 現有 {{ddlHour.length}} 筆 -->
                             </td></tr>
                         <tr> <td>
