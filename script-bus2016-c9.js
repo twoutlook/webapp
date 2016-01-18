@@ -1,7 +1,7 @@
 var app = angular.module("sampleApp", ["firebase"]);
 
 app.controller("SampleCtrl", function($scope, $firebaseArray) {
-  var ref = new Firebase("https://bus2016.firebaseio.com/");
+  var ref = new Firebase("https://bus2016-c9.firebaseio.com/");
 
   var refList=ref.child('list');
   $scope.messages = $firebaseArray(refList);
@@ -71,37 +71,52 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
     $scope.ddlHour.push(temp);
   }
 
-
-
-
-
-  $scope.step1 = function (selectCar) {
-    console.log("selectCar =>"+selectCar);
-     $scope.ddlDate={};
-      var refCar=ref.child(selectCar);
-      var ddlDate={};
-      refCar.once("value", function(snapshot) {
-        // The callback function will get called twice, once for "fred" and once for "barney"
-        snapshot.forEach(function(childSnapshot) {
-        // key will be "fred" the first time and "barney" the second time
-        var key = childSnapshot.key();
-        // childData will be the actual contents of the child
-        var childData = childSnapshot.val();
-        ddlDate[childData.dt.substr(0,13)]=true;
-        // console.log(key);
-        console.log(ddlDate);
-
-
-
-    //    $scope.ddlDate=checkDdl(ddlDate);
-        // console.log(childData);
-
-      });
-
-    });
+//http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
+  function contains(a, obj) {
+      for (var i = 0; i < a.length; i++) {
+          if (a[i] === obj) {
+              return true;
+          }
+      }
+      return false;
   }
 
 
+$scope.step1 = function (selectCar) {
+  console.log("???...DOING step1, selectCar =>"+selectCar);
+
+  var refCar=ref.child(selectCar);
+  var ddl=[];
+  refCar.once("value", function(snapshot) {
+    // The callback function will get called twice, once for "fred" and once for "barney"
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "fred" the first time and "barney" the second time
+        var key = childSnapshot.key();
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+      //var desiredDate=childData.dt.substr(0,13); // FOR TESTING 2016-01-18 08
+      var desiredDate=childData.dt.substr(0,10); // FOR PRODUCTION 2016-01-18
+      ddl.push(desiredDate);
+    })
+    console.log("ddl.length=>"+ddl.length);
+    console.log(ddl);
+    ddl2=[];
+    for (var i = 0; i < ddl.length; i++) {
+      if (contains(ddl2,ddl[i])){
+        //
+      }else{
+        ddl2.push(ddl[i]);
+      }
+    }
+    console.log(ddl2);
+    $scope.messages2=[];
+    for (var i = 0; i < ddl2.length; i++) {
+
+        var temp={carNum:ddl2[i]};
+        $scope.messages2.push(temp);
+    }
+  })
+}
 
 //
 function logArrayElements(element, index, array) {

@@ -1,7 +1,7 @@
 var app = angular.module("sampleApp", ["firebase"]);
 
 app.controller("SampleCtrl", function($scope, $firebaseArray) {
-  var ref = new Firebase("https://bus2016.firebaseio.com/");
+  var ref = new Firebase("https://bus2016-c9.firebaseio.com/");
 
   var refList=ref.child('list');
   $scope.messages = $firebaseArray(refList);
@@ -71,25 +71,83 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
     $scope.ddlHour.push(temp);
   }
 
-
-
+//http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
+  function contains(a, obj) {
+      for (var i = 0; i < a.length; i++) {
+          if (a[i] === obj) {
+              return true;
+          }
+      }
+      return false;
+  }
 
 
   $scope.step1 = function (selectCar) {
-    console.log("step1 selectCar =>"+selectCar);
-    //  $scope.ddlDate={};
-    //   var refCar=ref.child(selectCar);
-    //   var ddlDate={};
-    //   refCar.once("value", function(snapshot) {
-    //     // The callback function will get called twice, once for "fred" and once for "barney"
-    //     snapshot.forEach(function(childSnapshot) {
-    //     // key will be "fred" the first time and "barney" the second time
-    //     var key = childSnapshot.key();
-    //     // childData will be the actual contents of the child
-    //     var childData = childSnapshot.val();
-    //     ddlDate[childData.dt.substr(0,13)]=true;
-    //     // console.log(key);
-    //     console.log(ddlDate);
+    console.log("???...DOING step1, selectCar =>"+selectCar);
+     $scope.ddlDate={};
+      var refCar=ref.child(selectCar);
+      var ddlDate={};
+
+      $scope.messages2=[];// reset this array
+      refCar.once("value", function(snapshot) {
+        // The callback function will get called twice, once for "fred" and once for "barney"
+        snapshot.forEach(function(childSnapshot) {
+        // key will be "fred" the first time and "barney" the second time
+        var key = childSnapshot.key();
+        // childData will be the actual contents of the child
+        var childData = childSnapshot.val();
+        // var desiredDate=childData.dt.substr(0,13); // FOR TESTING 2016-01-18 08
+        var desiredDate=childData.dt.substr(0,10); // FOR PRODUCTION 2016-01-18
+        // var temp={carNum:desiredDate};
+        var tempDate={carNum:desiredDate};
+        console.log(tempDate);
+        var dateCnt=$scope.messages2.length;
+        console.log($scope.messages2.length);
+
+        var flag=false;
+        for (var i = 0; i < $scope.messages2; i++) {
+          console.log(i+" of "+$scope.messages2.length);
+          console.log(i+" is "+$scope.messages2[i].carNum);
+
+            if ($scope.messages2[i].carNum == tempDate.carNum) {
+                flag=true;
+            }
+        }
+        console.log("flag="+flag);
+        if (flag===false){
+          //
+
+          $scope.messages2.push(tempDate);
+        }
+
+
+        // if contains($scope.messages2,temp){
+        //   // exist, not to repeat
+        // }else{
+        //   $scope.messages2.push(tempDate); // NOT GOOD ENOUGH, REPEAT DAYS
+        // }
+
+
+        // console.log("desiredDate "+desiredDate);
+        //
+        // ddlDate[desiredDate]=true;
+        // // console.log(key);
+        // // console.log("xxx no repeat date here: "+ddlDate);
+        // // console.log(ddlDate);
+        //
+        // for(var i = 0; i < ddlDate.length; i++) {
+        //   var obj = ddlDate[i];
+        //   console.log("============");
+        //   console.log(obj);
+        //   console.log(ddlDate);
+        //
+        // }
+        //
+        //   console.log("??? id "+obj.id);
+        //   var temp={carNum:obj.id};
+        //   // var temp={carHour:hr};
+        //   $scope.messages2.push(temp);
+        // }
 
 
 
