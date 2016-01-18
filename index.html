@@ -47,7 +47,11 @@
         <!--      rel="stylesheet">-->
 
         <!--<script src="javascripts/app-bus.js"></script>-->
-        <script src="script-bus2016-c9.js"></script>
+
+        <!-- Date.format -->
+        <script src="biz-js/date.format.js"></script>
+        <script src="biz-js/mark-util.js"></script>
+        <script src="biz-js/mark-bus-current-c9.js"></script>
         <style>
         /*http://blog.crazyegg.com/2012/07/11/website-color-palettes/*/
         body{
@@ -59,7 +63,7 @@
 <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 <style type="text/css">
      html, body { height: 100%; margin: 0; padding: 0; }
-     #map { height: 100%; }
+     #map { height: 75%; }
    </style>
     </head>
     <body  ng-controller="SampleCtrl">
@@ -67,135 +71,36 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <br>
+                <!-- <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> -->
+            
 
-                  <button class="btn btn-primary btn-lg" >DOING MAP 公車每小時實際行走記錄</button>
-
+                  <button class="btn btn-primary " >主題:現在公車在那裡?</button>
+  <button class="btn btn-success" > by 諾得捷思隊</button>
 
                     <!-- <h2>公車每小時實際行走記錄</h2> -->
-                    <h4 style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊</h4>
-               <table style='table-layout:auto; text-align:left' class="table table-condensed"  >
-                            <tr><td>
-                                <div id="sect1">
 
-                                    <label for="selectCar"><i>1.</i> 選擇車牌號碼: </label>
-                                    <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)">
+                    <!-- <div id="sysinfo">{{sysinfo}}  {{data.selectCar}} </div> -->
+
+
+
+                                    <button class="btn btn-danger " >選擇車牌號碼 (計 {{messages.length}} 筆) </button>
+                                    <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)" onchange='initMap()'>
                                       <!-- <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp;{{msg.$value}} #{{1+$index}}</option> -->
                                       <!-- <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp; #{{1+$index}}</option> -->
-                                      <option ng-repeat="msg in messages" value=" {{msg.$id}} "> {{msg.$id}}</option>
+                                      <option ng-repeat="msg in messages" value="{{msg.$id}}"> {{msg.BusID}} </option>
                                   </select>
-                                  <!-- …    計 {{messages.length}} 筆 -->
                                 </div>
+                                  <div class="row">
+                                 <button class="btn btn-danger " >{{BusID}}</button>
+                                 <button class="btn btn-info " >({{Latitude}},{{Longitude}})</button>
+                                      <button class="btn btn-warning " >{{DataTimeV2}}</button>
 
-                            </td></tr>
-                        <tr> <td>
-                                <div  id="sect2">
-                                    <label for="selectDate"><i>2.</i> 選擇日期時間:</label>
-                                    <select name="selectDate" id="selectDate" ng-model="data.selectDate"  >
-                                        <option ng-repeat="msg in messages2" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
-                                    </select>
-                                      只列出【{{data.selectCar}}】有記錄的日期時間
-                                </div>
-
-                                  <!-- 現有 {{messages2.length}} 筆 -->
-                            </td></tr>
-                        <!-- <tr> <td>
-
-
-                                <div  id="sect3">
-                                    <label for="selectHour"><i>3.</i> 選擇時間【小時】: </label>
-                                    <select name="selectHour" id="selectHour" ng-model="data.selectHour"  >
-                                            <option ng-repeat="ddl in ddlHour" value=" {{ddl.carHour}} "> {{ddl.carHour}}  </option>
-                                    </select>
-                                    DOING... 只列出【{{data.selectCar}}】【{{data.selectDate}}】有的時間
-                                  </div>
-
-
-                            </td></tr> -->
-                        <tr> <td>
-
-                          <!-- <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
-                          <button  id="hideData" class="btn btn-success" >隱藏行駛記錄</button> -->
-                          <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】行駛記錄</button>
-                          <button  id="hideData" class="btn btn-success" >隱藏行駛記錄</button>
-                          <script>
-                          $(document).ready(function(){
-                              $("#hideData").click(function(){
-                                  $("#data").hide();
-                              });
-                              $("#showData").click(function(){
-                                  $("#data").show();
-                              });
-
-                              $("#hideMap").click(function(){
-                                  $("#map").hide();
-                                  // $("#sect1").show();
-                                  //   $("#sect2").show();
-                                  //     $("#sect3").show();
-                                  //       $("#data").hide();
-                              });
-                              $("#showMap").click(function(){
-                                  $("#map").show();
-                                      // $("#sect1").hide();
-                                      //   $("#sect2").hide();
-                                      //     $("#sect3").hide();
-                                      //       $("#data").hide();
-                              });
-                          });
-</script>
-                      </td></tr>
-                        <tr> <td>
-                          <!-- <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button> -->
-                          <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】地圖標示</button>
-                          <button  id="hideMap" class="btn btn-warning" >隱藏地圖標示</button>
-
-                        <tr> <td>
-                    </table>
-
-
-                    <div id="data">
-                   <table style='table-layout:auto; text-align:left' class="table table-condensed"  >
-                   <tr>
-                            <th>
-
-                            </th>
-                            <th>
-                                時間
-                            </th>
-                            <th>
-                                經度
-                            </th>
-                            <th>
-                                緯度
-                            </th>
-                        </tr>
-
-                        <tr  ng-repeat="msg in results" >
-                            <td>
-                                {{1 + $index}}
-                            </td>
-                            <td>
-                                {{msg.dt}}
-                            </td>
-                            <td>
-                                {{msg.lat}}
-                            </td>
-                            <td>
-                                {{msg.lon}}
-                            </td>
-                        </tr>
-
-
-
-                    </table>
-                  </div>
                     <!--<ul ng-repeat="msg in results"  >-->
                     <!--    <li> {{1+$index}} [{{msg.$id}}]  {{msg.dt}} ({{msg.lat}}, {{msg.lon}})</li>-->
                     <!--</ul>-->
 
 
-                </div>
+                <!-- </div> -->
             </div>
         </div>
   <div id="map"></div>
@@ -206,21 +111,22 @@
 
 
   var map;
-  function initMap(lat,lng) {
-     var myLatLng = {lat: lat, lng: lng};
-    map = new google.maps.Map(document.getElementById('map'), {
-      // center: {lat: -34.397, lng: 150.644},
-      center: myLatLng,
-      zoom: 14
-    });
-
-//http://jsfiddle.net/pmrotule/9tfq5sqc/8/
-// moving marker
-    var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      icon: iconBase + 'bus.png'
-    });
+  function initMap() {
+      console.log("...initMap");
+//      var myLatLng = {lat: 25.093797, lng: 121.524992};
+//     map = new google.maps.Map(document.getElementById('map'), {
+//       // center: {lat: -34.397, lng: 150.644},
+//       center: myLatLng,
+//       zoom: 16
+//     });
+//
+// //http://jsfiddle.net/pmrotule/9tfq5sqc/8/
+// // moving marker
+//     var marker = new google.maps.Marker({
+//       position: myLatLng,
+//       map: map,
+//       icon: iconBase + 'bus.png'
+//     });
 
 
   }
