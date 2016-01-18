@@ -67,12 +67,14 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
        var query = ref9.orderByChild("dt").startAt(startStr).endAt(endStr);
        var cnt=0;
-
-       var myLatLng = {lat: 25.032945, lng: 121.613313};
+//25.084425, 121.561544
+//25.03315 121.6134
+       var myLatLng = {lat: 25.03315, lng: 121.6134};
        var map = new google.maps.Map(document.getElementById('map'), {
            center: myLatLng,
-           zoom: 16
+           zoom: 13
        });
+
        query.on("child_added", function (snapshot, prevChildKey) {
           var val=snapshot.val() ;
           cnt++;
