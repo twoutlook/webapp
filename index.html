@@ -69,11 +69,9 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <br>
-<<<<<<< HEAD
-                  <button class="btn btn-primary btn-lg" >DOING step1 date 公車每小時實際行走記錄</button>
-=======
-                  <button class="btn btn-primary btn-lg" >fb->c9 公車每小時實際行走記錄</button>
->>>>>>> 9b51d4fd11b18a4ac0fc28fa6e8a2b4022491f7b
+
+                  <button class="btn btn-primary btn-lg" >doing step2 公車每小時實際行走記錄</button>
+
 
                     <!-- <h2>公車每小時實際行走記錄</h2> -->
                     <h4 style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊</h4>
@@ -86,6 +84,7 @@
                                         <option ng-repeat="msg in messages" value=" {{msg.$id}} "> 【{{msg.$id}}】&nbsp;&nbsp;{{msg.$value}} </option>
                                     </select>
                                 </div>
+                                現有 {{messages.length}} 筆
                             </td></tr>
                         <tr> <td>
                                 <div  id="sect2">
@@ -94,6 +93,7 @@
                                         <option ng-repeat="msg in messages2" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
                                     </select>
                                 </div>
+                                  <!-- 現有 {{messages2.length}} 筆 -->
                             </td></tr>
                         <tr> <td>
 
@@ -104,8 +104,10 @@
                                         <!-- <option ng-repeat="msg in messages " value=" {{msg.$id}} "> {{msg.$id}}  </option> -->
                                         <option ng-repeat="ddl in ddlHour" value=" {{ddl.carHour}} "> {{ddl.carHour}}  </option>
                                     </select>
+
                                     <!--<button ng-click="step3(data.selectHour)">確認時間</button>-->
                                 </div>
+                                <!-- 現有 {{ddlHour.length}} 筆 -->
                             </td></tr>
                         <tr> <td>
 

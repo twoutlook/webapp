@@ -13,11 +13,12 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   //
   // ];
 
-    $scope.messages2 =[
-
-    {carNum:'2016-01-17'},
-    {carNum:'2016-01-18'},
-  ];
+$scope.messages2=[];
+  //   $scope.messages2 =[
+  //
+  //   {carNum:'2016-01-17'},
+  //   {carNum:'2016-01-18'},
+  // ];
 
 //http://stackoverflow.com/questions/563406/add-days-to-datetime
   Date.prototype.addDays = function(days)
@@ -41,16 +42,16 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
 }
 
   // $scope.messages2=null;
-  var day1 = new Date("2016-01-18");
-  for (var i=1;i<366;i++){
-    var dat=day1.addDays(i);
-
-    // console.log(formatDate(dat));
-    var dat=formatDate(dat);
-    var temp={carNum:dat};
-    // var temp={carHour:hr};
-    $scope.messages2.push(temp);
-  }
+  // var day1 = new Date("2016-01-18");
+  // for (var i=1;i<366;i++){
+  //   var dat=day1.addDays(i);
+  //
+  //   // console.log(formatDate(dat));
+  //   var dat=formatDate(dat);
+  //   var temp={carNum:dat};
+  //   // var temp={carHour:hr};
+  //   $scope.messages2.push(temp);
+  // }
 
 
 
