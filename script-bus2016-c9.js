@@ -95,8 +95,8 @@ $scope.step1 = function (selectCar) {
         var key = childSnapshot.key();
       // childData will be the actual contents of the child
       var childData = childSnapshot.val();
-      //var desiredDate=childData.dt.substr(0,13); // FOR TESTING 2016-01-18 08
-      var desiredDate=childData.dt.substr(0,10); // FOR PRODUCTION 2016-01-18
+      var desiredDate=childData.dt.substr(0,13); // FOR TESTING 2016-01-18 08
+      // var desiredDate=childData.dt.substr(0,10); // FOR PRODUCTION 2016-01-18…
       ddl.push(desiredDate);
     })
     console.log("ddl.length=>"+ddl.length);
@@ -148,13 +148,16 @@ function getEndStr(startStr) {
       var ref2=ref.child(selectCar);
 
       // var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).on("child_added", function(snapshot) {
-      var startStr=selectDate+" "+selectHour;
+      // var startStr=selectDate+" "+selectHour;
+      var startStr=selectDate;
+
+
       var endStr=startStr+":59:59";
 
     //  var endStr="2016-01-17 21"
       console.log("startStr="+startStr);
         console.log("endStr="+endStr);
-      var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).endAt(endStr);
+      var query=ref2.orderByChild("dt").startAt(startStr).endAt(endStr);
       // var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour);
 
       $scope.results = $firebaseArray(query);

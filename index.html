@@ -70,7 +70,7 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <br>
 
-                  <button class="btn btn-primary btn-lg" >not to update list every min,hide dt on ddl 公車每小時實際行走記錄</button>
+                  <button class="btn btn-primary btn-lg" >DOING MAP 公車每小時實際行走記錄</button>
 
 
                     <!-- <h2>公車每小時實際行走記錄</h2> -->
@@ -90,33 +90,33 @@
                             </td></tr>
                         <tr> <td>
                                 <div  id="sect2">
-                                    <label for="selectDate"><i>2.</i> 選擇日期【一天】:</label>
+                                    <label for="selectDate"><i>2.</i> 選擇日期時間:</label>
                                     <select name="selectDate" id="selectDate" ng-model="data.selectDate"  >
                                         <option ng-repeat="msg in messages2" value=" {{msg.carNum}} "> {{msg.carNum}}  </option>
                                     </select>
-                                      只列出【{{data.selectCar}}】有的日期
+                                      只列出【{{data.selectCar}}】有記錄的日期時間
                                 </div>
 
                                   <!-- 現有 {{messages2.length}} 筆 -->
                             </td></tr>
-                        <tr> <td>
+                        <!-- <tr> <td>
 
 
                                 <div  id="sect3">
                                     <label for="selectHour"><i>3.</i> 選擇時間【小時】: </label>
                                     <select name="selectHour" id="selectHour" ng-model="data.selectHour"  >
-                                        <!-- <option ng-repeat="msg in messages " value=" {{msg.$id}} "> {{msg.$id}}  </option> -->
-                                        <option ng-repeat="ddl in ddlHour" value=" {{ddl.carHour}} "> {{ddl.carHour}}  </option>
+                                            <option ng-repeat="ddl in ddlHour" value=" {{ddl.carHour}} "> {{ddl.carHour}}  </option>
                                     </select>
                                     DOING... 只列出【{{data.selectCar}}】【{{data.selectDate}}】有的時間
-                                    <!--<button ng-click="step3(data.selectHour)">確認時間</button>-->
-                                </div>
+                                  </div>
 
-                                <!-- 現有 {{ddlHour.length}} 筆 -->
-                            </td></tr>
+
+                            </td></tr> -->
                         <tr> <td>
 
-                          <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
+                          <!-- <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】行駛記錄</button>
+                          <button  id="hideData" class="btn btn-success" >隱藏行駛記錄</button> -->
+                          <button  title="請點擊兩次" id="showData" class="btn btn-success"  ng-click="check(data.selectCar, data.selectDate, data.selectHour)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】行駛記錄</button>
                           <button  id="hideData" class="btn btn-success" >隱藏行駛記錄</button>
                           <script>
                           $(document).ready(function(){
@@ -145,7 +145,8 @@
 </script>
                       </td></tr>
                         <tr> <td>
-                          <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button>
+                          <!-- <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】【{{data.selectHour}}】地圖標示</button> -->
+                          <button id="showMap" class="btn btn-warning" onclick="initMap(25.048788,	121.517097)">立即查看【{{data.selectCar}}】【{{data.selectDate}}】地圖標示</button>
                           <button  id="hideMap" class="btn btn-warning" >隱藏地圖標示</button>
 
                         <tr> <td>
