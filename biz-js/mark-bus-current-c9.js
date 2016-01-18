@@ -11,9 +11,11 @@ app.controller("SampleCtrl", function($scope, $firebaseArray) {
   $scope.sysinfo="...init bus l";
   var url="https://bus2016-c9.firebaseio.com/";
   var ref = new Firebase(url);
+//  var query=ref2.orderByChild("dt").startAt(selectDate+" "+selectHour).endAt(endStr);
 
   var refBusInfo=ref.child('current/BusInfo');
-  $scope.messages = $firebaseArray(refBusInfo);
+  var refBusInfoOrder=refBusInfo.orderByChild("BusID");
+  $scope.messages = $firebaseArray(refBusInfoOrder);
 
   $scope.results=[];
     $scope.BusID="";
