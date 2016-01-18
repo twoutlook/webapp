@@ -45,7 +45,7 @@
                 <button class="btn btn-primary " >主題:今天公車跑那裡?</button>
                 <button class="btn btn-success" > by 諾得捷思隊</button>
                 <button class="btn btn-danger " >選擇車牌號碼 (計 {{messages.length}} 筆) </button>
-                <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)" onchange='initMap()'>
+                <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)" >
                         <option ng-repeat="msg in messages" value="{{msg.$id}}"> {{msg.BusID}} </option>
                 </select>
             </div>
@@ -57,7 +57,7 @@
         </div>
         <div id="map"></div>
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc&callback=initMap">
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc">
         </script>
     </body>
 </html>
