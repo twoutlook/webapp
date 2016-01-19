@@ -99,6 +99,36 @@ console.log("unix "+unix);
 
 }
 
+// No. 35, Duxin Rd, Xitun District
+// Taichung City, 407
+// 24.179281, 120.600585
+
+$scope.test =function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: {lat: 24.179281, lng: 120.600585}
+  });
+
+  marker = new google.maps.Marker({
+    map: map,
+      icon:'img/idea.jpg',
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: {lat: 24.179281, lng: 120.600585}
+  });
+   map.setCenter(marker.getPosition());
+  marker.addListener('click', toggleBounce);
+}
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
   $scope.setAnchor =function (){
 var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 
@@ -106,10 +136,41 @@ var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 var marker = new google.maps.Marker({
     position: myInitLatLng,
     map: map,
-    icon: iconBase + 'marina.png'//marina.png
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    icon: iconBase + 'marina.png',//marina.png
+
 });
+  marker.addListener('click', toggleBounce);
  map.setCenter(marker.getPosition());
+ //
+ // marker = new google.maps.Marker({
+ //     map: map,
+ //     draggable: true,
+ //     animation: google.maps.Animation.DROP,
+ //     position: {lat: 59.327, lng: 18.067}
+ //   });
+ //   marker.addListener('click', toggleBounce);
+ // }
+ //
+
+
+
+
+
+
+
+ // map.panTo(marker.getPosition())
 }
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
     // TO SHOW ALL MARKS
     $scope.busClick =function (selectCar){
        // TODO
