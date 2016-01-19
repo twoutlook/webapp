@@ -111,13 +111,34 @@ $scope.test =function initMap() {
 
   marker = new google.maps.Marker({
     map: map,
-      icon:'img/idea.jpg',
+      icon:'img/idea.gif',
     draggable: true,
     animation: google.maps.Animation.DROP,
     position: {lat: 24.179281, lng: 120.600585}
   });
    map.setCenter(marker.getPosition());
   marker.addListener('click', toggleBounce);
+
+  var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        // '<h1 id="firstHeading" class="firstHeading">'+"【"+bus+"】"+'</h1>'+
+        '<div id="bodyContent">'+
+        // '<p><b>'+$scope.unix+'</b>'+
+          '<p><b>twcloudwebapp@outlook.com</b>'+
+        '</div>'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+
+
+
+
 }
 
 function toggleBounce() {
