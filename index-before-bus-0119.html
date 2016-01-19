@@ -26,7 +26,7 @@
         <!-- Date.format -->
         <script src="biz-js/date.format.js"></script>
         <script src="biz-js/mark-util.js"></script>
-        <script src="biz-js/mark-bus-0119.js"></script>
+        <script src="biz-js/mark-bus-current-c9.js"></script>
         <style>
             body{
                 background-color:#F9f9f9;
@@ -44,14 +44,13 @@
             <div class="row">
                 <button class="btn btn-primary " >bus-0119(1/22交卷)主題:走過必留痕跡</button>
                 <button class="btn btn-success" > by 諾得捷思隊</button>
-                <button class="btn btn-danger " >選擇車牌號碼 (計 {{busList.length}} 筆) </button>
-
-                <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
-                        <option ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
+                <button class="btn btn-danger " >選擇車牌號碼 (計 {{messages.length}} 筆) </button>
+                <select name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="step1(data.selectCar)" >
+                        <option ng-repeat="msg in messages" value="{{msg.$id}}"> {{msg.BusID}} </option>
                 </select>
             </div>
             <div class="row">
-                <button ng-click="busClick(data.selectCar)" class="btn btn-danger " >點兩下,看【{{bus}}】走過的痕跡</button>
+                <button ng-click="busClick(data.selectCar)" class="btn btn-danger " >{{BusID}}</button>
                 <button class="btn btn-info " >({{Latitude}},{{Longitude}})</button>
                 <button class="btn btn-warning " >{{DataTimeV2}}</button>
             </div>
