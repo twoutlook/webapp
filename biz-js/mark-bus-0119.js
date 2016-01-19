@@ -41,6 +41,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
           $scope.unix=doc.unix;
 
       });
+      showBus();
       //$scope.bus=bus;
     }
 
@@ -84,15 +85,44 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 
 
-  $scope.latLonClick =function (){
+  $scope.latLonClick =   function () {
+    showBus();
+  }
+
+  function showBus(){
 
     console.log("DOING, to show "+$scope.lat+","+$scope.lon);
+// var _date = $filter('date')(new Date(parseInt($scope.unix)), 'dd/MM/yyyy');
+    var dt=new Date(parseInt($scope.unix));
+    var contentString = '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
+          '<div id="bodyContent">'+
+          // '<p><b>'+$scope.unix+'</b>'+
+            '<p><b>'+dt+'</b>'+
+          '</div>'+
+          '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+
     var myLatLng = {lat: $scope.lat, lng: $scope.lon};
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        icon: iconBase + 'bus.png'
+        icon: iconBase + 'bus.png',
+         title: $scope.bus
     });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+   map.setCenter(marker.getPosition());
+
+
+
   }
 
 
