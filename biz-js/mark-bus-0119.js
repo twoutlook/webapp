@@ -91,42 +91,43 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
   }
 
   function showBus(){
+    makeMarker($scope.bus,$scope.unix,$scope.lat,$scope.lon,'bus.png');
+//     console.log("DOING, to show "+$scope.lat+","+$scope.lon);
+// // var _date = $filter('date')(new Date(parseInt($scope.unix)), 'dd/MM/yyyy');
+//     var dt=new Date(parseInt($scope.unix));
+//     var contentString = '<div id="content">'+
+//           '<div id="siteNotice">'+
+//           '</div>'+
+//           '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
+//           '<div id="bodyContent">'+
+//           // '<p><b>'+$scope.unix+'</b>'+
+//             '<p><b>'+dt+'</b>'+
+//           '</div>'+
+//           '</div>';
+//
+//       var infowindow = new google.maps.InfoWindow({
+//         content: contentString
+//       });
+//
+//
+//     var myLatLng = {lat: $scope.lat, lng: $scope.lon};
+//     var marker = new google.maps.Marker({
+//         position: myLatLng,
+//         map: map,
+//         icon: iconBase + 'bus.png',
+//          title: $scope.bus
+//     });
+//     marker.addListener('click', function() {
+//       infowindow.open(map, marker);
+//     });
 
-    console.log("DOING, to show "+$scope.lat+","+$scope.lon);
-// var _date = $filter('date')(new Date(parseInt($scope.unix)), 'dd/MM/yyyy');
-    var dt=new Date(parseInt($scope.unix));
-    var contentString = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
-          '<div id="bodyContent">'+
-          // '<p><b>'+$scope.unix+'</b>'+
-            '<p><b>'+dt+'</b>'+
-          '</div>'+
-          '</div>';
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-
-
-    var myLatLng = {lat: $scope.lat, lng: $scope.lon};
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        icon: iconBase + 'bus.png',
-         title: $scope.bus
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-   map.setCenter(marker.getPosition());
+  //  map.setCenter(marker.getPosition());
 
 
 
   }
 
-function makeMarker(bus,unix,lat,lon){//1453193870000
+function makeMarker(bus,unix,lat,lon,img){//1453193870000
                               //1453194522000
 console.log("unix "+unix);
   var temp=parseInt(unix);
@@ -141,7 +142,9 @@ console.log("unix "+unix);
   var marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
-      icon: iconBase + 'placemark_circle_highlight.png',//marina.png
+      // icon: iconBase + 'placemark_circle_highlight.png',//marina.png
+      icon: iconBase + img,//marina.png
+
       title:"【"+bus+"】"+dt2
   });
 
@@ -212,7 +215,7 @@ var myLatLng ;
           //     icon: iconBase + 'placemark_circle_highlight.png',//marina.png
           //     title:"【"+val.bus+"】"+(new Date(parseInt(val.unix)))
           // });
-          makeMarker(val.bus,val.unix,val.lat,val.lon);
+          makeMarker(val.bus,val.unix,val.lat,val.lon,'placemark_circle_highlight.png');
 //	isoDate:        "yyyy-mm-dd",
 	// isoTime:        "HH:MM:ss",
           // var dt=new Date(parseInt($scope.unix));
