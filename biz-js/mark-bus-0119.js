@@ -13,10 +13,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // var refBusInfoOrder = refBusInfo.orderByChild("BusID");
     //
-    // Taipei city hall
-    // 25.052415, 121.516170
-    $scope.lat=25.052415;
-    $scope.lon=121.516170;
+    // Taipei 101
+    //lat: 25.033718, lng: 121.565512
+    $scope.lat=25.033718;
+    $scope.lon=121.565512;
 
     // map = new google.maps.Map(document.getElementById('map'), {
     //     center: {lat:$scope.lat, lng:$scope.lon},
