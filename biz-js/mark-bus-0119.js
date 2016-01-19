@@ -126,7 +126,42 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
   }
 
+function makeMarker(bus,unix,lat,lon){//1453193870000
+                              //1453194522000
+console.log("unix "+unix);
+  var temp=parseInt(unix);
+  console.log("unix in int "+temp);
 
+  var dt=new Date(temp);
+  console.log("dt is date"+dt);
+  // dt2=dt.format("yyyy-mm-dd HH:MM:ss");
+  dt2=dt.format("mm/dd HH:MM");
+
+  var myLatLng = {lat: lat, lng: lon};
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: iconBase + 'placemark_circle_highlight.png',//marina.png
+      title:"【"+bus+"】"+dt2
+  });
+
+  var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        // '<h1 id="firstHeading" class="firstHeading">'+"【"+bus+"】"+'</h1>'+
+        '<div id="bodyContent">'+
+        // '<p><b>'+$scope.unix+'</b>'+
+          '<p><b>'+"【"+bus+"】"+dt2+'</b>'+
+        '</div>'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+}
     // TO SHOW ALL MARKS
     $scope.busClick =function (selectCar){
        // TODO
@@ -167,19 +202,38 @@ var myLatLng ;
        query.on("child_added", function (snapshot, prevChildKey) {
           var val=snapshot.val() ;
           cnt++;
-          console.log(cnt+" "+val.bus+" "+val.unix+" "+val.lat+" "+val.lon);
-
-          if (cnt==0){
-
-          }
+          // console.log(cnt+" "+val.bus+" "+val.unix+" "+val.lat+" "+val.lon);
+          console.log(cnt+" "+val.bus+" "+val.unix);
           //
-          var myLatLng = {lat: val.lat, lng: val.lon};
-          var marker = new google.maps.Marker({
-              position: myLatLng,
-              map: map,
-              icon: iconBase + 'placemark_circle_highlight.png',//marina.png
-              title:"【"+val.bus+"】"+(new Date(parseInt(val.unix)))
-          });
+          // var myLatLng = {lat: val.lat, lng: val.lon};
+          // var marker = new google.maps.Marker({
+          //     position: myLatLng,
+          //     map: map,
+          //     icon: iconBase + 'placemark_circle_highlight.png',//marina.png
+          //     title:"【"+val.bus+"】"+(new Date(parseInt(val.unix)))
+          // });
+          makeMarker(val.bus,val.unix,val.lat,val.lon);
+//	isoDate:        "yyyy-mm-dd",
+	// isoTime:        "HH:MM:ss",
+          // var dt=new Date(parseInt($scope.unix));
+          // dt2=dt.format("yyyy-mm-dd HH:MM:ss");
+          // var contentString = '<div id="content">'+
+          //       '<div id="siteNotice">'+
+          //       '</div>'+
+          //       '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
+          //       '<div id="bodyContent">'+
+          //       // '<p><b>'+$scope.unix+'</b>'+
+          //         '<p><b>'+dt2+'</b>'+
+          //       '</div>'+
+          //       '</div>';
+          //
+          //   var infowindow = new google.maps.InfoWindow({
+          //     content: contentString
+          //   });
+          //   marker.addListener('click', function() {
+          //     infowindow.open(map, marker);
+          //   });
+
        });
 
     }
