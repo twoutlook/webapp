@@ -11,6 +11,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var refBuslist = ref.child('buslist');
     $scope.busList = $firebaseArray(refBuslist);
 
+
     // var refBusInfoOrder = refBusInfo.orderByChild("BusID");
     //
     // Taipei 101
@@ -176,7 +177,8 @@ var myLatLng ;
           var marker = new google.maps.Marker({
               position: myLatLng,
               map: map,
-              icon: iconBase + 'placemark_circle_highlight.png'//marina.png
+              icon: iconBase + 'placemark_circle_highlight.png',//marina.png
+              title:"【"+val.bus+"】"+(new Date(parseInt(val.unix)))
           });
        });
 
