@@ -132,7 +132,8 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                                 lat: bus.Latitude,
                                 lon: bus.Longitude,
                                 // dt:bus.DataTime,
-                                unix: unix
+                                unix: unix, // remove unnecessary part of bus.DataTime
+                                fb: Firebase.ServerValue.TIMESTAMP
                             }
                             // console.log(doc);
                             var urlDoc = urlFirebase + bus.BusID;
@@ -146,7 +147,8 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                                 }
                             });
 
-                            fbRef.child("buslist/" + bus.BusID).set({sys: Firebase.ServerValue.TIMESTAMP}); //這個成本好像太高了!
+                            // fbRef.child("buslist/" + bus.BusID).set({sys: Firebase.ServerValue.TIMESTAMP}); //這個成本好像太高了!
+                            fbRef.child("buslist/" + bus.BusID).set({doc}); //這個成本好像太高了!
                         }
                     } catch (err) {
                         console.log(tag + " jsonlint err \n" + err);

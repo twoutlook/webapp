@@ -1,4 +1,6 @@
 // Mark, 2016/1/18 23:54
+//var map;
+
 var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
 //
 var urlFirebase = "https://bus-0119.firebaseio.com/";
@@ -11,13 +13,35 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // var refBusInfoOrder = refBusInfo.orderByChild("BusID");
     //
+    // Taipei city hall
+    // 25.052415, 121.516170
+    $scope.lat=25.052415;
+    $scope.lon=121.516170;
+
+    // map = new google.maps.Map(document.getElementById('map'), {
+    //     center: {lat:$scope.lat, lng:$scope.lon},
+    //     zoom: 13
+    // });
 
 
 
-    $scope.bus="001-FQ";
+    $scope.bus="";
     $scope.ddlBusChange = function (bus) {
       console.log("bus=" + bus);
       $scope.bus=bus;
+      var refBus = ref.child( "buslist/"+bus);
+      refBus.on("child_added", function (snapshot, prevChildKey) {
+          var doc=snapshot.val();
+          console.log("key=" + snapshot.key());
+          console.log("lat=" + doc.lat);
+          console.log("lon=" + doc.lon);
+          console.log("unix=" + doc.unix);
+          $scope.lat=doc.lat;
+          $scope.lon=doc.lon;
+          $scope.unix=doc.unix;
+
+      });
+      //$scope.bus=bus;
     }
 
 
@@ -56,6 +80,22 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     }
 
 */
+
+
+
+
+  $scope.latLonClick =function (){
+
+    console.log("DOING, to show "+$scope.lat+","+$scope.lon);
+    var myLatLng = {lat: $scope.lat, lng: $scope.lon};
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: iconBase + 'bus.png'
+    });
+  }
+
+
     // TO SHOW ALL MARKS
     $scope.busClick =function (selectCar){
        // TODO
@@ -88,11 +128,11 @@ var myLatLng ;
         });
 
         // var center = {lat: lastLat, lng: lastLon};
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: myLatLng,
-            zoom: 13
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: $scope.lat,lng:$scope.lon},
+          zoom: 13
         });
+
        query.on("child_added", function (snapshot, prevChildKey) {
           var val=snapshot.val() ;
           cnt++;
@@ -106,7 +146,7 @@ var myLatLng ;
           var marker = new google.maps.Marker({
               position: myLatLng,
               map: map,
-              icon: iconBase + 'placemark_circle_highlight.png'
+              icon: iconBase + 'placemark_circle_highlight.png'//marina.png
           });
        });
 

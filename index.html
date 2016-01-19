@@ -52,14 +52,31 @@
             </div>
             <div class="row">
                 <button ng-click="busClick(data.selectCar)" class="btn btn-danger " >點兩下,看【{{bus}}】走過的痕跡</button>
-                <button class="btn btn-info " >({{Latitude}},{{Longitude}})</button>
-                <button class="btn btn-warning " >{{DataTimeV2}}</button>
+                <button class="btn btn-info "  ng-click="latLonClick()" >({{lat}},{{lon}})</button>
+                <button class="btn btn-warning " >{{unix| date:'yyyy-MM-dd HH:mm:ss'}}</button>
             </div>
         </div>
         {{ results}}
         <div id="map"></div>
+        <script type="text/javascript">
+          var map;
+          function initMap() {
+              var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: myInitLatLng,
+                zoom: 13
+              });
+
+              var marker = new google.maps.Marker({
+                  position: myInitLatLng,
+                  map: map,
+                  icon: iconBase + 'marina.png'//marina.png
+              });
+            }
+
+            </script>
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc">
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc&callback=initMap">
         </script>
     </body>
 </html>
