@@ -33,10 +33,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
       var refBus = ref.child( "buslist/"+bus);
       refBus.on("child_added", function (snapshot, prevChildKey) {
           var doc=snapshot.val();
-          console.log("key=" + snapshot.key());
-          console.log("lat=" + doc.lat);
-          console.log("lon=" + doc.lon);
-          console.log("unix=" + doc.unix);
+          // console.log("key=" + snapshot.key());
+          // console.log("lat=" + doc.lat);
+          // console.log("lon=" + doc.lon);
+          // console.log("unix=" + doc.unix);
           $scope.lat=doc.lat;
           $scope.lon=doc.lon;
           $scope.unix=doc.unix;
@@ -46,97 +46,24 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
       //$scope.bus=bus;
     }
 
-
-/*
-    //
-    $scope.step1 = function (selectCar) {
-        var refBus = refBusInfo.child( selectCar);
-        refBus.on("child_added", function (snapshot, prevChildKey) {
-            if (snapshot.key() == 'BusID') {
-                $scope.BusID = snapshot.val();
-            }
-            if (snapshot.key() == 'Latitude') {
-                $scope.Latitude = snapshot.val();
-            }
-            if (snapshot.key() == 'Longitude') {
-                $scope.Longitude = snapshot.val();
-            }
-            if (snapshot.key() == 'DataTime') {
-                $scope.DataTime = snapshot.val();
-                var dt2 = mark_convert_BUSDATA_DataTime(snapshot.val())
-                $scope.DataTimeV2 = dt2;
-            }
-        });
-        //
-        var myLatLng = {lat: $scope.Latitude, lng: $scope.Longitude};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: myLatLng,
-            zoom: 16
-        });
-        //
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: iconBase + 'bus.png'
-        });
-    }
-
-*/
-
-
-
-
   $scope.latLonClick =   function () {
     showBus();
   }
 
   function showBus(){
-    makeMarker($scope.bus,$scope.unix,$scope.lat,$scope.lon,'bus.png');
-//     console.log("DOING, to show "+$scope.lat+","+$scope.lon);
-// // var _date = $filter('date')(new Date(parseInt($scope.unix)), 'dd/MM/yyyy');
-//     var dt=new Date(parseInt($scope.unix));
-//     var contentString = '<div id="content">'+
-//           '<div id="siteNotice">'+
-//           '</div>'+
-//           '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
-//           '<div id="bodyContent">'+
-//           // '<p><b>'+$scope.unix+'</b>'+
-//             '<p><b>'+dt+'</b>'+
-//           '</div>'+
-//           '</div>';
-//
-//       var infowindow = new google.maps.InfoWindow({
-//         content: contentString
-//       });
-//
-//
-//     var myLatLng = {lat: $scope.lat, lng: $scope.lon};
-//     var marker = new google.maps.Marker({
-//         position: myLatLng,
-//         map: map,
-//         icon: iconBase + 'bus.png',
-//          title: $scope.bus
-//     });
-//     marker.addListener('click', function() {
-//       infowindow.open(map, marker);
-//     });
-
-  //  map.setCenter(marker.getPosition());
-
-
-
+    makeMarker($scope.bus,$scope.unix,$scope.lat,$scope.lon,'bus.png',1);
   }
 
-function makeMarker(bus,unix,lat,lon,img){//1453193870000
+function makeMarker(bus,unix,lat,lon,img,moveCenter){//1453193870000
                               //1453194522000
 console.log("unix "+unix);
   var temp=parseInt(unix);
-  console.log("unix in int "+temp);
+  // console.log("unix in int "+temp);
 
   var dt=new Date(temp);
-  console.log("dt is date"+dt);
+  // console.log("dt is date"+dt);
   // dt2=dt.format("yyyy-mm-dd HH:MM:ss");
-  dt2=dt.format("mm/dd HH:MM");
+  dt2=dt.format("mm/dd HH:MM:ss");
 
   var myLatLng = {lat: lat, lng: lon};
   var marker = new google.maps.Marker({
@@ -164,6 +91,24 @@ console.log("unix "+unix);
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
+
+    if (moveCenter==1){
+       map.setCenter(marker.getPosition());
+    }
+
+
+}
+
+  $scope.setAnchor =function (){
+var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
+
+
+var marker = new google.maps.Marker({
+    position: myInitLatLng,
+    map: map,
+    icon: iconBase + 'marina.png'//marina.png
+});
+ map.setCenter(marker.getPosition());
 }
     // TO SHOW ALL MARKS
     $scope.busClick =function (selectCar){
@@ -188,11 +133,9 @@ console.log("unix "+unix);
 
         var lastLat;
         var lastLon;
-var myLatLng ;
+        var myLatLng ;
         query.on("child_added", function (snapshot, prevChildKey) {
            var val=snapshot.val() ;
-          //  lastLat=val.lat;
-          //  lastLon=val.lon;
               myLatLng = {lat: val.lat, lng: val.lon};
         });
 
@@ -204,39 +147,7 @@ var myLatLng ;
 
        query.on("child_added", function (snapshot, prevChildKey) {
           var val=snapshot.val() ;
-          cnt++;
-          // console.log(cnt+" "+val.bus+" "+val.unix+" "+val.lat+" "+val.lon);
-          console.log(cnt+" "+val.bus+" "+val.unix);
-          //
-          // var myLatLng = {lat: val.lat, lng: val.lon};
-          // var marker = new google.maps.Marker({
-          //     position: myLatLng,
-          //     map: map,
-          //     icon: iconBase + 'placemark_circle_highlight.png',//marina.png
-          //     title:"【"+val.bus+"】"+(new Date(parseInt(val.unix)))
-          // });
-          makeMarker(val.bus,val.unix,val.lat,val.lon,'placemark_circle_highlight.png');
-//	isoDate:        "yyyy-mm-dd",
-	// isoTime:        "HH:MM:ss",
-          // var dt=new Date(parseInt($scope.unix));
-          // dt2=dt.format("yyyy-mm-dd HH:MM:ss");
-          // var contentString = '<div id="content">'+
-          //       '<div id="siteNotice">'+
-          //       '</div>'+
-          //       '<h1 id="firstHeading" class="firstHeading">'+$scope.bus+'</h1>'+
-          //       '<div id="bodyContent">'+
-          //       // '<p><b>'+$scope.unix+'</b>'+
-          //         '<p><b>'+dt2+'</b>'+
-          //       '</div>'+
-          //       '</div>';
-          //
-          //   var infowindow = new google.maps.InfoWindow({
-          //     content: contentString
-          //   });
-          //   marker.addListener('click', function() {
-          //     infowindow.open(map, marker);
-          //   });
-
+          makeMarker(val.bus,val.unix,val.lat,val.lon,'placemark_circle_highlight.png',0);
        });
 
     }
