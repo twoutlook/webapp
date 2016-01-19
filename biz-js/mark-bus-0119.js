@@ -71,7 +71,7 @@ console.log("unix "+unix);
       map: map,
       // icon: iconBase + 'placemark_circle_highlight.png',//marina.png
       icon: iconBase + img,//marina.png
-
+animation: google.maps.Animation.DROP,
       title:"【"+bus+"】"+dt2
   });
 
@@ -104,10 +104,10 @@ console.log("unix "+unix);
 // 24.179281, 120.600585
 
 $scope.test =function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
-    center: {lat: 24.179281, lng: 120.600585}
-  });
+  // var map = new google.maps.Map(document.getElementById('map'), {
+  //   zoom: 16,
+  //   center: {lat: 24.179281, lng: 120.600585}
+  // });
 
   marker = new google.maps.Marker({
     map: map,
@@ -151,6 +151,7 @@ function toggleBounce() {
 
 
   $scope.setAnchor =function (){
+    initMap();
 var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 
 
@@ -164,25 +165,8 @@ var marker = new google.maps.Marker({
 });
   marker.addListener('click', toggleBounce);
  map.setCenter(marker.getPosition());
- //
- // marker = new google.maps.Marker({
- //     map: map,
- //     draggable: true,
- //     animation: google.maps.Animation.DROP,
- //     position: {lat: 59.327, lng: 18.067}
- //   });
- //   marker.addListener('click', toggleBounce);
- // }
- //
-
-
-
-
-
-
-
- // map.panTo(marker.getPosition())
 }
+
 function toggleBounce() {
   if (marker.getAnimation() !== null) {
     marker.setAnimation(null);
@@ -206,30 +190,12 @@ function toggleBounce() {
        console.log("rul9=" + rul9);
        var ref9 = new Firebase(rul9);
        var query=ref9;
-      //  var query = ref9.orderByChild("dt").startAt(startStr).endAt(endStr);
-      //  var query = ref9.orderByChild("unix");
-       var cnt=0;
-//25.084425, 121.561544
-//25.03315 121.6134
-        console.log("TODO center, get it from current or buslist");
 
-        var lastLat;
-        var lastLon;
-        var myLatLng ;
-        query.on("child_added", function (snapshot, prevChildKey) {
-           var val=snapshot.val() ;
-              myLatLng = {lat: val.lat, lng: val.lon};
-        });
-
-        // var center = {lat: lastLat, lng: lastLon};
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: $scope.lat,lng:$scope.lon},
-          zoom: 13
-        });
 
        query.on("child_added", function (snapshot, prevChildKey) {
           var val=snapshot.val() ;
-          makeMarker(val.bus,val.unix,val.lat,val.lon,'placemark_circle_highlight.png',0);
+          makeMarker(val.bus,val.unix,val.lat,val.lon,'placemark_circle_highlight.png',1);//1 setCenter
+
        });
 
     }
