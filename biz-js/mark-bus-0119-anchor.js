@@ -38,12 +38,17 @@
 
      var item2='<h3><a  target="_blank" href="http://transportation-data.taipei">';
      item2+='3. 交通即時資料開放資料專區</a></h3> ';
+     var item3='<h3><a  target="_blank" href="http://data.taipei/opendata/datalist/datasetMeta?oid=c84f781f-02e7-45a4-84c2-0fc690749f66">';
+     item3+='4. 臺北市公共運輸處 定時車機資訊</a></h3> ';
+     var item4='<h3><a  target="_blank" href="http://data.taipei/bus/BUSDATA">';
+     item4+='5. 本作品原始資料即時下載</a></h3> ';
+
 
      var contentString = '<div id="content">'+
            '<div id="siteNotice">'+
            '</div>'+
            '<h1 id="firstHeading" class="firstHeading">'+title+'</h1>'+
-           '<div id="bodyContent">'+item0+item1+item2+
+           '<div id="bodyContent">'+item0+item1+item2+item3+item4+
           //  '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
           //  'sandstone rock formation in the southern part of the '+
           //  'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
