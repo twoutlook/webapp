@@ -1,8 +1,20 @@
 
-function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//1453193870000
-                              //1453194522000
-  console.log("unix "+unix);
-  console.log("unix "+icon);
+function makeMarkerV2(doc){//1453193870000
+  // bus,unix,lat,lon,isOpenNow,moveCenter                            //1453194522000
+
+  var bus=doc.bus;
+  var unix=doc.unix;
+  var lat=doc.lat;
+  var lon=doc.lon;
+  var toOpenNow=doc.toOpenNow;
+  var toMoveCenter=doc.toMoveCenter;
+
+  // ,unix,lat,lon,isOpenNow,moveCenter
+
+
+  //
+  console.log(doc);
+  return;
   var temp=parseInt(unix);
   // console.log("unix in int "+temp);
 
@@ -15,16 +27,28 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//145319387
 
   var myLatLng = {lat: lat, lng: lon};
 
-
+  if (isOpenNow){
   var marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
       // icon: iconBase + 'placemark_circle_highlight.png',//marina.png
-      icon: icon,//marina.png
+      // icon: iconBase + img,//marina.png
+      animation: google.maps.Animation.DROP,
+      title:"【"+bus+"】"+dt2
+  });
+}else{
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+       icon: iconBase + 'placemark_circle_highlight.png',//marina.png
 
       animation: google.maps.Animation.DROP,
       title:"【"+bus+"】"+dt2
   });
+
+}
+
+
 
   var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
@@ -40,15 +64,14 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//145319387
       content: contentString
     });
 
-    if (toOpenNow){
+    if (isOpenNow){
       infowindow.open(map, marker);
-    }
-
-    marker.addListener('click', function() {
+      }
+      marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
 
-    if (toMoveCenterNow){
+    if (moveCenter==1){
        map.setCenter(marker.getPosition());
     }
 }

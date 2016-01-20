@@ -1,4 +1,5 @@
 // Mark, 2016/1/20 11:19
+var iconCircle=iconBase + 'placemark_circle_highlight.png';
 //
 var urlFirebase = "https://bus-0119.firebaseio.com/";
 //
@@ -30,28 +31,27 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         // showBus();
     }
 
+    var tracking=[
+      {num:5},
+      {num:10},
+      {num:15},
+      {num:20},
+      {num:30},
+      {num:40},
+      {num:50},
+      {num:60}
+    ];
+
+  $scope.Tracking=tracking;
+
     $scope.showLastPosition = function () {
-        makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, 'bus.png', 1);
-        // showBus();
+        makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
+      }
 
- //        var marker = new google.maps.Marker({
- //            position: {lat:  $scope.lat, lng:  $scope.lon },
- //            map: map,
- //            // draggable: true,
- //            animation: google.maps.Animation.DROP,
- //            // icon: iconBase + 'marina.png',//marina.png
- //
- //        });
- // map.setCenter(marker.getPosition());
-// infowindow.open(map, marker);
-
-
-
-    }
-
-    function moveLastPostionToCenter() {
-        makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, 'bus.png', 1);
-    }
+    // function moveLastPostionToCenter() {
+    //     makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
+    //     //function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow)
+    // }
 
     $scope.showAnchor = function () {
       //  initMap();
@@ -69,7 +69,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     $scope.showTeam = function () {
         initTeam();
     }
-
+    $scope.initMap = function () {
+        initMap();
+    }
 
 
     // function toggleBounce() {
@@ -82,8 +84,14 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 
     // TO SHOW ALL MARKS
-    $scope.busClick = function (selectCar) {
-        var SHOW_DOT_CNT=60;
+    $scope.busClick = function (selectCar,selectTracking) {
+      if(selectTracking === undefined){
+        selectTracking=5;
+      }
+      console.log("selectCar=" + selectCar);
+      console.log("selectTracking=" + selectTracking);
+
+        var SHOW_DOT_CNT= parseInt(selectTracking);
 
         var rul9 = urlFirebase + "/" + selectCar;
         console.log("rul9=" + rul9);
@@ -101,19 +109,23 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             cnt++;
             var dt=new Date(parseInt(val.unix));
             var  dt2=dt.format("mm/dd HH:MM:ss");
-            console.log(cnt+" => "+val.bus +" "+dt2)
+            console.log(cnt+" => "+val.bus +" "+dt2);
 
-            if (cnt==1 || cnt>=SHOW_DOT_CNT){
-              makeMarker(val.bus, val.unix, val.lat, val.lon,true , 0);//1 setCenter
+//iconBase + 'placemark_circle_highlight.png
+//function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow)
+            if ( cnt==1){
+              makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false);
+            }else if ( cnt>=SHOW_DOT_CNT){
+                makeMarker(val.bus, val.unix, val.lat, val.lon,null, false ,false);
             }else{
-                makeMarker(val.bus, val.unix, val.lat, val.lon,false , 0);//1 setCenter
+                makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,false);
             }
             $scope.bus =val.bus;
             $scope.lat = val.lat;
             $scope.lon = val.lon;
             $scope.unix = val.unix;
         });
-        moveLastPostionToCenter();
+          makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);//moveLastPostionToCenter();
 
 
     }
