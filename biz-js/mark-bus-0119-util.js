@@ -39,6 +39,4 @@ animation: google.maps.Animation.DROP,
     if (moveCenter==1){
        map.setCenter(marker.getPosition());
     }
-
-
 }

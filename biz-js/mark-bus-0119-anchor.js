@@ -1,5 +1,9 @@
 //https://developers.google.com/maps/documentation/javascript/infowindows
   var map;
+var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+
+
   function initMap() {
     // var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 
