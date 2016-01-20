@@ -133,7 +133,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             if ( cnt==1){
               makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false);
             }else if ( cnt>=SHOW_DOT_CNT){
-                makeMarker(val.bus, val.unix, val.lat, val.lon,null, false ,false);
+                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,false);
             }else{
                 makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,false);
             }

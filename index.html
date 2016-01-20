@@ -44,21 +44,21 @@
         <div class="container">
             <div class="row">
                 <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡</button>
-                <button  ng-click="showTeam()" class="btn btn-success" > by 諾得捷思隊</button>
+                <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
                 <button class="btn  " >公車數:{{busList.length}}  </button>
 
                 <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
                         <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
                 </select>
+                <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>
 
                   <button class="btn  " >痕跡數  </button>
                   <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  >
                           <option  ng-selected="$index==0"  ng-repeat="bus in Tracking" value="{{bus.num}}"> {{bus.num}}</option>
                   </select>
 
-                <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-danger " >看【{{bus}}】的痕跡</button>
-                <button class="btn btn-danger " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>
-                  <button ng-click="initMap()" class="btn btn-warning " >全部清除</button>
+                <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button>
+                  <button ng-click="initMap()" class="btn btn-danger " >全部清除</button>
 
                 <!-- <button class="btn btn-info "  ng-click="latLonClick()" >({{lat}},{{lon}})</button>
                 <button "   class="btn btn-warning " >{{unix| date:'yyyy-MM-dd HH:mm:ss'}}</button> -->
