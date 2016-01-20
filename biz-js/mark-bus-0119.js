@@ -86,7 +86,21 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     $scope.showTeam = function () {
         initTeam();
     }
-    $scope.initMap = function () {
+    $scope.resetAll = function () {
+
+      var rulX = urlFirebase +  'buslist';
+      // console.log("rul9=" + rul9);
+      var refList = new Firebase(rulX);
+      var cnt=0;
+      refList.on("child_added", function (snapshot, prevChildKey) {
+          var key = snapshot.key();
+          // console.log("key=" + key);
+          ref.child(key).off();
+      });
+
+
+
+
         initMap();
     }
 
