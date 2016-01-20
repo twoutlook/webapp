@@ -1,22 +1,23 @@
 //https://developers.google.com/maps/documentation/javascript/infowindows
   var map;
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
+  var initLatLng={lat: 25.033718, lng: 121.565512};
 
 
 
   function initMap() {
     // var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 
-      var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
+    //  var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
       map = new google.maps.Map(document.getElementById('map'), {
-        center: myInitLatLng,
-        zoom: 13
+        center: initLatLng,
+        zoom: 14
       });
 
     var marker = new google.maps.Marker({
-        position: myInitLatLng,
+        position: initLatLng,
         map: map,
-        draggable: true,
+        // draggable: true,
         animation: google.maps.Animation.DROP,
         icon: iconBase + 'marina.png',//marina.png
 

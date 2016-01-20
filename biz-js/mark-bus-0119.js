@@ -27,19 +27,44 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             $scope.lon = doc.lon;
             $scope.unix = doc.unix;
         });
-        showBus();
+        // showBus();
     }
 
-    $scope.latLonClick = function () {
-        showBus();
+    $scope.showLastPosition = function () {
+        makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, 'bus.png', 1);
+        // showBus();
+
+ //        var marker = new google.maps.Marker({
+ //            position: {lat:  $scope.lat, lng:  $scope.lon },
+ //            map: map,
+ //            // draggable: true,
+ //            animation: google.maps.Animation.DROP,
+ //            // icon: iconBase + 'marina.png',//marina.png
+ //
+ //        });
+ // map.setCenter(marker.getPosition());
+// infowindow.open(map, marker);
+
+
+
     }
 
-    function showBus() {
+    function moveLastPostionToCenter() {
         makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, 'bus.png', 1);
     }
 
     $scope.showAnchor = function () {
-        initMap();
+      //  initMap();
+      var marker = new google.maps.Marker({
+          position: initLatLng,
+          map: map,
+          // draggable: true,
+          animation: google.maps.Animation.DROP,
+          icon: iconBase + 'marina.png',//marina.png
+
+      });
+        // marker.addListener('click', toggleBounce);
+       map.setCenter(marker.getPosition());
     }
     $scope.showTeam = function () {
         initTeam();
@@ -58,28 +83,38 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // TO SHOW ALL MARKS
     $scope.busClick = function (selectCar) {
-        // TODO
-        //  var busNum="001-FQ";
-        //  var busDate="2016-01-18";
-        //  var startStr = busDate ;
-        //  var endStr = startStr + " 23:59:59";
-        //  console.log("startStr=" + startStr);
-        //  console.log("endStr=" + endStr);
+        var SHOW_DOT_CNT=60;
 
         var rul9 = urlFirebase + "/" + selectCar;
         console.log("rul9=" + rul9);
         var ref9 = new Firebase(rul9);
         // var query = ref9.orderByChild('unix').endAt().limit(60);
-        var query = ref9.endAt().limit(15);
+        var query = ref9.endAt().limitToLast(SHOW_DOT_CNT);
 
         //
 //http://stackoverflow.com/questions/25611356/display-posts-in-descending-posted-order
   console.log("========================================");
+        var cnt=0;
         query.on("child_added", function (snapshot, prevChildKey) {
             var val = snapshot.val();
-            makeMarker(val.bus, val.unix, val.lat, val.lon, 'placemark_circle_highlight.png', 1);//1 setCenter
 
+            cnt++;
+            var dt=new Date(parseInt(val.unix));
+            var  dt2=dt.format("mm/dd HH:MM:ss");
+            console.log(cnt+" => "+val.bus +" "+dt2)
+
+            if (cnt==1 || cnt>=SHOW_DOT_CNT){
+              makeMarker(val.bus, val.unix, val.lat, val.lon,true , 0);//1 setCenter
+            }else{
+                makeMarker(val.bus, val.unix, val.lat, val.lon,false , 0);//1 setCenter
+            }
+            $scope.bus =val.bus;
+            $scope.lat = val.lat;
+            $scope.lon = val.lon;
+            $scope.unix = val.unix;
         });
+        moveLastPostionToCenter();
+
 
     }
 
