@@ -32,14 +32,31 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     }
 
     var tracking=[
-      {num:5},
+
       {num:10},
-      {num:15},
+
       {num:20},
       {num:30},
       {num:40},
       {num:50},
-      {num:60}
+      {num:60},
+      {num:70},
+      {num:80},
+      {num:90},
+      {num:100},
+      {num:110},
+      {num:120},
+      {num:180},
+      {num:240},
+      {num:300},
+      {num:360},
+      {num:420},
+      {num:480},
+      {num:720},
+      {num:1440}
+
+
+
     ];
 
   $scope.Tracking=tracking;
@@ -86,22 +103,22 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     // TO SHOW ALL MARKS
     $scope.busClick = function (selectCar,selectTracking) {
       if(selectTracking === undefined){
-        selectTracking=5;
+        selectTracking=10;
       }
-      console.log("selectCar=" + selectCar);
-      console.log("selectTracking=" + selectTracking);
+      // console.log("selectCar=" + selectCar);
+      // console.log("selectTracking=" + selectTracking);
 
         var SHOW_DOT_CNT= parseInt(selectTracking);
 
-        var rul9 = urlFirebase + "/" + selectCar;
-        console.log("rul9=" + rul9);
+        var rul9 = urlFirebase +  selectCar;
+        // console.log("rul9=" + rul9);
         var ref9 = new Firebase(rul9);
         // var query = ref9.orderByChild('unix').endAt().limit(60);
         var query = ref9.endAt().limitToLast(SHOW_DOT_CNT);
 
         //
 //http://stackoverflow.com/questions/25611356/display-posts-in-descending-posted-order
-  console.log("========================================");
+  // console.log("========================================");
         var cnt=0;
         query.on("child_added", function (snapshot, prevChildKey) {
             var val = snapshot.val();
@@ -109,7 +126,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             cnt++;
             var dt=new Date(parseInt(val.unix));
             var  dt2=dt.format("mm/dd HH:MM:ss");
-            console.log(cnt+" => "+val.bus +" "+dt2);
+            // console.log(cnt+" => "+val.bus +" "+dt2);
 
 //iconBase + 'placemark_circle_highlight.png
 //function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow)

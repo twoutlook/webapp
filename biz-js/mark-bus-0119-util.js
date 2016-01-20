@@ -1,8 +1,8 @@
 
 function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//1453193870000
                               //1453194522000
-  console.log("unix "+unix);
-  console.log("unix "+icon);
+  // console.log("unix "+unix);
+  // console.log("unix "+icon);
   var temp=parseInt(unix);
   // console.log("unix in int "+temp);
 

@@ -43,15 +43,15 @@
     <body  ng-controller="SampleCtrl">
         <div class="container">
             <div class="row">
-                <button ng-click="showAnchor()" class="btn btn-primary " >#431主題:走過必留痕跡</button>
+                <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡</button>
                 <button  ng-click="showTeam()" class="btn btn-success" > by 諾得捷思隊</button>
-                <button class="btn  " >Bus數:{{busList.length}}  </button>
+                <button class="btn  " >公車數:{{busList.length}}  </button>
 
                 <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
                         <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
                 </select>
 
-                  <button class="btn  " >痕跡數 {{data.selectTracking}}  </button>
+                  <button class="btn  " >痕跡數  </button>
                   <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  >
                           <option  ng-selected="$index==0"  ng-repeat="bus in Tracking" value="{{bus.num}}"> {{bus.num}}</option>
                   </select>
