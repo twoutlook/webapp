@@ -30,9 +30,9 @@
 
      var title="諾得捷思隊 twcloudwebapp@outlook.com";
 
-     var item0='<h3>隊長: 陳美君  創意規畫</h3>';
+     var item0='<h3>隊長: 陳美君  &nbsp;&nbsp;&nbsp;職責: 創意規畫, 美感設計</h3>';
 
-     var item1='<h3>隊員: 陳炳陵  開發測試</h3>';
+     var item1='<h3>隊員: 陳炳陵  &nbsp;&nbsp;&nbsp;職責: 系統配置, 開發測試</h3>';
      var item2="";
 
      var contentString = '<div id="content">'+

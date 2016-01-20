@@ -1,6 +1,6 @@
 //https://developers.google.com/maps/documentation/javascript/infowindows
   var map;
-var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
 
 
 
