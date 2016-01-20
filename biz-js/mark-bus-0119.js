@@ -103,7 +103,7 @@ animation: google.maps.Animation.DROP,
 // Taichung City, 407
 // 24.179281, 120.600585
 
-$scope.test =function initMap() {
+$scope.test =function xxxinitMap() {
   // var map = new google.maps.Map(document.getElementById('map'), {
   //   zoom: 16,
   //   center: {lat: 24.179281, lng: 120.600585}
@@ -150,22 +150,14 @@ function toggleBounce() {
 }
 
 
-  $scope.setAnchor =function (){
+$scope.showAnchor =function (){
     initMap();
-var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
-
-
-var marker = new google.maps.Marker({
-    position: myInitLatLng,
-    map: map,
-    draggable: true,
-    animation: google.maps.Animation.DROP,
-    icon: iconBase + 'marina.png',//marina.png
-
-});
-  marker.addListener('click', toggleBounce);
- map.setCenter(marker.getPosition());
 }
+$scope.showTeam =function (){
+    initTeam();
+}
+
+
 
 function toggleBounce() {
   if (marker.getAnimation() !== null) {

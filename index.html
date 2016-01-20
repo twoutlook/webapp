@@ -26,6 +26,8 @@
         <!-- Date.format -->
         <script src="biz-js/date.format.js"></script>
         <script src="biz-js/mark-util.js"></script>
+        <script src="biz-js/mark-bus-0119-anchor.js"></script>
+        <script src="biz-js/mark-bus-0119-team.js"></script>
         <script src="biz-js/mark-bus-0119.js"></script>
         <style>
             body{
@@ -44,8 +46,8 @@
     <body  ng-controller="SampleCtrl">
         <div class="container">
             <div class="row">
-                <button ng-click="setAnchor()" class="btn btn-primary " >主題:走過必留痕跡</button>
-                <button  ng-click="test()" class="btn btn-success" > by 諾得捷思隊</button>
+                <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡</button>
+                <button  ng-click="showTeam()" class="btn btn-success" > by 諾得捷思隊</button>
                 <button class="btn btn-danger " ng-click="latLonClick()">顯示位置 (計 {{busList.length}} 筆) </button>
 
                 <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
@@ -58,7 +60,7 @@
         </div>
         {{ results}}
         <div id="map"></div>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
           var map;
           function initMap() {
             // var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
@@ -80,6 +82,13 @@
               marker.addListener('click', toggleBounce);
              map.setCenter(marker.getPosition());
 
+             function toggleBounce() {
+               if (marker.getAnimation() !== null) {
+                 marker.setAnimation(null);
+               } else {
+                 marker.setAnimation(google.maps.Animation.BOUNCE);
+               }
+             }
 
 
               // var marker = new google.maps.Marker({
@@ -93,7 +102,7 @@
 
 
 
-            </script>
+            </script> -->
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc&callback=initMap">
         </script>
