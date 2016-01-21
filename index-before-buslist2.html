@@ -29,8 +29,8 @@
 
     <style>
         body{
-          background-color:#F9f9f9;
-          /*background-color:black;*/
+          /*background-color:#F9f9f9;*/
+          background-color:black;
 
             font-family: 'Droid Sans Mono' ;
         }
@@ -43,18 +43,14 @@
 </head>
   <body  ng-controller="SampleCtrl">
       <div class="container">
-
           <div class="row">
-
-                <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡!</button>
+          <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡!</button>
             <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
             <!-- <button class="btn  " >公車數:{{busList.length}}  </button> -->
-
-            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼   (數量:{{status}}) </button>
+            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼  </button>
             <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
             <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
             </select>
-
             <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>-->
             <!-- <button class="btn btn-success " ng-click="showLocation()">看【{{bus}}】位置 </button> -->
             <button class="btn btn-success " ng-click="showLocation()">查看位置 </button>
@@ -65,14 +61,11 @@
                 <option value="10">10</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
-                <option value="120">120</option>
-                <option value="720">720</option>
-                <option value="1440">1440</option>
             </select>
 
             <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
             <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >查看痕跡</button>
-            <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button>
+            <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button> -->
 
           </div>
       </div>
@@ -154,10 +147,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFTv4Vcf-1zKI7awd_iqiwSMmkm-_aqvc&callback=initMap"
     async defer></script>
 
-    <!-- <script src="biz-js/mark-bus-0119-anchor.js"></script> -->
+    <script src="biz-js/mark-bus-0119-anchor.js"></script>
     <script src="biz-js/mark-bus-0119-team.js"></script>
     <script src="biz-js/mark-bus-0119-util.js"></script>
-
+    <script src="biz-js/mark-bus-0119-util2.js"></script>
 
     <script src="biz-js/mark-bus-0119.js"></script>
     <script src="biz-js/date.format.js"></script>

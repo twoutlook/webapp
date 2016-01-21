@@ -7,16 +7,21 @@ var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase(urlFirebase);
     // var refBuslist = ref.child('buslist');
+
+    // var CAR_CNT=360;
+    var CAR_CNT=128;
     var refBuslist2 = ref.child('buslist2');
 
-    var CAR_CNT=120;
+    $scope.busList = $firebaseArray(refBuslist2.limitToFirst(CAR_CNT));
 
 
-    // IT TAKES LONG AT FIRST LOADING
-    // $scope.busList = $firebaseArray(refBuslist);
-    $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(CAR_CNT));
 
 
+
+    //       var val = snapshot.val();
+    //
+    //     console.log("$$$$$$$$$$$$$$4444"+snapshot.key())
+    //   });
 
   //   var qryList = refBuslist.endAt().limitToFirst(CAR_CNT);
   //
@@ -31,9 +36,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
   //   $scope.busList = $firebaseArray(qryList);
 
 // loadMoreCarNum
-    $scope.loadMoreCarNum = function () {
-      $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(600));
-    }
+    // $scope.loadMoreCarNum = function () {
+    //   $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(600));
+    // }
 
 
 
@@ -107,7 +112,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     // TO SHOW ALL MARKS
     $scope.busClick = function (selectCar,selectTracking) {
       if(selectTracking === undefined){
-        selectTracking=5;
+        selectTracking=10;
       }
       // console.log("selectCar=" + selectCar);
       // console.log("selectTracking=" + selectTracking);
