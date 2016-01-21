@@ -52,7 +52,7 @@
             <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
             <!-- <button class="btn  " >公車數:{{busList.length}}  </button> -->
 
-            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼   (數量:{{status}}) </button>
+            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼</button>
             <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
             <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
             </select>
