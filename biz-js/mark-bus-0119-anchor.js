@@ -4,8 +4,15 @@
   var initLatLng={lat: 25.033718, lng: 121.565512};
 
 
-
   function initMap() {
+
+      function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
     // var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
 
     //  var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
@@ -25,13 +32,7 @@
       marker.addListener('click', toggleBounce);
      map.setCenter(marker.getPosition());
 
-     function toggleBounce() {
-       if (marker.getAnimation() !== null) {
-         marker.setAnimation(null);
-       } else {
-         marker.setAnimation(google.maps.Animation.BOUNCE);
-       }
-     }
+
 
      var title="臺北市政府全新「雲端即時開放資料服務」 Taipei OMG (Open, Mobility, Green) 綠色交通應用開發大賽";
 

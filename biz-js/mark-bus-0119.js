@@ -6,8 +6,38 @@ var urlFirebase = "https://bus-0119.firebaseio.com/";
 var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase(urlFirebase);
-    var refBuslist = ref.child('buslist');
-    $scope.busList = $firebaseArray(refBuslist);
+    // var refBuslist = ref.child('buslist');
+    var refBuslist2 = ref.child('buslist2');
+
+    var CAR_CNT=120;
+
+
+    // IT TAKES LONG AT FIRST LOADING
+    // $scope.busList = $firebaseArray(refBuslist);
+    $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(CAR_CNT));
+
+
+
+  //   var qryList = refBuslist.endAt().limitToFirst(CAR_CNT);
+  //
+  //   //
+  // //http://stackoverflow.com/questions/25611356/display-posts-in-descending-posted-order
+  //
+  //   qryList.on("child_added", function (snapshot, prevChildKey) {
+  //       var val = snapshot.val();
+  //
+  //     console.log("$$$$$$$$$$$$$$4444"+snapshot.key())
+  //   });
+  //   $scope.busList = $firebaseArray(qryList);
+
+// loadMoreCarNum
+    $scope.loadMoreCarNum = function () {
+      $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(600));
+    }
+
+
+
+
 
     // Taipei 101
     //lat: 25.033718, lng: 121.565512
@@ -23,7 +53,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         var refBus = ref.child("buslist/" + bus);
         refBus.on("child_added", function (snapshot, prevChildKey) {
             var doc = snapshot.val();
-            // console.log("**********************bus=" + doc);
+            console.log("**********************bus=" + doc.bus);
             $scope.lat = doc.lat;
             $scope.lon = doc.lon;
             $scope.unix = doc.unix;
@@ -31,39 +61,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         // showBus();
     }
 
-    var tracking=[
-
-      {num:10},
-
-      {num:20},
-      {num:30},
-      {num:40},
-      {num:50},
-      {num:60},
-      {num:70},
-      {num:80},
-      {num:90},
-      {num:100},
-      {num:110},
-      {num:120},
-      {num:180},
-      {num:240},
-      {num:300},
-      {num:360},
-      {num:420},
-      {num:480},
-      {num:720},
-      {num:1440}
-
-
-
-    ];
-
-  $scope.Tracking=tracking;
-
-    $scope.showLastPosition = function () {
+    $scope.showLocation = function () {
         makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
-      }
+    }
 
     // function moveLastPostionToCenter() {
     //     makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
@@ -71,17 +71,17 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     // }
 
     $scope.showAnchor = function () {
-      //  initMap();
-      var marker = new google.maps.Marker({
-          position: initLatLng,
-          map: map,
-          // draggable: true,
-          animation: google.maps.Animation.DROP,
-          icon: iconBase + 'marina.png',//marina.png
-
-      });
-        // marker.addListener('click', toggleBounce);
-       map.setCenter(marker.getPosition());
+      initMap();
+      // var marker = new google.maps.Marker({
+      //     position: initLatLng,
+      //     map: map,
+      //     // draggable: true,
+      //     animation: google.maps.Animation.DROP,
+      //     icon: iconBase + 'marina.png',//marina.png
+      //
+      // });
+      //   // marker.addListener('click', toggleBounce);
+      //  map.setCenter(marker.getPosition());
     }
     $scope.showTeam = function () {
         initTeam();
@@ -104,20 +104,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         initMap();
     }
 
-
-    // function toggleBounce() {
-    //     if (marker.getAnimation() !== null) {
-    //         marker.setAnimation(null);
-    //     } else {
-    //         marker.setAnimation(google.maps.Animation.BOUNCE);
-    //     }
-    // }
-
-
     // TO SHOW ALL MARKS
     $scope.busClick = function (selectCar,selectTracking) {
       if(selectTracking === undefined){
-        selectTracking=10;
+        selectTracking=5;
       }
       // console.log("selectCar=" + selectCar);
       // console.log("selectTracking=" + selectTracking);

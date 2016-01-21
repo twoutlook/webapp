@@ -3,7 +3,6 @@
 <head>
 
     <meta charset="utf-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -47,24 +46,18 @@
           <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡!</button>
             <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
             <!-- <button class="btn  " >公車數:{{busList.length}}  </button> -->
-            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼  </button>
+
             <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)" >
             <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
             </select>
-            <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>-->
-            <!-- <button class="btn btn-success " ng-click="showLocation()">看【{{bus}}】位置 </button> -->
-            <button class="btn btn-success " ng-click="showLocation()">查看位置 </button>
+          <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>
 
             <button class="btn  " >痕跡數  </button>
             <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  >
-                <option value="5" selected="selected">5</option>
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="60">60</option>
+              <option  ng-selected="$index==0"  ng-repeat="bus in Tracking" value="{{bus.num}}"> {{bus.num}}</option>
             </select>
 
-            <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
-            <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >查看痕跡</button>
+            <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button>
             <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button> -->
 
           </div>
