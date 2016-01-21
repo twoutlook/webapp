@@ -1,5 +1,5 @@
 
-function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//1453193870000
+function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt){//1453193870000
                               //1453194522000
   // console.log("unix "+unix);
   // console.log("unix "+icon);
@@ -23,16 +23,20 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow){//145319387
       icon: icon,//marina.png
 
       animation: google.maps.Animation.DROP,
-      title:"【"+bus+"】"+dt2
+      title:"【"+bus+"】#"+cnt+" "+dt2
   });
 
+  var cntStr="";
+  if (cnt!=null){
+    cntStr="#"+cnt;
+  }
   var contentString = '<div id="content">'+
         '<div id="siteNotice">'+
         '</div>'+
         // '<h1 id="firstHeading" class="firstHeading">'+"【"+bus+"】"+'</h1>'+
         '<div id="bodyContent">'+
         // '<p><b>'+$scope.unix+'</b>'+
-          '<p><b>'+"【"+bus+"】<BR>"+dt2+'</b>'+
+          '<p><b>'+"【"+bus+"】"+cntStr+"<BR>"+dt2+'</b>'+
         '</div>'+
         '</div>';
 

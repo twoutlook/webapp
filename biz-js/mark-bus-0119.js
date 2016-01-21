@@ -124,6 +124,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         // console.log("rul9=" + rul9);
         var ref9 = new Firebase(rul9);
         // var query = ref9.orderByChild('unix').endAt().limit(60);
+        SHOW_DOT_CNT++;
         var query = ref9.endAt().limitToLast(SHOW_DOT_CNT);
 
         //
@@ -141,18 +142,18 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 //iconBase + 'placemark_circle_highlight.png
 //function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow)
             if ( cnt==1){
-              makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false);
+              makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false,cnt);
             }else if ( cnt>=SHOW_DOT_CNT){
-                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,false);
+                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,false,null);
             }else{
-                makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,false);
+                makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,false,cnt);
             }
             $scope.bus =val.bus;
             $scope.lat = val.lat;
             $scope.lon = val.lon;
             $scope.unix = val.unix;
         });
-          makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);//moveLastPostionToCenter();
+          makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true,null);//moveLastPostionToCenter();
 
 
     }
