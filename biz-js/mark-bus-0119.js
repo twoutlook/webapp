@@ -54,12 +54,12 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // 選擇了bus,即顯示,準備定點可以快速在地圖回到中心點
     $scope.ddlBusChange = function (bus) {
-        console.log("**********************bus=" + bus);
+        // console.log("**********************bus=" + bus);
         $scope.bus = bus;
         var refBus = ref.child("buslist/" + bus);
         refBus.on("child_added", function (snapshot, prevChildKey) {
             var doc = snapshot.val();
-            console.log("**********************bus=" + doc.bus);
+            // console.log("**********************bus=" + doc.bus);
             $scope.lat = doc.lat;
             $scope.lon = doc.lon;
             $scope.unix = doc.unix;
