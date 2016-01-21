@@ -8,12 +8,13 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase(urlFirebase);
     // var refBuslist = ref.child('buslist');
 
-    // var CAR_CNT=360;
-    var CAR_CNT=128;
+    var CAR_CNT=360;
+    // var CAR_CNT=1280;
     var refBuslist2 = ref.child('buslist2');
 
     $scope.busList = $firebaseArray(refBuslist2.limitToFirst(CAR_CNT));
 
+    // $scope.busList = $firebaseArray(refBuslist2);
 
 
 
