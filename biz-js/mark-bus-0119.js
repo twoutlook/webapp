@@ -12,34 +12,35 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     // var CAR_CNT=1280;
     var refBuslist2 = ref.child('buslist2');
 
-    $scope.busList = $firebaseArray(refBuslist2.limitToFirst(CAR_CNT));
+    //這是可以參考的範例
+    // $scope.busList = $firebaseArray(refBuslist2.limitToFirst(CAR_CNT));
 
-    // $scope.busList = $firebaseArray(refBuslist2);
+    $scope.buslist3x = $firebaseArray(ref.child('buslist3x').orderByChild("bus"));
+
+
+    // $scope.busNumList= $firebaseArray(ref.child("buslist3").limitToLast(1));
+  //  var ref = new Firebase("https://dinosaur-facts.firebaseio.com/");
+    var refBusNumList=ref.child("buslist3x");
+    $scope.firstbus="...截入資料中,請稍候";
+    var loadingCnt=0;
+    refBusNumList.limitToFirst(1).on("child_added", function(snapshot) {
+      // console.log(snapshot.key());
+      // console.log(snapshot.val());
+      var val=snapshot.val();
+      if (loadingCnt==0){
+        $scope.firstbus=val.bus;
+        $scope.bus=val.bus;
+
+        ddlBusChange(val.bus) ;
+        loadingCnt=999;
 
 
 
 
-    //       var val = snapshot.val();
-    //
-    //     console.log("$$$$$$$$$$$$$$4444"+snapshot.key())
-    //   });
 
-  //   var qryList = refBuslist.endAt().limitToFirst(CAR_CNT);
-  //
-  //   //
-  // //http://stackoverflow.com/questions/25611356/display-posts-in-descending-posted-order
-  //
-  //   qryList.on("child_added", function (snapshot, prevChildKey) {
-  //       var val = snapshot.val();
-  //
-  //     console.log("$$$$$$$$$$$$$$4444"+snapshot.key())
-  //   });
-  //   $scope.busList = $firebaseArray(qryList);
-
-// loadMoreCarNum
-    // $scope.loadMoreCarNum = function () {
-    //   $scope.busList = $firebaseArray(refBuslist2.endAt().limitToFirst(600));
-    // }
+      }
+    //  console.log(val.bus);
+    });
 
 
 
@@ -54,7 +55,24 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // 選擇了bus,即顯示,準備定點可以快速在地圖回到中心點
     $scope.ddlBusChange = function (bus) {
+      $scope.firstbus=bus;
+      $scope.bus=bus;
+      ddlBusChange(bus) ;
         // console.log("**********************bus=" + bus);
+        // $scope.bus = bus;
+        // var refBus = ref.child("buslist/" + bus);
+        // refBus.on("child_added", function (snapshot, prevChildKey) {
+        //     var doc = snapshot.val();
+        //     // console.log("**********************bus=" + doc.bus);
+        //     $scope.lat = doc.lat;
+        //     $scope.lon = doc.lon;
+        //     $scope.unix = doc.unix;
+        // });
+        // showBus();
+    }
+
+    function ddlBusChange(bus) {
+        console.log("**********************bus=" + bus);
         $scope.bus = bus;
         var refBus = ref.child("buslist/" + bus);
         refBus.on("child_added", function (snapshot, prevChildKey) {
@@ -120,7 +138,11 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
         var SHOW_DOT_CNT= parseInt(selectTracking);
 
-        var rul9 = urlFirebase +  selectCar;
+
+//        var rul9 = urlFirebase +  selectCar;
+        var rul9 = urlFirebase +  $scope.bus;
+
+
         // console.log("rul9=" + rul9);
         var ref9 = new Firebase(rul9);
         // var query = ref9.orderByChild('unix').endAt().limit(60);

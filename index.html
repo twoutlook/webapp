@@ -4,7 +4,10 @@
 
     <meta charset="utf-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,8 +37,8 @@
 
     <style>
         body{
-          /*background-color:#F9f9f9;*/
-          background-color:black;
+          background-color:#F9f9f9;
+          /*background-color:black;*/
 
             font-family: 'Droid Sans Mono' ;
         }
@@ -50,24 +53,44 @@
       <div class="container">
 
           <div class="row">
-
                 <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡!</button>
             <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
             <!-- <button class="btn  " >公車數:{{busList.length}}  </button> -->
+            <!-- {{busNumList[0].list}} -->
+<!-- {{buslist3x}} -->
 
-            <button class="btn  "  ng-click="loadMoreCarNum()"> 車牌號碼</button>
-            <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)"  >
-            <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
+
+            <button class="btn  " ng-click="loadMoreCarNum()"> 車牌號碼 ({{buslist3x.length}}筆)</button>
+
+            <!-- http://stackoverflow.com/questions/30088227/angularjs-set-default-value-on-select-inside-a-ng-repeat -->
+            <!-- hard coding is working
+            <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-init="data.selectCar='337-FP'" ng-change="ddlBusChange(data.selectCar)"  >
+
+            NOT WORKING???
+            <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-init="data.selectCar='{{busNumList[0].list[0].bus}}'" ng-change="ddlBusChange(data.selectCar)"  >
+            -->
+            <!-- <select  name="selectCar" id="selectCar" ng-model="data.selectCar"   ng-init="data.selectCar='337-FP'" ng-change="ddlBusChange(data.selectCar)"  > -->
+
+            <select  name="selectCar" id="selectCar" ng-model="buslist3x.selectedValue" ng-change="ddlBusChange(buslist3x.selectedValue)"   >
+
+                <option  ng-repeat="doc in buslist3x" value="{{doc.bus}}"> {{doc.bus}}</option>
 
             </select>
 
+
+
+            <!-- <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)"  >
+            <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
+
+            </select> -->
+
             <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>-->
             <!-- <button class="btn btn-success " ng-click="showLocation()">看【{{bus}}】位置 </button> -->
-            <button class="btn btn-success " ng-click="showLocation()">查看位置 </button>
+            <button class="btn btn-success " ng-click="showLocation()">查看【{{firstbus}}】位置 </button>
 
             <button class="btn  " >痕跡數  </button>
             <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  > -->
-            <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='10'" >
+            <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
                   <option value="5" >5</option>
                 <option value="10">10</option>
                 <option value="30">30</option>
@@ -78,7 +101,7 @@
             </select>
 
             <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
-            <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >查看痕跡</button>
+            <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >查看【{{firstbus}}】痕跡</button>
             <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button>
 
           </div>
@@ -162,13 +185,14 @@
     async defer></script>
 
     <!-- <script src="biz-js/mark-bus-0119-anchor.js"></script> -->
+    <script src="biz-js/date.format.js"></script>
+    <script src="biz-js/mark-util.js"></script>
     <script src="biz-js/mark-bus-0119-team.js"></script>
     <script src="biz-js/mark-bus-0119-util.js"></script>
 
 
     <script src="biz-js/mark-bus-0119.js"></script>
-    <script src="biz-js/date.format.js"></script>
-    <script src="biz-js/mark-util.js"></script>
+
 
 
   </body>
