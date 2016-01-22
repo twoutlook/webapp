@@ -23,8 +23,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var refBusNumList=ref.child("buslist3x");
     $scope.firstbus="...截入資料中,請稍候";
     var loadingCnt=0;
-    refBusNumList.limitToFirst(1).on("child_added", function(snapshot) {
-      // console.log(snapshot.key());
+    //refBusNumList.limitToFirst(1).on("child_added", function(snapshot) {
+    // https://www.firebase.com/docs/web/api/query/once.html
+    refBusNumList.limitToFirst(1).once("child_added", function(snapshot) {
+        console.log(snapshot.key()+",,, loadingCnt= "+loadingCnt);
       // console.log(snapshot.val());
       var val=snapshot.val();
       if (loadingCnt==0){
@@ -32,7 +34,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         $scope.bus=val.bus;
 
         ddlBusChange(val.bus) ;
-        loadingCnt=999;
+        loadingCnt++;
 
 
 
