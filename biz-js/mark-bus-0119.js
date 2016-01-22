@@ -166,7 +166,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             if ( cnt==1){
               makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false,cnt);
             }else if ( cnt>SHOW_DOT_CNT){
-                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,false,null);
+                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,true,null);
             }else{
                 makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,true,cnt);
             }
