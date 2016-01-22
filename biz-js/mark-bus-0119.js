@@ -165,10 +165,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 //function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow)
             if ( cnt==1){
               makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false,cnt);
-            }else if ( cnt>=SHOW_DOT_CNT){
+            }else if ( cnt>SHOW_DOT_CNT){
                 makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,false,null);
             }else{
-                makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,false,cnt);
+                makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,true,cnt);
             }
             $scope.bus =val.bus;
             $scope.lat = val.lat;
