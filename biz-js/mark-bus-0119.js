@@ -86,8 +86,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     }
 
     $scope.showLocation = function () {
-        makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
-    }
+      // makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
+      makeMarker($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
+  }
 
     // function moveLastPostionToCenter() {
     //     makeMarker($scope.bus, $scope.unix, $scope.lat, $scope.lon, null, true,true);
@@ -140,7 +141,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 
 //        var rul9 = urlFirebase +  selectCar;
-        var rul9 = urlFirebase +  $scope.bus;
+        // var rul9 = urlFirebase +  $scope.bus;
+        var rul9 = urlFirebase +  $scope.firstbus;
 
 
         // console.log("rul9=" + rul9);
