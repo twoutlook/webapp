@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="sampleApp">
+<head>
+
+    <meta charset="utf-8">
+
+
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NodeJs2016走過必留痕跡!</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+
+
+  <script src="biz-js/jquery.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <style>
+        body{
+          background-color:#F9f9f9;
+          /*background-color:black;*/
+
+            font-family: 'Droid Sans Mono' ;
+        }
+    </style>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        html, body { height: 100%; margin: 0; padding: 0; }
+        #map { height: 98%; }
+    </style>
+</head>
+  <body  ng-controller="SampleCtrl">
+      <div class="container">
+        <div class="row" >
+          <br>
+          <label>Search: <input ng-model="searchText2"></label>
+          <table class="table table-bordered">
+            <tr><th></th><th>線路編號</th><th>線路名稱</th><th>起站</th><th>迄站</th><th>查看線路圖</th></tr>
+            <tr  ng-repeat="bus in buses | filter:searchText2">
+              <td>{{1+$index}}</td>
+              <!-- <td>{{bus}}</td> -->
+                <td>{{bus.BusID}}</td>
+                  <td>{{bus.RouteID}}</td>
+              <!-- <td>{{route.nameZh}}</td>
+              <td>{{route.departureZh}}</td>
+              <td>{{route.destinationZh}}</td> -->
+              <td><a target='_blank' href='{{route.roadMapUrl}}' >查看線路圖</a></td>
+            </tr>
+          </table>
+        </div>
+
+          <div class="row" >
+            <br>
+            <label>Search: <input ng-model="searchText"></label>
+            <table class="table table-bordered">
+              <tr><th></th><th>線路編號</th><th>線路名稱</th><th>起站</th><th>迄站</th><th>查看線路圖</th></tr>
+              <tr  ng-repeat="route in routes | filter:searchText">
+                <td>{{1+$index}}</td>
+                <td>{{route.Id}}</td>
+                  <td>{{route.pathAttributeId}}</td>
+                    <td>{{route.pathAttributeName}}</td>
+                <td>{{route.nameZh}}</td>
+                <td>{{route.departureZh}}</td>
+                <td>{{route.destinationZh}}</td>
+                <td><a target='_blank' href='{{route.roadMapUrl}}' >查看線路圖</a></td>
+              </tr>
+            </table>
+          </div>
+      </div>
+        <script src="biz-js/routes.js"></script>
+  </body>
+</html>
