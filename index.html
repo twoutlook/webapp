@@ -36,17 +36,18 @@
 
 
     <style>
-        body{
-          background-color:#F9f9f9;
-          /*background-color:black;*/
-
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 98%; }
+      .firstHeading{ text-align: center}
+      body{
+          /*background-color:#F9f9f9;*/
+            background-color:black;
             font-family: 'Droid Sans Mono' ;
-        }
+      }
     </style>
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
     <style type="text/css">
-        html, body { height: 100%; margin: 0; padding: 0; }
-        #map { height: 98%; }
+
     </style>
 </head>
   <body  ng-controller="SampleCtrl">
@@ -92,11 +93,13 @@
             <button class="btn  " >痕跡數  </button>
             <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  > -->
             <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
-                  <option value="5" >5</option>
                 <option value="10">10</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
                 <option value="120">120</option>
+                <option value="180">180</option>
+                <option value="240">240</option>
+                <option value="360">360</option>
                 <option value="720">720</option>
                 <option value="1440">1440</option>
             </select>
@@ -141,12 +144,13 @@
           icon: iconBase + 'marina.png',//marina.png
 
       });
-        marker.addListener('click', toggleBounce);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      marker.addListener('click', toggleBounce);
        map.setCenter(marker.getPosition());
 
 
 
-       var title="臺北市政府全新「雲端即時開放資料服務」 Taipei OMG (Open, Mobility, Green) 綠色交通應用開發大賽";
+       var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
 
        var item0='<h3><a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
        item0+='1. 開發大賽官網</a> </h3>';
@@ -165,9 +169,10 @@
        var contentString = '<div id="content">'+
              '<div id="siteNotice">'+
              '</div>'+
-            //  '<h1 id="firstHeading" class="firstHeading">'+title+'</h1>'+
-             '<div id="bodyContent">'+item0+item1+item2+item3+item4+
-                   '</div>'+
+             '<h2 id="firstHeading" class="firstHeading"><b>'+title+'</b></h2>'+
+            // '<div id="bodyContent">'+item0+item1+item2+item3+item4+
+            '<div id="bodyContent">'+item0+item1+item2+
+                  '</div>'+
              '</div>';
 
          var infowindow = new google.maps.InfoWindow({

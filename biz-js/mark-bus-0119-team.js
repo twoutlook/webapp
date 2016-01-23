@@ -28,7 +28,7 @@
        }
      }
 
-     var title="諾得捷思隊 twcloudwebapp@outlook.com";
+     var title="<span style='color:#002080;'>諾得捷思隊 <br>twcloudwebapp@outlook.com</span>";
 
      var item0='<h3>隊長: 陳美君  &nbsp;&nbsp;&nbsp;職責: 創意規畫, 美感設計</h3>';
 
@@ -39,7 +39,7 @@
            '<div id="siteNotice">'+
            '</div>'+
           //  '<h1 id="firstHeading" class="firstHeading">'+title+'</h1>'+
-                '<h3 id="firstHeading" class="firstHeading">'+title+'</h3>'+
+                '<h1 id="firstHeading" class="firstHeading">'+title+'</h1>'+
            '<div id="bodyContent">'+item0+item1+item2+
           //  '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
           //  'sandstone rock formation in the southern part of the '+
@@ -61,7 +61,7 @@
          content: contentString
        });
 
-
+marker.setAnimation(google.maps.Animation.BOUNCE);
        marker.addListener('click', function() {
          infowindow.open(map, marker);
        });
