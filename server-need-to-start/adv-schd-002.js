@@ -163,7 +163,9 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             var doc = {
                                 bus: bus.BusID,
                                 lat: bus.Latitude,
-                                lon: bus.Longitude,
+                                lon: bus.Longitude, //RouteID
+                                route: bus.RouteID, // NOTE by Mark, 2015/1/23 13:04 to show bus belonging to which route and route details
+
                                 // dt:bus.DataTime,
                                 unix: unix, // remove unnecessary part of bus.DataTime
                                 fb: Firebase.ServerValue.TIMESTAMP

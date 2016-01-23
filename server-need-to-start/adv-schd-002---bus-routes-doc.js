@@ -140,10 +140,9 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                               mapUrl:bus.roadMapUrl
                             }
                             // docs[bus.pathAttributeId]=doc;
-                            docs[bus.pathAttributeId]={doc:doc};
-
+                            docs[bus.pathAttributeId]={doc};
                         }
-                        REF.child('bus/routes').set(docs);
+                        REF.child('bus-routes').set({routes:docs});
 
 
                         // UPDATE CURRENT
