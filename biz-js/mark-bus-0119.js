@@ -126,8 +126,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     }
 
     // NOTE TO SHOW ALL MARKS
-    $scope.showTracking = function (selectCar,selectTracking) {
-        var SHOW_DOT_CNT=1+ parseInt(selectTracking);
+    $scope.showTracking = function (selectCar) {
+        // var SHOW_DOT_CNT=1+ parseInt(selectTracking);
+        var SHOW_DOT_CNT=30;
+
         var ref2=ref.child($scope.firstbus)
         var query = ref2.endAt().limitToLast(SHOW_DOT_CNT);
         var cnt=0;

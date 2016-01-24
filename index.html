@@ -95,7 +95,7 @@
 
             <!-- <button class="btn   btn-info" >痕跡</button> -->
             <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  > -->
-            <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
+            <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
                 <option value="10">10</option>
                 <option value="30">30</option>
                 <option value="60">60</option>
@@ -105,10 +105,11 @@
                 <option value="360">360</option>
                 <option value="720">720</option>
                 <option value="1440">1440</option>
-            </select>
+            </select> -->
 
             <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
-            <button ng-click="showTracking(data.selectCar,data.selectTracking)" class="btn btn-success " >痕跡</button>
+          <!-- …  <button ng-click="showTracking(data.selectCar,data.selectTracking)" class="btn btn-success " >查看痕跡</button> -->
+            <button ng-click="showTracking(data.selectCar)" class="btn btn-success " >查看痕跡</button>
             <!-- <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button> -->
 
           </div>
