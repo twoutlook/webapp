@@ -144,22 +144,22 @@
           icon: iconBase + 'marina.png',//marina.png
 
       });
-      marker.setAnimation(google.maps.Animation.BOUNCE);
+      // marker.setAnimation(google.maps.Animation.BOUNCE);
       marker.addListener('click', toggleBounce);
-       map.setCenter(marker.getPosition());
+      map.setCenter(marker.getPosition());
 
 
 
        var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
 
-       var item0='<h3><a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
-       item0+='1. 開發大賽官網</a> </h3>';
+       var item0='<h3>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
+       item0+='本次開發大賽官網</a> </h3>';
 
-       var item1='<h3><a  target="_blank" href="http://data.taipei/">';
-       item1+='2. Data.Taipei臺北市政府資料開放平台</a> </h3>';
+       var item1='<h3>※<a  target="_blank" href="http://data.taipei/">';
+       item1+='Data.Taipei臺北市政府資料開放平台</a> </h3>';
 
-       var item2='<h3><a  target="_blank" href="http://transportation-data.taipei">';
-       item2+='3. 交通即時資料開放資料專區</a></h3> ';
+       var item2='<h3>※這個WebAPP數據來源<a  target="_blank" href="http://transportation-data.taipei">';
+       item2+='交通即時資料開放資料專區</a></h3> ';
        var item3='<h3><a  target="_blank" href="http://data.taipei/opendata/datalist/datasetMeta?oid=c84f781f-02e7-45a4-84c2-0fc690749f66">';
        item3+='4. 臺北市公共運輸處 定時車機資訊</a></h3> ';
        var item4='<h3><a  target="_blank" href="http://data.taipei/bus/BUSDATA">';
@@ -171,7 +171,7 @@
              '</div>'+
              '<h2 id="firstHeading" class="firstHeading"><b>'+title+'</b></h2>'+
             // '<div id="bodyContent">'+item0+item1+item2+item3+item4+
-            '<div id="bodyContent">'+item0+item1+item2+
+            '<div id="bodyContent">'+item1+item0+item2+
                   '</div>'+
              '</div>';
 
@@ -179,6 +179,7 @@
            content: contentString
          });
 
+         infowindow.open(map, marker);
 
          marker.addListener('click', function() {
            infowindow.open(map, marker);

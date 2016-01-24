@@ -7,9 +7,8 @@ var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var ref = new Firebase(urlFirebase);
     // NOTE
-    $scope.firstbus="...截入資料中,請稍候";
-    $scope.firstbus="";
-    $scope.bus="";
+    $scope.firstbus="...資料截入中,請稍候";
+      $scope.bus="";
     // Taipei 101
     //lat: 25.033718, lng: 121.565512
     $scope.lat = 25.033718;
