@@ -118,6 +118,13 @@
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
     var initLatLng={lat: 25.033718, lng: 121.565512};
 
+    // to try size
+    //※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
+    //item0+='本次開發大賽官網</a> </h3>
+    function getItemHtml(src1,src2,src3){
+      return '<h4>※'+src1+'<a  target="_blank" href="'+src2+'">'+src3+'</a> </h4>';
+
+    }
 
     function initMap() {
 
@@ -152,11 +159,17 @@
 
        var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
 
-       var item0='<h3>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
-       item0+='本次開發大賽官網</a> </h3>';
+       var item0='<h4>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
+       item0+='本次開發大賽官網</a> </h4>';
 
        var item1='<h3>※<a  target="_blank" href="http://data.taipei/">';
        item1+='Data.Taipei臺北市政府資料開放平台</a> </h3>';
+
+       var itemTaipei=getItemHtml('','http://data.taipei/','Data.Taipei臺北市政府資料開放平台');
+       var itemBhuntr=getItemHtml('','https://taipeiomg.bhuntr.com/','本次開發大賽官網');
+       var itemSource=getItemHtml('本WebAPP數據來源','http://transportation-data.taipei','交通即時資料開放資料專區');
+
+
 
        var item2='<h3>※本WebAPP數據來源：<a  target="_blank" href="http://transportation-data.taipei">';
        item2+='交通即時資料開放資料專區</a></h3> ';
@@ -170,9 +183,9 @@
       var contentString = '<div id="content" style="background-color:#f9f9f9"> '+
              '<div id="siteNotice">'+
              '</div>'+
-             '<h2 id="firstHeading" class="firstHeading"><b>'+title+'</b></h2>'+
+             '<h3 id="firstHeading" class="firstHeading"><b>'+title+'</b></h3>'+
             // '<div id="bodyContent">'+item0+item1+item2+item3+item4+
-            '<div id="bodyContent">'+item1+item0+item2+
+            '<div id="bodyContent">'+itemTaipei+itemBhuntr+itemSource+
                   '</div>'+
              '</div>';
 
