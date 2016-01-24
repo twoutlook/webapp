@@ -41,7 +41,10 @@
       .firstHeading{ text-align: center}
       body{
           /*background-color:#F9f9f9;*/
-            background-color:black;
+          /*background-color:black;//#0000b3*/
+          background-color:#bfbfbf;
+
+
             font-family: 'Droid Sans Mono' ;
       }
     </style>
@@ -54,15 +57,15 @@
       <div class="container">
 
           <div class="row">
-                <button ng-click="showAnchor()" class="btn btn-primary " >主題:走過必留痕跡!</button>
-            <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button>
+                <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
+            <!-- <button  ng-click="showTeam()" class="btn btn-primary" > by 諾得捷思隊</button> -->
 
             <!-- <button class="btn  " >公車數:{{busList.length}}  </button> -->
             <!-- {{busNumList[0].list}} -->
 <!-- {{buslist3x}} -->
 
 
-            <button class="btn  " ng-click="loadMoreCarNum()"> 車牌號碼 ({{buslist3x.length}}筆)</button>
+            <button class="btn  btn-info" ng-click="loadMoreCarNum()">車號({{buslist3x.length}}筆)</button>
 
             <!-- http://stackoverflow.com/questions/30088227/angularjs-set-default-value-on-select-inside-a-ng-repeat -->
             <!-- hard coding is working
@@ -88,9 +91,9 @@
 
             <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>-->
             <!-- <button class="btn btn-success " ng-click="showLocation()">看【{{bus}}】位置 </button> -->
-            <button class="btn btn-success " ng-click="showLocation()">查看【{{firstbus}}】位置 </button>
+            <button class="btn btn-success " ng-click="showLocation()">【{{firstbus}}】位置 </button>
 
-            <button class="btn  " >痕跡數  </button>
+            <button class="btn   btn-info" >痕跡</button>
             <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  > -->
             <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
                 <option value="10">10</option>
@@ -105,8 +108,8 @@
             </select>
 
             <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
-            <button ng-click="showTracking(data.selectCar,data.selectTracking)" class="btn btn-success " >查看【{{firstbus}}】痕跡</button>
-            <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button>
+            <button ng-click="showTracking(data.selectCar,data.selectTracking)" class="btn btn-success " >【{{firstbus}}】痕跡</button>
+            <!-- <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button> -->
 
           </div>
       </div>
@@ -122,7 +125,7 @@
     //※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
     //item0+='本次開發大賽官網</a> </h3>
     function getItemHtml(src1,src2,src3){
-      return '<h4>※'+src1+'<a  target="_blank" href="'+src2+'">'+src3+'</a> </h4>';
+      return '<h4>'+src1+'<a  target="_blank" href="'+src2+'">'+src3+'</a> </h4>';
 
     }
 
@@ -159,24 +162,25 @@
 
        var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
 
-       var item0='<h4>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
-       item0+='本次開發大賽官網</a> </h4>';
+      //  var item0='<h4>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
+      //  item0+='本次開發大賽官網</a> </h4>';
+       //
+      //  var item1='<h3>※<a  target="_blank" href="http://data.taipei/">';
+      //  item1+='Data.Taipei臺北市政府資料開放平台</a> </h3>';
 
-       var item1='<h3>※<a  target="_blank" href="http://data.taipei/">';
-       item1+='Data.Taipei臺北市政府資料開放平台</a> </h3>';
+       var itemTaipei=getItemHtml('※','http://data.taipei/','Data.Taipei臺北市政府資料開放平台');
+       var itemBhuntr=getItemHtml('※','https://taipeiomg.bhuntr.com/','本次開發大賽官網');
+       var itemSource=getItemHtml('※本作品數據來源:&nbsp;','http://transportation-data.taipei','交通即時資料開放資料專區');
+       var itemTeam=getItemHtml('※作品主題:&nbsp;走過必留痕跡!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊','','');
 
-       var itemTaipei=getItemHtml('','http://data.taipei/','Data.Taipei臺北市政府資料開放平台');
-       var itemBhuntr=getItemHtml('','https://taipeiomg.bhuntr.com/','本次開發大賽官網');
-       var itemSource=getItemHtml('本WebAPP數據來源','http://transportation-data.taipei','交通即時資料開放資料專區');
-
-
-
-       var item2='<h3>※本WebAPP數據來源：<a  target="_blank" href="http://transportation-data.taipei">';
-       item2+='交通即時資料開放資料專區</a></h3> ';
-       var item3='<h3><a  target="_blank" href="http://data.taipei/opendata/datalist/datasetMeta?oid=c84f781f-02e7-45a4-84c2-0fc690749f66">';
-       item3+='4. 臺北市公共運輸處 定時車機資訊</a></h3> ';
-       var item4='<h3><a  target="_blank" href="http://data.taipei/bus/BUSDATA">';
-       item4+='5. 本作品原始資料即時下載</a></h3> ';
+       //
+       //
+      //  var item2='<h3>※本WebAPP數據來源：<a  target="_blank" href="http://transportation-data.taipei">';
+      //  item2+='交通即時資料開放資料專區</a></h3> ';
+      //  var item3='<h3><a  target="_blank" href="http://data.taipei/opendata/datalist/datasetMeta?oid=c84f781f-02e7-45a4-84c2-0fc690749f66">';
+      //  item3+='4. 臺北市公共運輸處 定時車機資訊</a></h3> ';
+      //  var item4='<h3><a  target="_blank" href="http://data.taipei/bus/BUSDATA">';
+      //  item4+='5. 本作品原始資料即時下載</a></h3> ';
 
 
       //  var contentString = '<div id="content">'+
@@ -185,7 +189,7 @@
              '</div>'+
              '<h3 id="firstHeading" class="firstHeading"><b>'+title+'</b></h3>'+
             // '<div id="bodyContent">'+item0+item1+item2+item3+item4+
-            '<div id="bodyContent">'+itemTaipei+itemBhuntr+itemSource+
+            '<div id="bodyContent">'+itemTaipei+itemBhuntr+itemSource+itemTeam
                   '</div>'+
              '</div>';
 
@@ -207,8 +211,8 @@
 
     <!-- <script src="biz-js/mark-bus-0119-anchor.js"></script> -->
     <script src="biz-js/date.format.js"></script>
-    <script src="biz-js/mark-util.js"></script>
-    <script src="biz-js/mark-bus-0119-team.js"></script>
+    <!-- <script src="biz-js/mark-util.js"></script> -->
+    <!-- <script src="biz-js/mark-bus-0119-team.js"></script> -->
     <script src="biz-js/mark-bus-0119-util.js"></script>
 
 

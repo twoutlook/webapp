@@ -95,6 +95,17 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
       //  initMap();
       // initLatLng
         map.setCenter(initLatLng);
+
+        // RESET ALL
+        var rulX = urlFirebase +  'buslist';
+        var refList = new Firebase(rulX);
+        var cnt=0;
+        refList.on("child_added", function (snapshot, prevChildKey) {
+            var key = snapshot.key();
+            // console.log("key=" + key);
+            ref.child(key).off();
+        });
+        initMap();
     }
 
     $scope.showTeam = function () {
