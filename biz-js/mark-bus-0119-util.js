@@ -10,7 +10,11 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){//1
   // dt2=dt.format("yyyy-mm-dd HH:MM:ss");
   // dt2=dt.format("mm/dd HH:MM:ss");
 
-  dt2=dt.format("mm/dd HH:MM");
+  // dt2=dt.format("mm/dd HH:MM");
+  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+  dt2NoHtml=dt.format("yyyy-mm-dd HH:MM:ss");
+
+  //
 
   var myLatLng = {lat: lat, lng: lon};
 
@@ -22,7 +26,7 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){//1
       icon: icon,//marina.png
 
       animation: google.maps.Animation.DROP,
-      title:"【&nbsp;"+bus+"&nbsp;】#"+cnt+" "+dt2
+      title:"【"+bus+"】#"+cnt+" "+dt2NoHtml
   });
 
   var cntStr="";
@@ -34,13 +38,13 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){//1
 
 
 
-  var contentString = '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
+  var contentString = '<div id="content"  class="firstHeading">'+
+        // '<div id="siteNotice">'+
+        // '</div>'+
         // '<h1 id="firstHeading" class="firstHeading">'+"【"+bus+"】"+'</h1>'+
         '<div id="bodyContent">'+
         // '<p><b>'+$scope.unix+'</b>'+
-          '<p><b>'+"【"+bus+"】"+cntStr+"<BR>"+dt2+'</b>'+msg+
+          '<p><b>'+"【"+bus+"】"+cntStr+"</b><BR>"+dt2+
         '</div>'+
         '</div>';
 

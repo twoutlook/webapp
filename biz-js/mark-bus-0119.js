@@ -51,7 +51,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             $scope.route = doc.route;
             // NOTE 得到像 01/23 19:57
             var dt=new Date(parseInt(doc.unix));
-            var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
+            // var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
+            var  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
 
             // NOTE nested??? YES, IT WORKS!
             // https://bus-0119.firebaseio.com/bus-routes/routes/10142
@@ -97,6 +98,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         map.setCenter(initLatLng);
 
         // RESET ALL
+        anchorCnt++; // it won't show info window again
+        console.log("anchorCnt="+anchorCnt);
+        //
         var rulX = urlFirebase +  'buslist';
         var refList = new Firebase(rulX);
         var cnt=0;

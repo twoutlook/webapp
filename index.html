@@ -119,6 +119,7 @@
 
     <script>
     var map;
+    var anchorCnt=0;
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
     // var initLatLng={lat: 25.033718, lng: 121.565512};
     var initLatLng={lat: 25.033718, lng: 121.565512};
@@ -203,8 +204,11 @@
            content: contentString
          });
 
+         console.log(" initMap, anchorCnt"+anchorCnt);
+         // not bo open again when click title
+         if (anchorCnt==0){
          infowindow.open(map, marker);
-
+        }
          marker.addListener('click', function() {
            infowindow.open(map, marker);
          });
