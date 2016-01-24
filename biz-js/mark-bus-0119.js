@@ -51,7 +51,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             $scope.route = doc.route;
             // NOTE 得到像 01/23 19:57
             var dt=new Date(parseInt(doc.unix));
-            var dt2=dt.format("mm/dd HH:MM");
+            var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
 
             // NOTE nested??? YES, IT WORKS!
             // https://bus-0119.firebaseio.com/bus-routes/routes/10142
@@ -59,13 +59,22 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             refBusRoutes.on("child_added", function (snapshot, prevChildKey) {
                 var doc2 = snapshot.val();
                 $scope.routeName = doc2.routeName;
-                $scope.routeMsg ="<b><h3>【"+doc.bus+"】</h3>"
+                $scope.routeName = "<a target='_blank' href='"+doc2.mapUrl+"' >"+doc2.routeName+"</a>";
+
+                $scope.routeMsg =""
                               // +"<br>路線："+doc2.routeName
-                              +"<br>起站："+doc2.startStop
-                              +"<br>迄站："+doc2.endStop
-                              +"<br><h3><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h3>"
-                              +"<br>資料時間："+dt2
-                              +"<br></b>"
+                              // +"<br>起站："+doc2.startStop
+                              // +"<br>迄站："+doc2.endStop
+                              // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop
+                              +"<div style='background-color:#f9f9f9; color:#00802b;'><h4>"+doc2.startStop
+                              +"<br>|"
+                              +"<br>"+doc2.endStop
+                              +"</div>"
+                              // +"<br><h4><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h4>"
+                              +"【"+doc.bus+"】"
+                              // +"<br>資料時間："+dt2
+                              +"<br>"+dt2
+                              +"</h4>"
                               ;
             });
         });

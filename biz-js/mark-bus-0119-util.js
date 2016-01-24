@@ -78,11 +78,11 @@ function makeMarkerV2(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg,ro
       // title:msg // html tag is bad here
   });
 
-  var contentString = '<div id="content">'+
+  var contentString = '<div id="content" style="background-color:#f9f9f9"> '+
         '<div id="siteNotice">'+
         '</div>'+
         '<h1 id="firstHeading" class="firstHeading">'+" <u> "+routeName+" </u> "+'</h1>'+
-        '<div id="bodyContent">'+
+        '<div id="bodyContent" class="firstHeading">'+
         // '<p><b>'+$scope.unix+'</b>'+
         // '<p><b>'+"【"+bus+"】"+cntStr+"<BR>"+dt2+'</b>'+msg+
         '<p>'+msg+
