@@ -119,6 +119,7 @@
     <script>
     var map;
     var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
+    // var initLatLng={lat: 25.033718, lng: 121.565512};
     var initLatLng={lat: 25.033718, lng: 121.565512};
 
     // to try size
@@ -160,7 +161,8 @@
 
 
 
-       var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
+      // var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
+      var title="<span style='color:#00802b;'>Data.Taipei</span><br> <span style='color:red;'>Taipei OMG</span> <br>(<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
 
       //  var item0='<h4>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
       //  item0+='本次開發大賽官網</a> </h4>';
@@ -170,7 +172,7 @@
 
        var itemTaipei=getItemHtml('※','http://data.taipei/','Data.Taipei臺北市政府資料開放平台');
        var itemBhuntr=getItemHtml('※','https://taipeiomg.bhuntr.com/','本次開發大賽官網');
-       var itemSource=getItemHtml('※本作品數據來源:&nbsp;','http://transportation-data.taipei','交通即時資料開放資料專區');
+       var itemSource=getItemHtml('※數據來源:&nbsp;','http://transportation-data.taipei','交通即時資料開放資料專區');
        var itemTeam=getItemHtml('※作品主題:&nbsp;走過必留痕跡!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;by 諾得捷思隊','','');
 
        //
