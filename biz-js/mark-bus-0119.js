@@ -65,13 +65,18 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                               // +"<br>路線："+doc2.routeName
                               // +"<br>起站："+doc2.startStop
                               // +"<br>迄站："+doc2.endStop
-                              // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop
-                              +"<div style='background-color:#f9f9f9; color:#00802b;'><h4>"+doc2.startStop
+                              // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop//#00802b
+                              +"<div ><h4>"
+                              +"<a target='_blank' href='"+doc2.mapUrl+"' >"
+                              +doc2.startStop
+
+
                               +"<br>|"
                               +"<br>"+doc2.endStop
+                              +"</a>"
                               +"</div>"
                               // +"<br><h4><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h4>"
-                              +"【"+doc.bus+"】"
+                              +"<b>【"+doc.bus+"】</b>"
                               // +"<br>資料時間："+dt2
                               +"<br>"+dt2
                               +"</h4>"
