@@ -148,7 +148,7 @@ function ddlRouteChange (doc){
                   +"<br>"+dt2
                   +"</h4>"
                   ;
-    makeMarkerV2(bus.bus,   bus.unix, bus.lat, bus.lon, iconBus, true,true,null,msg);
+    makeMarkerV2(bus.bus,   bus.unix, bus.lat, bus.lon, iconBus, false,true,null,msg);
     // busArray[val.bus]=true;
       // console.log("busArray.length=" + busArray.length);
     }
