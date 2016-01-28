@@ -80,112 +80,47 @@ var refRoutes = ref.child("routesv5/");
 //
 // });
 
-
-
+var docX;
+$scope.clearScreen = function () {
+  initMap();
+  ddlRouteChange (docX)
+}
 
 $scope.ddlRouteChange = function (doc) {
+  docX=doc;
+  ddlRouteChange (doc);
+}
+
+function ddlRouteChange (doc){
   var obj = JSON.parse(doc);
-  console.log(obj);
-  console.log(obj.endStop);
-
   var route=parseInt(obj.routeId);
-  // for(var key in obj){
-  //           var attrName = key;
-  //           var attrValue = obj[key];
-  //       console.log(attrName+"=>"+attrValue);
-  // }
-
-  // console.log(JSON.stringify(doc));
-
-    // console.log("DOING SPLIT----------------");
-    // var routeArray=route.split(",");
-    //
-    // var route=routeArray[0];
-    // var routeName=routeArray[1];
-    // var startStop=routeArray[2];
-    // var endStop=routeArray[3];
-    // route=parseInt(route.substring(1,route.length-1));
-    // routeName=parseInt(routeName.substring(1,routeName.length-1));
-    // startStop=parseInt(startStop.substring(1,startStop.length-1));
-    // endStop=parseInt(endStop.substring(1,endStop.length-1));
-
-
-
-
-  $scope.busCnt=busArray.length;
-
-
-  for (var i=0;i<busArray.length;i++){
-    console.log(i+" ???"+busArray[i]);
-  }
-
-
-  $scope.activeRoute=route;
-
-  console.log("DOING route=" + route);
-  console.log("busArray.length=" + busArray.length);
-
-  var intRoute=parseInt(route);
   var refBustlist = ref.child("buslistv5/");
-  refBustlist.orderByChild("route").startAt(intRoute).endAt(intRoute).on("child_added", function (snapshot, prevChildKey) {
-    // $scope.busCnt++;
 
 
+  refBustlist.orderByChild("route").startAt(route).endAt(route).on("child_added", function (snapshot, prevChildKey) {
 
-  // console.log("... cnt="+$scope.busCnt);
-  // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
-
-  // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
-  // refBustlist.orderByChild("route").on("child_added", function (snapshot, prevChildKey) {
     var key = snapshot.key();
     var val = snapshot.val();
     var dt=new Date(parseInt(val.unix));
     // var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
     var  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
     var msg =""
-                  // +"<br>路線："+doc2.routeName
-                  // +"<br>起站："+doc2.startStop
-                  // +"<br>迄站："+doc2.endStop
-                  // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop//#00802b
                   +"<div ><h4>"
                   +"<a target='_blank' href='"+obj.mapUrl+"' >"
                   +"<h3>【"+obj.routeName+"】</h3>"
-                  +obj.startStop
-
-
-                  +"<br>|"
-                  +"<br>"+obj.endStop
+                  // +obj.startStop
+                  // +"<br>|"
+                  // +"<br>"+obj.endStop
                   +"</a>"
                   +"</div>"
-                  // +"<br><h4><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h4>"
                   +"<b>【"+val.bus+"】</b>"
-                  // +"<br>資料時間："+dt2
                   +"<br>"+dt2
                   +"</h4>"
                   ;
-    // console.log("key" + key);
-    // console.log("val" + val);
-    // console.log("route: " + val['route']);
-    // console.log("route: " + val['route']+"  "+val['bus'] +JSON.stringify(val));
-    // console.log(JSON.stringify(val));
-// makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg)
-    // makeMarker(val.bus,val.unix,val.lat,val.lon,iconBus,false,true,null,msg);
-    // makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, "img/bus.png", true,true,null,$scope.routeMsg,$scope.routeName);
-
-    // makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, "img/bus.png", false,true,null,msg,route);
     makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, true,true,null,msg);
-
-
     busArray[val.bus]=true;
       console.log("busArray.length=" + busArray.length);
-    // console.log("bus: " + val['bus']);
-
-
   });
-
-
-
-
 }
 
 
