@@ -63,7 +63,8 @@
 
                             <select  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
 
-                                <option  ng-repeat="doc in routesv4" value="{{doc.routeId}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
+                              <!-- <option  ng-repeat="doc in routesv4" value="'{{doc.routeId}}','{{doc.routeName}}','{{doc.startStop}}','{{doc.endStop}}'"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
+                              <option  ng-repeat="doc in routesv4" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
 
                             </select>
 

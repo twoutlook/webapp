@@ -83,7 +83,31 @@ var refRoutes = ref.child("routesv5/");
 
 
 
-$scope.ddlRouteChange = function (route) {
+$scope.ddlRouteChange = function (doc) {
+  var obj = JSON.parse(doc);
+  console.log(obj);
+  console.log(obj.endStop);
+
+  var route=parseInt(obj.routeId);
+  // for(var key in obj){
+  //           var attrName = key;
+  //           var attrValue = obj[key];
+  //       console.log(attrName+"=>"+attrValue);
+  // }
+
+  // console.log(JSON.stringify(doc));
+
+    // console.log("DOING SPLIT----------------");
+    // var routeArray=route.split(",");
+    //
+    // var route=routeArray[0];
+    // var routeName=routeArray[1];
+    // var startStop=routeArray[2];
+    // var endStop=routeArray[3];
+    // route=parseInt(route.substring(1,route.length-1));
+    // routeName=parseInt(routeName.substring(1,routeName.length-1));
+    // startStop=parseInt(startStop.substring(1,startStop.length-1));
+    // endStop=parseInt(endStop.substring(1,endStop.length-1));
 
 
 
@@ -124,12 +148,13 @@ $scope.ddlRouteChange = function (route) {
                   // +"<br>迄站："+doc2.endStop
                   // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop//#00802b
                   +"<div ><h4>"
-                  +"<a target='_blank' href='"+val.mapUrl+"' >"
-                  +val.startStop
+                  +"<a target='_blank' href='"+obj.mapUrl+"' >"
+                  +"<h3>【"+obj.routeName+"】</h3>"
+                  +obj.startStop
 
 
                   +"<br>|"
-                  +"<br>"+val.endStop
+                  +"<br>"+obj.endStop
                   +"</a>"
                   +"</div>"
                   // +"<br><h4><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h4>"
@@ -148,7 +173,7 @@ $scope.ddlRouteChange = function (route) {
     // makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, "img/bus.png", true,true,null,$scope.routeMsg,$scope.routeName);
 
     // makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, "img/bus.png", false,true,null,msg,route);
-    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, false,true,null,msg,route);
+    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, false,true,null,msg);
 
 
     busArray[val.bus]=true;
