@@ -82,11 +82,23 @@ var refRoutes = ref.child("routesv5/");
 
 var docX;
 $scope.clearScreen = function () {
-  initMap();
+  // initMap();
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: initLatLng,
+    zoom: 14,
+     disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+  });
+
   ddlRouteChange (docX)
 }
 
 $scope.ddlRouteChange = function (doc) {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: initLatLng,
+    zoom: 14,
+     disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+  });
   docX=doc;
   ddlRouteChange (doc);
 }
@@ -94,16 +106,32 @@ $scope.ddlRouteChange = function (doc) {
 function ddlRouteChange (doc){
   var obj = JSON.parse(doc);
   var route=parseInt(obj.routeId);
-  var refBustlist = ref.child("buslistv5/");
+  var refBustlist = ref.child("buslistv6/");
 
 
-  refBustlist.orderByChild("route").startAt(route).endAt(route).on("child_added", function (snapshot, prevChildKey) {
+  // refBustlist.orderByChild("route").startAt(route).endAt(route).on("child_added", function (snapshot, prevChildKey) {
+    refBustlist.once("child_added", function (snapshot, prevChildKey) {
 
     var key = snapshot.key();
     var val = snapshot.val();
-    var dt=new Date(parseInt(val.unix));
-    // var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
-    var  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+    var array=val;
+    // console.log(val);
+
+    for (var i = 0; i < array.length; i++) {
+      var bus=array[i];
+      if (bus['route']==obj.routeId){
+
+// Object {bus: "191-FY", lat: 25.023092, lon: 121.570015, route: 10832, unix: "1453985247000"}
+        // console.log(bus);
+        // console.log(bus['bus']);
+        // console.log(bus.bus);
+        var dt=new Date(parseInt(bus.unix));
+        // var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
+        var  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+
+
+
+
     var msg =""
                   +"<div ><h4>"
                   +"<a target='_blank' href='"+obj.mapUrl+"' >"
@@ -111,15 +139,21 @@ function ddlRouteChange (doc){
                   // +obj.startStop
                   // +"<br>|"
                   // +"<br>"+obj.endStop
+                  +obj.startStop
+                  +"<br>|"
+                  +"<br>"+obj.endStop
                   +"</a>"
                   +"</div>"
-                  +"<b>【"+val.bus+"】</b>"
+                  +"<b>【"+bus.bus+"】</b>"
                   +"<br>"+dt2
                   +"</h4>"
                   ;
-    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, true,true,null,msg);
-    busArray[val.bus]=true;
-      console.log("busArray.length=" + busArray.length);
+    makeMarkerV2(bus.bus,   bus.unix, bus.lat, bus.lon, iconBus, true,true,null,msg);
+    // busArray[val.bus]=true;
+      // console.log("busArray.length=" + busArray.length);
+    }
+  }
+
   });
 }
 
