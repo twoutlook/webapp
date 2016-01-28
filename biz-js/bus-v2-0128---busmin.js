@@ -173,7 +173,7 @@ $scope.ddlRouteChange = function (doc) {
     // makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, "img/bus.png", true,true,null,$scope.routeMsg,$scope.routeName);
 
     // makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, "img/bus.png", false,true,null,msg,route);
-    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, false,true,null,msg);
+    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, true,true,null,msg);
 
 
     busArray[val.bus]=true;
