@@ -56,18 +56,18 @@
   <body  ng-controller="SampleCtrl">
       <div class="container">
           <div class="row">
-                <button ng-click="showAnchor()" class="btn btn-danger " >(改版施工中,請稍候再試)走過必留痕跡!</button>
+                <button ng-click="showAnchor()" class="btn btn-danger " >(加強中...)走過必留痕跡!</button>
 
 
                 <button class="btn  btn-info" >請選擇路線({{routesv4.length}}筆)</button>
 
                             <select  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
 
-                                <option  ng-repeat="doc in routesv4" value="{{doc.routeName}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
+                                <option  ng-repeat="doc in routesv4" value="{{doc.routeId}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
 
                             </select>
 
-
+      <button class="btn  btn-primary" >共有 {{busCnt}} 痕跡數</button>
 
 
             <!-- <button class="btn  btn-info" >車號({{buslistv4.length}}筆)</button> -->

@@ -26,7 +26,9 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){//1
       icon: icon,//marina.png
 
       animation: google.maps.Animation.DROP,
-      title:"【"+bus+"】#"+cnt+" "+dt2NoHtml
+      // title:"【"+bus+"】#"+cnt+" "+dt2NoHtml
+      title:"【"+bus+"】"+" "+dt2NoHtml
+
   });
 
   var cntStr="";

@@ -1,6 +1,6 @@
 // Mark, 2016/1/20 11:19
-var iconCircle=iconBase + 'placemark_circle_highlight.png';
-var iconBus="http://maps.google.com/mapfiles/kml/shapes/bus.png";
+var iconCircle= 'img/placemark_circle_highlight.png';
+var iconBus="img/bus.png";
 
 // var urlFirebase = "https://bus-0119.firebaseio.com/";
 
@@ -45,6 +45,49 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
       $scope.bus=bus;
       ddlBusChange(bus);
     }
+
+//ddlRouteChange
+$scope.busCnt=0;
+$scope.ddlRouteChange = function (route) {
+  console.log("DOING route=" + route);
+  var intRoute=parseInt(route);
+  var refBustlist = ref.child("buslistv5/");
+  $scope.busCnt=0;
+
+
+  refBustlist.orderByChild("route").startAt(intRoute).endAt(intRoute).on("child_added", function (snapshot, prevChildKey) {
+    $scope.busCnt++;
+
+
+
+  console.log("... cnt="+$scope.busCnt);
+  // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
+
+  // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
+  // refBustlist.orderByChild("route").on("child_added", function (snapshot, prevChildKey) {
+    var key = snapshot.key();
+    var val = snapshot.val();
+
+
+    // console.log("key" + key);
+    // console.log("val" + val);
+    // console.log("route: " + val['route']);
+    // console.log("route: " + val['route']+"  "+val['bus'] +JSON.stringify(val));
+    console.log(JSON.stringify(val));
+// makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg)
+    makeMarker(val.bus,val.unix,val.lat,val.lon,iconCircle,false,true,null,"TODO");
+
+    // console.log("bus: " + val['bus']);
+
+
+  });
+
+
+
+
+}
+
+
 
     function ddlBusChange(bus) {
         console.log("**********************ddlBusChange bus=" + bus);
