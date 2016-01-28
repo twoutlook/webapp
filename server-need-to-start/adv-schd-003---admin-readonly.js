@@ -30,29 +30,25 @@ var request = require('request');       //
 var zlib = require('zlib');             // to unzip gz
 var jsonlint = require('jsonlint');     // to parse Json
 
-fbRef.authWithCustomToken(token, function (error, authData) {
-    if (error) {
-        console.log(urlFirebase + ",  Login Failed!", error);
-    } else {
-        // console.log(urlFirebase + ", Login Succeeded! To start schedule! Per minute, ", authData);
+fbRef.child("buslist3")
 
-        console.log("\n=====================================================================================================");
-        console.log(urlFirebase + ", Login Succeeded! To start schedule per minite, user=", authData.uid);
-        console.log("=====================================================================================================\n");
-
-        // *** TO RESET ***
-        // fbRef.set(null);
-        // fbRef.child("list").set(null);
-
-        // start one first!!!
-        fetch_one_set_and_show_json_problem(get_option(urlSrc));
-
-        // Schedule starts here !!!
-        var j = schedule.scheduleJob('* * * * *', function () { // per min
-            fetch_one_set_and_show_json_problem(get_option(urlSrc));
-        });
-    }
-});
+// fbRef.authWithCustomToken(token, function (error, authData) {
+//     if (error) {
+//         console.log(urlFirebase + ",  Login Failed!", error);
+//     } else {
+//         // console.log(urlFirebase + ", Login Succeeded! To start schedule! Per minute, ", authData);
+//
+//         console.log("\n=====================================================================================================");
+//         console.log(urlFirebase + ", Login Succeeded! To start admin *** TO REMOVE ***, user=", authData.uid);
+//         console.log("=====================================================================================================\n");
+//
+//         // *** TO RESET ***
+//         // fbRef.set(null);
+//         fbRef.child("buslist3").set(null);
+//
+//
+//     }
+// });
 
 
 

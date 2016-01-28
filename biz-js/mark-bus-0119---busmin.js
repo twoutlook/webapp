@@ -19,10 +19,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     $scope.routeMsg ="...do nothing yet "
 
     // NOTE for bus dropdown list
-    $scope.buslist3x = $firebaseArray(ref.child('buslist3x').orderByChild("bus"));
+    $scope.buslistv4 = $firebaseArray(ref.child('buslistv4').orderByChild("bus"));
 
     // NOTE 取一個 bus 出來
-    var refBusNumList=ref.child("buslist3x");
+    var refBusNumList=ref.child("buslistv4");
     refBusNumList.limitToFirst(1).once("child_added", function(snapshot) {
         var val=snapshot.val();
         $scope.firstbus=val.bus;
@@ -155,7 +155,11 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             if ( cnt==1){
               makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, true ,false,cnt,"");
             }else if ( cnt>SHOW_DOT_CNT){
-                makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,true,cnt,"");
+//              makeMarker(val.bus, val.unix, val.lat, val.lon,null, true ,true,cnt,"");
+// NOT TO OPEN
+              makeMarker(val.bus, val.unix, val.lat, val.lon,null, false ,true,cnt,"");
+
+
             }else{
                 makeMarker(val.bus, val.unix, val.lat, val.lon,iconCircle, false ,true,cnt,"");
             }

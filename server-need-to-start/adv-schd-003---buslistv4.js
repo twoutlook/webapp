@@ -148,7 +148,7 @@ function fetch_one_set_and_show_json_problem(opt_set) {
 
                             // FIX car-num-list
                             i==0 ? strBusNumList=bus.BusID: strBusNumList+=" "+bus.BusID;
-                            busList3.push({bus:bus.BusID});
+                            busList3.push({bus:bus.BusID,route:bus.RouteID});
 
 
 
@@ -172,10 +172,11 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             }
                             // console.log(doc);
 
-                            var urlDoc = urlFirebase + bus.BusID;
-                            // console.log(urlDoc);
-                            var ref = new Firebase(urlDoc);
-                            ref.push(doc, function (error) {   // 只要有出現的公車就加進來
+                            //NOTE
+                            //
+                            var urlBus = urlFirebase+"busmin/" + bus.BusID;
+                            var refBus = new Firebase(urlBus);
+                            refBus.push(doc, function (error) {   // 只要有出現的公車就加進來
                                 if (error) {
                                     console.log('doc, Synchronization failed');
                                 } else {
@@ -186,36 +187,14 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             // fbRef.child("buslist/" + bus.BusID).set({sys: Firebase.ServerValue.TIMESTAMP}); //這個成本好像太高了!
                             fbRef.child("buslist/" + bus.BusID).set({doc}); //NOTE 1/26 17:37 取代current
 
-                            //
-                            //fbRef.child("buslist2/" + bus.BusID).set(true); //這個成本好像太高了!
 
                         }
 
-                        //
-
-                        //https://www.firebase.com/docs/web/guide/saving-data.html#section-push
-                        var justNow=new Date();
-                        // dt=justNow.format()
-                        // fbRef.child('bus-num-list').push({firebase:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length,dt:justNow}, function (error) {   // 只要有出現的公車就加進來
-                        //fbRef.child('bus-num-list').push({firebase:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length,dt:justNow}, function (error) {   // 只要有出現的公車就加進來
-                        // fbRef.child('bus-num-list').push({fbtime:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length}, function (error) {   // 只要有出現的公車就加進來
-                        //         if (error) {
-                        //         console.log('doc, Synchronization failed');
-                        //     } else {
-                        //         console.log(" size:"+strBusNumList.length+" cnt:"+busInfo.length+ " "+justNow);
-                        //     }
-                        // });
-
-                        fbRef.child('buslist3').push({fbtime:Firebase.ServerValue.TIMESTAMP , list:busList3, cnt:busInfo.length}, function (error) {   // 只要有出現的公車就加進來
-                                if (error) {
-                                console.log('doc, Synchronization failed');
-                            } else {
-                                console.log(" size:"+strBusNumList.length+" cnt:"+busInfo.length+ " "+justNow);
-                            }
-                        });
 
 
-                        fbRef.child('buslist3x').set(busList3); // 只要有出現的公車就加進來
+
+
+                        fbRef.child('buslistv4').set(busList3); // 只要有出現的公車就加進來
 
 
 

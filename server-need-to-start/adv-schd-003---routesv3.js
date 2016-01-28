@@ -9,20 +9,23 @@ ver 3--- https://bus-0119.firebaseio.com/buslist2
 ver 4--- https://bus-0119.firebaseio.com/bus-num-list
    val
 
-
+ROUTE 路線 每小時 http://data.taipei/bus/ROUTE
 
 
 
 */
+var Firebase = require("firebase");
+var URL = "https://bus-0119.firebaseio.com/";
+var REF = new Firebase(URL);
 
 
 // prepare this to run on Azure, Application settings =>'Always on'
-var Firebase = require("firebase");
+
 var urlFirebase = "https://bus-0119.firebaseio.com/";
 var fbRef = new Firebase(urlFirebase);
 var token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6Im1hcmsiLCJzb21lIjoiYXJiaXRyYXJ5IiwiZGF0YSI6ImhlcmUifSwiaWF0IjoxNDUzMTcwNjgzfQ.9XZ0qWYpFfMhP4vSvEDnAXUvOv03N6wuNhfFabY-LH0";
 
-var urlSrc = "http://data.taipei/bus/BUSDATA";
+var urlSrc = "http://data.taipei/bus/ROUTE ";
 
 // === 1. require section ===
 var schedule = require('node-schedule');// to run schedule
@@ -37,7 +40,7 @@ fbRef.authWithCustomToken(token, function (error, authData) {
         // console.log(urlFirebase + ", Login Succeeded! To start schedule! Per minute, ", authData);
 
         console.log("\n=====================================================================================================");
-        console.log(urlFirebase + ", Login Succeeded! To start schedule per minite, user=", authData.uid);
+        console.log(urlFirebase + ", Login Succeeded! To start schedule XXX, user=", authData.uid);
         console.log("=====================================================================================================\n");
 
         // *** TO RESET ***
@@ -48,7 +51,7 @@ fbRef.authWithCustomToken(token, function (error, authData) {
         fetch_one_set_and_show_json_problem(get_option(urlSrc));
 
         // Schedule starts here !!!
-        var j = schedule.scheduleJob('* * * * *', function () { // per min
+        var j = schedule.scheduleJob('50 * * * *', function () { // per min
             fetch_one_set_and_show_json_problem(get_option(urlSrc));
         });
     }
@@ -121,19 +124,37 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                         //  console.log(tag+", TODO per bus record to update...");
                         //console.log(tag+JSON.stringify(json));
                         var busInfo = json.BusInfo;
-                        //  console.log("bus info len is "+busInfo.length);
 
+                        // NOTE
+                        // by Mark, 2016/1/23 12:53
+                        // 解析Data.Taipei source, 一次性set到 firebase
+                        var docs=[];
+                        console.log("bus info len is "+busInfo.length);
+                        for (i = 0; i < busInfo.length; i++) {
+                            var bus = busInfo[i];
+                            var doc={
+                              routeId:bus.pathAttributeId,
+                              routeName:bus.pathAttributeName,
+                              startStop:bus.departureZh,
+                              endStop:bus.destinationZh,
+                              mapUrl:bus.roadMapUrl
+                            }
+                            // docs[bus.pathAttributeId]=doc;
+                            docs[bus.pathAttributeId]={doc};
+                            REF.child('routesv4/'+bus.pathAttributeId).set(doc);
+                        }
+                        // REF.child('routesv3').set(docs);
 
 
                         // UPDATE CURRENT
-                        // fbRef.child("current").set(json, function (error) {
+                        // fbRef.child("bus/ROUTE").set(json, function (error) {
                         //     if (error) {
                         //         console.log(error);
                         //     } else {
-                        //         console.log(tag + "sync current, done!");
+                        //         console.log(tag + "sync current, done!   --- bus/ROUTE ");
                         //     }
                         // });
-
+/*
                         //
                         // NOTE: 這是解析當下活動車輛的資訊
                         //
@@ -163,9 +184,7 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             var doc = {
                                 bus: bus.BusID,
                                 lat: bus.Latitude,
-                                lon: bus.Longitude, //RouteID
-                                route: bus.RouteID, // NOTE by Mark, 2015/1/23 13:04 to show bus belonging to which route and route details
-
+                                lon: bus.Longitude,
                                 // dt:bus.DataTime,
                                 unix: unix, // remove unnecessary part of bus.DataTime
                                 fb: Firebase.ServerValue.TIMESTAMP
@@ -184,10 +203,10 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                             });
 
                             // fbRef.child("buslist/" + bus.BusID).set({sys: Firebase.ServerValue.TIMESTAMP}); //這個成本好像太高了!
-                            fbRef.child("buslist/" + bus.BusID).set({doc}); //NOTE 1/26 17:37 取代current
+                            fbRef.child("buslist/" + bus.BusID).set({doc}); //這個成本好像太高了!
 
                             //
-                            //fbRef.child("buslist2/" + bus.BusID).set(true); //這個成本好像太高了!
+                            fbRef.child("buslist2/" + bus.BusID).set(true); //這個成本好像太高了!
 
                         }
 
@@ -198,13 +217,13 @@ function fetch_one_set_and_show_json_problem(opt_set) {
                         // dt=justNow.format()
                         // fbRef.child('bus-num-list').push({firebase:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length,dt:justNow}, function (error) {   // 只要有出現的公車就加進來
                         //fbRef.child('bus-num-list').push({firebase:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length,dt:justNow}, function (error) {   // 只要有出現的公車就加進來
-                        // fbRef.child('bus-num-list').push({fbtime:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length}, function (error) {   // 只要有出現的公車就加進來
-                        //         if (error) {
-                        //         console.log('doc, Synchronization failed');
-                        //     } else {
-                        //         console.log(" size:"+strBusNumList.length+" cnt:"+busInfo.length+ " "+justNow);
-                        //     }
-                        // });
+                        fbRef.child('bus-num-list').push({fbtime:Firebase.ServerValue.TIMESTAMP , list:strBusNumList, cnt:busInfo.length}, function (error) {   // 只要有出現的公車就加進來
+                                if (error) {
+                                console.log('doc, Synchronization failed');
+                            } else {
+                                console.log(" size:"+strBusNumList.length+" cnt:"+busInfo.length+ " "+justNow);
+                            }
+                        });
 
                         fbRef.child('buslist3').push({fbtime:Firebase.ServerValue.TIMESTAMP , list:busList3, cnt:busInfo.length}, function (error) {   // 只要有出現的公車就加進來
                                 if (error) {
@@ -217,7 +236,7 @@ function fetch_one_set_and_show_json_problem(opt_set) {
 
                         fbRef.child('buslist3x').set(busList3); // 只要有出現的公車就加進來
 
-
+                        */
 
 
                     } catch (err) {

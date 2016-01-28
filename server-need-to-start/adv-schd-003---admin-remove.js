@@ -37,20 +37,14 @@ fbRef.authWithCustomToken(token, function (error, authData) {
         // console.log(urlFirebase + ", Login Succeeded! To start schedule! Per minute, ", authData);
 
         console.log("\n=====================================================================================================");
-        console.log(urlFirebase + ", Login Succeeded! To start schedule per minite, user=", authData.uid);
+        console.log(urlFirebase + ", Login Succeeded! To start admin *** TO REMOVE ***, user=", authData.uid);
         console.log("=====================================================================================================\n");
 
         // *** TO RESET ***
         // fbRef.set(null);
-        // fbRef.child("list").set(null);
+        fbRef.child("buslist3").set(null);
 
-        // start one first!!!
-        fetch_one_set_and_show_json_problem(get_option(urlSrc));
 
-        // Schedule starts here !!!
-        var j = schedule.scheduleJob('* * * * *', function () { // per min
-            fetch_one_set_and_show_json_problem(get_option(urlSrc));
-        });
     }
 });
 
