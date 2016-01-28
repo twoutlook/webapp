@@ -2,9 +2,9 @@
 var iconCircle=iconBase + 'placemark_circle_highlight.png';
 var iconBus="http://maps.google.com/mapfiles/kml/shapes/bus.png";
 
-var urlFirebase = "https://bus-0119.firebaseio.com/";
+// var urlFirebase = "https://bus-0119.firebaseio.com/";
 
-// var urlFirebase = "https://bus-v2-0128.firebaseio.com/";
+var urlFirebase = "https://bus-v2-0128.firebaseio.com/";
 
 
 //
@@ -25,6 +25,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     // NOTE for bus dropdown list
     $scope.buslistv4 = $firebaseArray(ref.child('buslistv4').orderByChild("bus"));
+
+    $scope.routesv4 = $firebaseArray(ref.child('routesv4').orderByChild("routeName"));
 
     // NOTE 取一個 bus 出來
     var refBusNumList=ref.child("buslistv4");
