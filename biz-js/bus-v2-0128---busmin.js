@@ -116,7 +116,7 @@ function ddlRouteChange (doc){
     var val = snapshot.val();
     var array=val;
     // console.log(val);
-
+    var toOpen=true;
     for (var i = 0; i < array.length; i++) {
       var bus=array[i];
       if (bus['route']==obj.routeId){
@@ -148,7 +148,8 @@ function ddlRouteChange (doc){
                   +"<br>"+dt2
                   +"</h4>"
                   ;
-    makeMarkerV2(bus.bus,   bus.unix, bus.lat, bus.lon, iconBus, false,true,null,msg);
+    makeMarkerV2(bus.bus,   bus.unix, bus.lat, bus.lon, iconBus, toOpen,true,null,msg);
+    toOpen=false;
     // busArray[val.bus]=true;
       // console.log("busArray.length=" + busArray.length);
     }
