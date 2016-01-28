@@ -37,7 +37,7 @@
 
     <style>
       html, body { height: 100%; margin: 0; padding: 0; }
-      #map { height: 95%; }
+      #map { height: 88%; }
       .firstHeading{ text-align: center}
       body{
           /*background-color:#F9f9f9;*/
@@ -57,17 +57,18 @@
       <div class="container">
           <div class="row">
                 <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
-
+  <button ng-click="clearScreen()"  class="btn  btn-primary" >更新畫面</button>
 
                 <button class="btn  btn-info" >請選擇路線({{routesv4.length}}筆)</button>
 
-                            <select  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+
+                            <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
 
                               <!-- <option  ng-repeat="doc in routesv4" value="'{{doc.routeId}}','{{doc.routeName}}','{{doc.startStop}}','{{doc.endStop}}'"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
                               <option  ng-repeat="doc in routesv4" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
 
                             </select>
-  <button ng-click="clearScreen()"  class="btn  btn-primary" >更新畫面</button>
+
       <!-- <button class="btn  btn-primary" >debug... {{busCnt}} </button> -->
 
 
