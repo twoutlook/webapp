@@ -48,35 +48,111 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 //ddlRouteChange
 $scope.busCnt=0;
+$scope.activeRoute=0;
+
+var busArray=[];
+
+var allRoutes={};
+
+var refRoutes = ref.child("routesv5/");
+
+// console.log("routesv5 =======================");
+// refRoutes.once("child_added", function (snapshot, prevChildKey) {
+//   // $scope.busCnt++;
+//   var key = snapshot.key();
+//   var val = snapshot.val();
+//   // var
+//   // console.log(val['mapUrl']);
+//   //   console.log(JSON.stringify(val));
+//   allRoutes=snapshot.val();
+//
+//
+//
+//   console.log(val);
+//   console.log("numChildren="+snapshot.numChildren());
+//   console.log("prepare onhand db...");
+//   // for (var i = 0; i < array.length; i++) {
+//   for (var i = 0; i < 1; i++) {
+//     console.log(i);
+//     console.log(allRoutes[i]);
+//   }
+//
+//
+// });
+
+
+
+
 $scope.ddlRouteChange = function (route) {
+
+
+
+
+  $scope.busCnt=busArray.length;
+
+
+  for (var i=0;i<busArray.length;i++){
+    console.log(i+" ???"+busArray[i]);
+  }
+
+
+  $scope.activeRoute=route;
+
   console.log("DOING route=" + route);
+  console.log("busArray.length=" + busArray.length);
+
   var intRoute=parseInt(route);
   var refBustlist = ref.child("buslistv5/");
-  $scope.busCnt=0;
-
-
   refBustlist.orderByChild("route").startAt(intRoute).endAt(intRoute).on("child_added", function (snapshot, prevChildKey) {
-    $scope.busCnt++;
+    // $scope.busCnt++;
 
 
 
-  console.log("... cnt="+$scope.busCnt);
+  // console.log("... cnt="+$scope.busCnt);
   // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
 
   // refBustlist.orderByChild("route").startAt(""+route).on("child_added", function (snapshot, prevChildKey) {
   // refBustlist.orderByChild("route").on("child_added", function (snapshot, prevChildKey) {
     var key = snapshot.key();
     var val = snapshot.val();
+    var dt=new Date(parseInt(val.unix));
+    // var dt2=dt.format("yyyy-mm-dd<br>HH:MM:ss");
+    var  dt2=dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+    var msg =""
+                  // +"<br>路線："+doc2.routeName
+                  // +"<br>起站："+doc2.startStop
+                  // +"<br>迄站："+doc2.endStop
+                  // +"<div style='background-color:#00802b; color:white;'><h4>"+doc2.startStop//#00802b
+                  +"<div ><h4>"
+                  +"<a target='_blank' href='"+val.mapUrl+"' >"
+                  +val.startStop
 
 
+                  +"<br>|"
+                  +"<br>"+val.endStop
+                  +"</a>"
+                  +"</div>"
+                  // +"<br><h4><a target='_blank' href='"+doc2.mapUrl+"' >查看路線圖</a></h4>"
+                  +"<b>【"+val.bus+"】</b>"
+                  // +"<br>資料時間："+dt2
+                  +"<br>"+dt2
+                  +"</h4>"
+                  ;
     // console.log("key" + key);
     // console.log("val" + val);
     // console.log("route: " + val['route']);
     // console.log("route: " + val['route']+"  "+val['bus'] +JSON.stringify(val));
-    console.log(JSON.stringify(val));
+    // console.log(JSON.stringify(val));
 // makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg)
-    makeMarker(val.bus,val.unix,val.lat,val.lon,iconCircle,false,true,null,"TODO");
+    // makeMarker(val.bus,val.unix,val.lat,val.lon,iconBus,false,true,null,msg);
+    // makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, "img/bus.png", true,true,null,$scope.routeMsg,$scope.routeName);
 
+    // makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, "img/bus.png", false,true,null,msg,route);
+    makeMarkerV2(val.bus,   $scope.unix, val.lat, val.lon, null, false,true,null,msg,route);
+
+
+    busArray[val.bus]=true;
+      console.log("busArray.length=" + busArray.length);
     // console.log("bus: " + val['bus']);
 
 
