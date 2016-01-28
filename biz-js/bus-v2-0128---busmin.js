@@ -95,7 +95,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     $scope.showLocation = function () {
       // makeMarker___Bus($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, iconBus, true,true,$scope.routeMsg);
-        makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, iconBus, true,true,null,$scope.routeMsg,$scope.routeName);
+        makeMarkerV2($scope.firstbus, $scope.unix, $scope.lat, $scope.lon, "img/bus.png", true,true,null,$scope.routeMsg,$scope.routeName);
     //  function makeMarker(bus,unix,            lat,        lon,        icon, toOpenNow,toMoveCenterNow,cnt,msg){//1453193
     }
 
