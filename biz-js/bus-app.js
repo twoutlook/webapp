@@ -76,6 +76,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         var myDiv = document.getElementById("busCnt");
         myDiv.innerHTML =$scope.busCnt+"輛公車";
 
+        // showAnchor();
+
+
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
         var refBustlist = ref.child("buslistv6/");
@@ -126,29 +129,41 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
                 }
             }
-            map.setCenter({lat: $scope.lat, lng: $scope.lon});
+            if ($scope.busCnt==0){
+                showAnchor();
+            }else{
+                map.setCenter({lat: $scope.lat, lng: $scope.lon});
+            }
+
         }); // end of once
     }
 
+
+    function showAnchor(){
+      map.setCenter(initLatLng);
+
+      // RESET ALL
+      anchorCnt++; // it won't show info window again
+      console.log("anchorCnt=" + anchorCnt);
+      //
+      var rulX = urlFirebase + 'buslist';
+      var refList = new Firebase(rulX);
+      var cnt = 0;
+      refList.on("child_added", function (snapshot, prevChildKey) {
+          var key = snapshot.key();
+          // console.log("key=" + key);
+          ref.child(key).off();
+      });
+      initMap();
+    }
+
     $scope.showAnchor = function () {
+      showAnchor();
+    }
         //  initMap();
         // initLatLng
-        map.setCenter(initLatLng);
 
-        // RESET ALL
-        anchorCnt++; // it won't show info window again
-        console.log("anchorCnt=" + anchorCnt);
-        //
-        var rulX = urlFirebase + 'buslist';
-        var refList = new Firebase(rulX);
-        var cnt = 0;
-        refList.on("child_added", function (snapshot, prevChildKey) {
-            var key = snapshot.key();
-            // console.log("key=" + key);
-            ref.child(key).off();
-        });
-        initMap();
-    }
+
 
     $scope.resetAll = function () {
 
