@@ -108,6 +108,9 @@ function makeMarkerV2(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){
     });
 
     if (toMoveCenterNow){
-          map.setCenter(myLatLng);//myLatLng
+      console.log("setCenter "+ myLatLng+" "+bus+ " "+lat+","+lon);
+      // map.setCenter(myLatLng);//myLatLng
+      map.setCenter({lat: lat, lng: lon});//myLatLng
+
     }
 }

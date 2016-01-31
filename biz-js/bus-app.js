@@ -16,8 +16,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     // $scope.bus = "";
     // // Taipei 101
     // //lat: 25.033718, lng: 121.565512
-    // $scope.lat = 25.033718;
-    // $scope.lon = 121.565512;
+    $scope.lat = 25.033718;
+    $scope.lon = 121.565512;
     // $scope.bus = "";
     // $scope.unix = "";
     // $scope.route = "";
@@ -35,6 +35,18 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var allRoutes = {};
 
     var refRoutes = ref.child("routesv5/");
+
+
+    function showRouteBusList(){
+
+    }
+
+    $scope.showRouteBusList = function () {
+
+    }
+
+
+
 
     var docX;
     $scope.clearScreen = function () {
@@ -63,7 +75,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
         $scope.busCnt = 0;
         var myDiv = document.getElementById("busCnt");
         myDiv.innerHTML =$scope.busCnt+"輛公車";
-        
+
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
         var refBustlist = ref.child("buslistv6/");
@@ -104,12 +116,18 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
                     console.log("i=" + i);
                     makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
-                    toOpen=false;
+
+
+                      $scope.lat=bus.lat;
+                      $scope.lon=bus.lon;
+
+
+                    // toOpen=false;
 
                 }
             }
-
-        });
+            map.setCenter({lat: $scope.lat, lng: $scope.lon});
+        }); // end of once
     }
 
     $scope.showAnchor = function () {
