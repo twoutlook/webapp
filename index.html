@@ -1,242 +1,148 @@
 <!DOCTYPE html>
 <html ng-app="sampleApp">
-<head>
+    <head>
 
-    <meta charset="utf-8">
+        <meta charset="utf-8">
 
-
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>NodeJs2016走過必留痕跡!</title>
-
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>走過必留痕跡! by 諾得捷思</title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
 
 
 
-  <script src="biz-js/jquery.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="biz-js/jquery.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-
-    <style>
-      html, body { height: 100%; margin: 0; padding: 0; }
-      #map { height: 88%; }
-      .firstHeading{ text-align: center}
-      body{
-          /*background-color:#F9f9f9;*/
-          /*background-color:black;//#0000b3*/
-          background-color:#bfbfbf;
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
-            font-family: 'Droid Sans Mono' ;
-      }
-    </style>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
-    <style type="text/css">
+        <style>
+            html, body { height: 100%; margin: 0; padding: 0; }
+            #map { height: 88%; }
+            .firstHeading{ text-align: center}
+            body{
+                /*background-color:#F9f9f9;*/
+                /*background-color:black;//#0000b3*/
+                background-color:#bfbfbf;
+                font-family: 'Droid Sans Mono' ;
+            }
+        </style>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 
-    </style>
-</head>
-  <body  ng-controller="SampleCtrl">
-      <div class="container">
-          <div class="row">
+    </head>
+    <body  ng-controller="SampleCtrl">
+        <div class="container">
+            <div class="row">
                 <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
-  <button ng-click="clearScreen()"  class="btn  btn-primary" >更新畫面</button>
-
+                <button ng-click="clearScreen()"  class="btn  btn-primary" >更新畫面</button>
                 <button class="btn  btn-info" >請選擇路線({{routesv4.length}}筆)</button>
 
+                <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+                    <option  ng-repeat="doc in routesv4" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
+                </select>
+            </div>
+        </div>
 
-                            <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+        <div id="map"></div>
 
-                              <!-- <option  ng-repeat="doc in routesv4" value="'{{doc.routeId}}','{{doc.routeName}}','{{doc.startStop}}','{{doc.endStop}}'"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
-                              <option  ng-repeat="doc in routesv4" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
+        <script>
+                    var map;
+                    var anchorCnt = 0;
+                    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
+                    // var initLatLng={lat: 25.033718, lng: 121.565512};
+                    var initLatLng = {lat: 25.033718, lng: 121.565512};
+                    function getItemHtml(src1, src2, src3) {
+                        return '<h5>' + src1 + '<a  target="_blank" href="' + src2 + '">' + src3 + '</a> </h5>';
+                    }
 
-                            </select>
+                    function initMap() {
 
-      <!-- <button class="btn  btn-primary" >debug... {{busCnt}} </button> -->
+                        function toggleBounce() {
+                            if (marker.getAnimation() !== null) {
+                                marker.setAnimation(null);
+                            } else {
+                                marker.setAnimation(google.maps.Animation.BOUNCE);
+                            }
+                        }
 
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: initLatLng,
+                            zoom: 14,
+                            disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+                        });
 
-            <!-- <button class="btn  btn-info" >車號({{buslistv4.length}}筆)</button> -->
-
-            <!-- http://stackoverflow.com/questions/30088227/angularjs-set-default-value-on-select-inside-a-ng-repeat -->
-            <!-- hard coding is working
-            <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-init="data.selectCar='337-FP'" ng-change="ddlBusChange(data.selectCar)"  >
-
-            NOT WORKING???
-            <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-init="data.selectCar='{{busNumList[0].list[0].bus}}'" ng-change="ddlBusChange(data.selectCar)"  >
-            -->
-            <!-- <select  name="selectCar" id="selectCar" ng-model="data.selectCar"   ng-init="data.selectCar='337-FP'" ng-change="ddlBusChange(data.selectCar)"  > -->
-
-            <!-- <select  name="selectCar" id="selectCar" ng-model="buslistv4.selectedValue" ng-change="ddlBusChange(buslistv4.selectedValue)"   >
-
-                <option  ng-repeat="doc in buslistv4" value="{{doc.bus}}"> 【{{doc.bus}}】</option>
-
-            </select> -->
-
-
-
-            <!-- <select  name="selectCar" id="selectCar" ng-model="data.selectCar"  ng-change="ddlBusChange(data.selectCar)"  >
-            <option   ng-repeat="bus in busList" value="{{bus.$id}}"> {{bus.$id}}</option>
-
-            </select> -->
-
-            <!--        <button class="btn btn-success " ng-click="showLastPosition()">看【{{bus}}】的位置 </button>-->
-            <!-- <button class="btn btn-success " ng-click="showLocation()">看【{{bus}}】位置 </button> -->
-            <!-- <button class="btn btn-primary " ng-click="showLocation()">查看【{{firstbus}}】位置 </button> -->
-
-            <!-- <button class="btn   btn-info" >痕跡</button> -->
-            <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking"  > -->
-            <!-- <select  name="selectTracking" id="selectTracking" ng-model="data.selectTracking" ng-init="data.selectTracking='30'" >
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="60">60</option>
-                <option value="120">120</option>
-                <option value="180">180</option>
-                <option value="240">240</option>
-                <option value="360">360</option>
-                <option value="720">720</option>
-                <option value="1440">1440</option>
-            </select> -->
-
-            <!-- <button ng-click="busClick(data.selectCar,data.selectTracking)" class="btn btn-success " >看【{{bus}}】的痕跡</button> -->
-          <!-- …  <button ng-click="showTracking(data.selectCar,data.selectTracking)" class="btn btn-success " >查看痕跡</button> -->
-            <!-- <button ng-click="showTracking(data.selectCar)" class="btn btn-success " >查看痕跡</button> -->
-            <!-- <button ng-click="resetAll()" class="btn btn-danger " >全部清除</button> -->
-
-          </div>
-      </div>
-
-      <div id="map"></div>
-
-    <script>
-    var map;
-    var anchorCnt=0;
-    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
-    // var initLatLng={lat: 25.033718, lng: 121.565512};
-    var initLatLng={lat: 25.033718, lng: 121.565512};
-
-    // to try size
-    //※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
-    //item0+='本次開發大賽官網</a> </h3>
-    function getItemHtml(src1,src2,src3){
-      return '<h5>'+src1+'<a  target="_blank" href="'+src2+'">'+src3+'</a> </h5>';
-
-    }
-
-    function initMap() {
-
-        function toggleBounce() {
-          if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-          } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-          }
-        }
-      // var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
-
-      //  var myInitLatLng = {lat: 25.033718, lng: 121.565512};//25.033718,121.565512
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: initLatLng,
-          zoom: 14,
-           disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
-        });
-
-      var marker = new google.maps.Marker({
-          position: initLatLng,
-          map: map,
-          // draggable: true,
-          animation: google.maps.Animation.DROP,
-          icon: iconBase + 'marina.png',//marina.png
+                        var marker = new google.maps.Marker({
+                            position: initLatLng,
+                            map: map,
+                            // draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            icon: iconBase + 'marina.png', //marina.png
 
 
-      });
-      // marker.setAnimation(google.maps.Animation.BOUNCE);
-      marker.addListener('click', toggleBounce);
-      map.setCenter(marker.getPosition());
+                        });
+                        // marker.setAnimation(google.maps.Animation.BOUNCE);
+                        marker.addListener('click', toggleBounce);
+                        map.setCenter(marker.getPosition());
+
+                        var title = '<a  target="_blank" href="http://taipeiomg.bhuntr.com/">Data.Taipei & Taipei OMG <br>綠色交通應用開發大賽</a>';
+                        var itemTaipei = getItemHtml('※', 'http://data.taipei/', 'Data.Taipei臺北市政府資料開放平台');
+                        var itemSource = getItemHtml('※數據來源:&nbsp;', 'http://transportation-data.taipei', '交通即時資料開放資料專區');
+                        var itemTeam = getItemHtml('※作品主題:&nbsp;<a  target="_blank" href="https://nodejs2016.azurewebsites.net/">走過必留痕跡!</a>&nbsp;&nbsp;by 諾得捷思隊', '', '');
+                        var contentString = '<div id="content" style="background-color:#f9f9f9"> ' +
+                                '<h4 id="firstHeading" class="firstHeading"><b>' + title + '</b></h4>' +
+                                '<div id="bodyContent">' + itemTaipei + itemSource + itemTeam
+                                '</div>' +
+                                '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+
+                        console.log(" initMap, anchorCnt" + anchorCnt);
+                        // not bo open again when click title
+                        if (anchorCnt == 0) {
+                            infowindow.open(map, marker);
+                        }
+                        marker.addListener('click', function () {
+                            infowindow.open(map, marker);
+                        });
+                    }
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8DY8o-Qzo6Yv9bYzP-cBO9cmgqAwXh0c&callback=initMap"
+        async defer></script>
+
+        <script src="biz-js/date.format.js"></script>
+        <!-- <script src="biz-js/mark-bus-0119-util.js"></script> -->
+        <script src="biz-js/bus-util-make-marker.js"></script>
+
+
+        <!-- <script src="biz-js/mark-bus-0119.js"></script> -->
+        <!-- <script src="biz-js/bus-v2-0128---busmin.js"></script> -->
+
+        <script src="biz-js/bus-firebase.js"></script>
+        <script src="biz-js/bus-app.js"></script>
 
 
 
-      // var title="<span style='color:#00802b;'>臺北市政府全新「雲端即時開放資料服務」</span><br> <span style='color:red;'>Taipei OMG</span> (<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
-      // var title="<span style='color:#00802b;'>Data.Taipei</span><br> <span style='color:red;'>Taipei OMG</span> <br>(<span style='color:red;'>O</span>pen, <span style='color:red;'>M</span>obility,  <span style='color:red;'>G</span>reen)<br> <span style='color:#00802b;'>綠色交通應用開發大賽</span>";
-      var title='<a  target="_blank" href="http://taipeiomg.bhuntr.com/">Data.Taipei & Taipei OMG <br>綠色交通應用開發大賽</a>';
-
-      //  var item0='<h4>※<a  target="_blank" href="https://taipeiomg.bhuntr.com/">';
-      //  item0+='本次開發大賽官網</a> </h4>';
-       //
-      //  var item1='<h3>※<a  target="_blank" href="http://data.taipei/">';
-      //  item1+='Data.Taipei臺北市政府資料開放平台</a> </h3>';
-
-       var itemTaipei=getItemHtml('※','http://data.taipei/','Data.Taipei臺北市政府資料開放平台');
-      //  var itemBhuntr=getItemHtml('※','https://taipeiomg.bhuntr.com/','本次開發大賽官網');
-       var itemSource=getItemHtml('※數據來源:&nbsp;','http://transportation-data.taipei','交通即時資料開放資料專區');
-       var itemTeam=getItemHtml('※作品主題:&nbsp;<a  target="_blank" href="https://nodejs2016.azurewebsites.net/">走過必留痕跡!</a>&nbsp;&nbsp;by 諾得捷思隊','','');
-
-       //
-       //
-      //  var item2='<h3>※本WebAPP數據來源：<a  target="_blank" href="http://transportation-data.taipei">';
-      //  item2+='交通即時資料開放資料專區</a></h3> ';
-      //  var item3='<h3><a  target="_blank" href="http://data.taipei/opendata/datalist/datasetMeta?oid=c84f781f-02e7-45a4-84c2-0fc690749f66">';
-      //  item3+='4. 臺北市公共運輸處 定時車機資訊</a></h3> ';
-      //  var item4='<h3><a  target="_blank" href="http://data.taipei/bus/BUSDATA">';
-      //  item4+='5. 本作品原始資料即時下載</a></h3> ';
-
-
-      //  var contentString = '<div id="content">'+
-      var contentString = '<div id="content" style="background-color:#f9f9f9"> '+
-            //  '<div id="siteNotice">'+
-            //  '</div>'+
-             '<h4 id="firstHeading" class="firstHeading"><b>'+title+'</b></h4>'+
-            // '<div id="bodyContent">'+item0+item1+item2+item3+item4+
-            '<div id="bodyContent">'+itemTaipei+itemSource+itemTeam
-                  '</div>'+
-             '</div>';
-
-         var infowindow = new google.maps.InfoWindow({
-           content: contentString
-         });
-
-         console.log(" initMap, anchorCnt"+anchorCnt);
-         // not bo open again when click title
-         if (anchorCnt==0){
-         infowindow.open(map, marker);
-        }
-         marker.addListener('click', function() {
-           infowindow.open(map, marker);
-         });
-      }
-
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8DY8o-Qzo6Yv9bYzP-cBO9cmgqAwXh0c&callback=initMap"
-    async defer></script>
-
-    <!-- <script src="biz-js/mark-bus-0119-anchor.js"></script> -->
-    <script src="biz-js/date.format.js"></script>
-    <!-- <script src="biz-js/mark-util.js"></script> -->
-    <!-- <script src="biz-js/mark-bus-0119-team.js"></script> -->
-    <script src="biz-js/mark-bus-0119-util.js"></script>
-
-
-    <!-- <script src="biz-js/mark-bus-0119.js"></script> -->
-        <script src="biz-js/bus-v2-0128---busmin.js"></script>
-
-
-
-  </body>
+    </body>
 </html>
