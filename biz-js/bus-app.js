@@ -61,6 +61,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var remLon;
     function ddlRouteChange(doc) {
         $scope.busCnt = 0;
+        var myDiv = document.getElementById("busCnt");
+        myDiv.innerHTML =$scope.busCnt+"輛公車";
+        
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
         var refBustlist = ref.child("buslistv6/");
