@@ -35,14 +35,98 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var allRoutes = {};
 
     var refRoutes = ref.child("routesv5/");
-
+    var refBuslist = ref.child("buslistv6/");
 
     function showRouteBusList(){
+      console.log("DOING... showRouteBusList");
+      refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+          var key = snapshot.key();
+          var val = snapshot.val();
+          var obj = val;
+          var route_id_name=[];
+          for(var key in obj){
+              var attrName = key;
+              var attrValue = obj[key];
+              route_id_name[key]=obj[key].routeName;
+              // console.log(key+" "+obj[key].routeName);
+          }
+          // console.log(key);
+          // console.log(val);
+          // console.log(val['810'].routeName);
+          // for (var i = 0; i < array.length; i++) {
+          //     var route = array[i];
+          //     console.log(i+" "+ JSON.stringify(route));
+          // }
+          // function getRouteName(route){
+          //     return val[route].routeName
+          // }
+          // console.log (getRouteName(810));
+
+          var obj={};
+          refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+              var key = snapshot.key();
+              var val = snapshot.val();
+              var array = val;
+              // console.log(val);
+              var route_bus=[];
+              var routeName_bus=[];
+
+              var toOpen = true;
+              for (var i = 0; i < array.length; i++) {
+                  var bus = array[i];
+
+                  // console.log(bus['route']);
+                  var routeId=parseInt(bus['route']);
+                  // var routeName=getRouteName(bus['routeId']);
+                  // console.log(routeId+ " "+routeName);
+
+
+                  // console.log("route "+bus['route']);
+                  // console.log("bus "+bus['bus']);
+                  // route_bus[bus['route']]+=bus['bus']+" ";
+                  if (  obj[bus['route']]===undefined){
+                      obj[bus['route']]=bus['bus']+" ";
+                  }else{
+                      obj[bus['route']]+=bus['bus']+" ";
+                  }
+
+              }
+
+              // console.log(JSON.stringify(obj));
+              var str="<table>";
+              var cnt=0;
+              for(var key in obj){
+                  var attrName = key;
+                  var attrValue = obj[key];
+                  console.log(key+" 【"+route_id_name[key]+"】 "+obj[key]);
+                  // console.log(key+" ");
+                  // str+=" <br>"+key+"【"+route_id_name[key]+"】 "+obj[key];
+                  if (route_id_name[key]===undefined){
+                    // TODO WHY?
+                  }else{
+                      cnt++;
+                      str+=" <tr><td>"+cnt+"</td><td>【"+route_id_name[key]+"】</td><td> "+obj[key]+"</td></tr>";
+                  }
+
+
+              }
+              str+="</table>";
+
+              // NOTE working, 2/1 02:23
+              //document.getElementById("list").innerHTML =str;
+
+
+          }); // en
+
+
+
+      });
+
 
     }
 
     $scope.showRouteBusList = function () {
-
+      showRouteBusList();
     }
 
 
@@ -81,8 +165,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
-        var refBustlist = ref.child("buslistv6/");
-        refBustlist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+
+        refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
             var key = snapshot.key();
             var val = snapshot.val();
             var array = val;
