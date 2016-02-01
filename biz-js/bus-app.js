@@ -172,10 +172,11 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             var array = val;
             // console.log(val);
             var toOpen = true;
+            var busCntNumber=0;
             for (var i = 0; i < array.length; i++) {
                 var bus = array[i];
                 if (bus['route'] == obj.routeId) {
-
+                    busCntNumber++;
                     $scope.busCnt++;
                     var myDiv = document.getElementById("busCnt");
                     myDiv.innerHTML =$scope.busCnt+"輛公車";
@@ -192,9 +193,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                             // +"<br>|"
                             // +"<br>"+obj.endStop
                             + obj.startStop
-                            + "<br>|"
+                            // + "<br>|"
                             + "<br>" + obj.endStop
                             + "</a>"
+                            +"<br>#" + busCntNumber
                             + "</div>"
                             + "<b>【" + bus.bus + "】</b>"
                             + "<br>" + dt2
@@ -203,7 +205,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
                     console.log("i=" + i);
                     makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
-
+//function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
 
                       $scope.lat=bus.lat;
                       $scope.lon=bus.lon;
