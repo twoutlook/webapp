@@ -28,6 +28,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 //ddlRouteChange
     $scope.busCnt = 0;
+    $scope.routeCnt = 0;
     $scope.activeRoute = 0;
 
     var busArray = [];
@@ -37,17 +38,38 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var refRoutes = ref.child("routesv5/");
     var refBuslist = ref.child("buslistv6/");
 
+
+    refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+        var key = snapshot.key();
+        var val = snapshot.val();
+        var obj = val;
+        var route_name=[];
+        for(var key in obj){
+          $scope.routeCnt++;
+            // var attrName = key;
+            // var attrValue = obj[key];
+            route_name[key]=obj[key].routeName;
+            // console.log(key+" "+obj[key].routeName);
+        }
+        document.getElementById("routeCnt").innerHTML =$scope.routeCnt+"個路線";
+    });
+
+
+
+
+
+
     function showRouteBusList(){
       console.log("DOING... showRouteBusList");
       refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
           var key = snapshot.key();
           var val = snapshot.val();
           var obj = val;
-          var route_id_name=[];
+          var route_name=[];
           for(var key in obj){
               var attrName = key;
               var attrValue = obj[key];
-              route_id_name[key]=obj[key].routeName;
+              route_name[key]=obj[key].routeName;
               // console.log(key+" "+obj[key].routeName);
           }
           // console.log(key);
@@ -64,6 +86,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
           var obj={};
           refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+            $scope.routeCnt ++;
+
               var key = snapshot.key();
               var val = snapshot.val();
               var array = val;
@@ -93,23 +117,27 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
               }
 
               // console.log(JSON.stringify(obj));
-              var str="<table class='flat-table'>";
+              var str="只列出現在資料有公車的路線<table class='flat-table'>";
               // str+=" <tr><th>序號</th><th>路線編號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
+  // str+= "<tr><th colspan='4'>現有公車的路線</th></tr>";
               str+=" <tr><th>序號</th><th>路線編號</th><th>車輛數</th><th align='left'>路線名稱</th></tr>";
             var cnt=0;
               for(var key in obj){
                   var attrName = key;
                   var attrValue = obj[key];
-                  // console.log(key+" 【"+route_id_name[key]+"】 "+obj[key]);
+                  // console.log(key+" 【"+route_name[key]+"】 "+obj[key]);
                   // console.log(key+" ");
-                  // str+=" <br>"+key+"【"+route_id_name[key]+"】 "+obj[key];
-                  if (route_id_name[key]===undefined){
+                  // str+=" <br>"+key+"【"+route_name[key]+"】 "+obj[key];
+                  if (route_name[key]===undefined){
                     // TODO WHY?
                   }else{
                       cnt++;
                       var temp=obj[key].split(" ");
-                      // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td>【"+route_id_name[key]+"】</td><td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
-                      str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length+"</td><td> 【"+route_id_name[key]+"】</td></tr>";
+                      // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td>【"+route_name[key]+"】</td><td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
+                      str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length
+                      +"</td><td> "
+                      // +"<button>【"+route_name[key]+"】</button></td></tr>";
+                        +"【"+route_name[key]+"】</td></tr>";
                   }
 
 
