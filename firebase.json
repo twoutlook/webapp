@@ -1,0 +1,9 @@
+{
+  "firebase": "nodejs2016",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
