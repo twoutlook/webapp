@@ -93,19 +93,23 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
               }
 
               // console.log(JSON.stringify(obj));
-              var str="<table>";
-              var cnt=0;
+              var str="<table class='flat-table'>";
+              // str+=" <tr><th>序號</th><th>路線編號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
+              str+=" <tr><th>序號</th><th>路線編號</th><th>車輛數</th><th align='left'>路線名稱</th></tr>";
+            var cnt=0;
               for(var key in obj){
                   var attrName = key;
                   var attrValue = obj[key];
-                  console.log(key+" 【"+route_id_name[key]+"】 "+obj[key]);
+                  // console.log(key+" 【"+route_id_name[key]+"】 "+obj[key]);
                   // console.log(key+" ");
                   // str+=" <br>"+key+"【"+route_id_name[key]+"】 "+obj[key];
                   if (route_id_name[key]===undefined){
                     // TODO WHY?
                   }else{
                       cnt++;
-                      str+=" <tr><td>"+cnt+"</td><td>【"+route_id_name[key]+"】</td><td> "+obj[key]+"</td></tr>";
+                      var temp=obj[key].split(" ");
+                      // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td>【"+route_id_name[key]+"】</td><td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
+                      str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length+"</td><td> 【"+route_id_name[key]+"】</td></tr>";
                   }
 
 
@@ -113,7 +117,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
               str+="</table>";
 
               // NOTE working, 2/1 02:23
-              //document.getElementById("list").innerHTML =str;
+              document.getElementById("list").innerHTML =str;
 
 
           }); // en

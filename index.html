@@ -41,9 +41,63 @@
             body{
                 /*background-color:#F9f9f9;*/
                 /*background-color:black;//#0000b3*/
-                background-color:#bfbfbf;
+                /*background-color:#bfbfbf;*/
+
+                background-color: #D8D8D8;
+
                 font-family: 'Droid Sans Mono' ;
             }
+
+table th:first-child{
+  border-radius:10px 0 0 10px;
+}
+table th:last-child{
+  border-radius:0 10px 10px 0;
+}
+ table td:first-child{
+  border-radius:10px 0 0 10px;
+}
+table td:last-child{
+  border-radius:0 10px 10px 0;
+}
+
+/*  caption {*/
+/*  	 text-align: left;*/
+/*  	 color: white;*/
+/*    background-color: #3F51B5;*/
+/*     padding: 8px 12px;*/
+/* }*/
+table{
+	 /*padding: 8px 12px;*/
+     border:2;
+         border-style: solid;
+    border-color: #D8D8D8;
+}
+.flat-table {
+    border:2;
+  /*display: block;*/
+  font-size: 115%;
+  /*overflow: auto;*/
+  width: auto;
+}
+
+th {
+    background-color: #3F51B5;
+    color: white;
+    font-weight: 500;
+    font-weight: normal;
+/*//    padding: 20px 30px;*/
+        padding: 8px 12px;
+    text-align: center;
+}
+
+td {
+    background-color:  #E8EAF6;
+    font-weight: 400;
+    color: rgb(111, 111, 111);
+     padding: 8px 12px;
+}
+
         </style>
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 
@@ -53,15 +107,44 @@
             <div class="row">
                 <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
                 <!-- <button ng-click="clearScreen()"  class="btn  btn-primary" >更新</button> -->
-                <button ng-click="showRouteBusList()"  class="btn  btn-primary" >路線({{routes.length}}筆)</button>
+                <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" >路線({{routes.length}}筆)</button>
                 <!-- <button ng-click=""  class="btn  btn-primary" >{{busCnt}}輛公車</button> -->
                   <button ng-click="clearScreen()" class="btn btn-success " ><div id="busCnt">車輛數</div></button>
                 <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
                     <option  ng-repeat="doc in routes" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
                 </select>
             </div>
+              <div class="row">
+                <div id="list"></div>
+                  </div>
         </div>
-        <div id="list"></div>
+
+        <script>
+    $(document).ready(function(){
+        // $("button").click(function(){
+        //     $("p").toggle();
+        //       $("#list").toggle();
+        // });
+        $("#showRouteBusList").click(function(){
+            // $("p").toggle();
+            // $("#list").toggle();
+            $("#list").show();
+
+        });
+        $("#selectRoute").click(function(){
+            // $("p").toggle();
+            // $("#list").toggle();
+            $("#list").hide();
+
+        });
+    });
+    </script>
+<!-- <button>Toggle</button>
+
+<p>This is a paragraph with little content.</p>
+<p>This is another small paragraph.</p> -->
+
+
         <div id="map"></div>
 
         <script>
