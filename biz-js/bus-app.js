@@ -196,9 +196,9 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                             // + "<br>|"
                             + "<br>" + obj.endStop
                             + "</a>"
-                            +"<br>#" + busCntNumber
-                            + "</div>"
-                            + "<b>【" + bus.bus + "】</b>"
+                            +"<br><b>#" + busCntNumber
+                            + "</b></div>"
+                            + "【" + bus.bus + "】"
                             + "<br>" + dt2
                             + "</div>"
                             ;
