@@ -203,7 +203,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                             + "</div>"
                             ;
 
-                    console.log("i=" + i);
+                    // console.log("i=" + i);
                     makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
 //function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
 
