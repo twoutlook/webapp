@@ -334,8 +334,12 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             // console.log(val);
             var toOpen = true;
             var busCntNumber=0;
+
+            var showRouteAlready=false;
             for (var i = 0; i < array.length; i++) {
                 var bus = array[i];
+
+
                 if (bus['route'] == obj.routeId) {
                     busCntNumber++;
                     $scope.busCnt++;
@@ -351,7 +355,10 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
 
   // getRouteDots(11811);
-  getRouteDots($scope.majorRoute);
+  if (!showRouteAlready){
+    getRouteDots($scope.majorRoute);
+showRouteAlready=true;
+  }
 
 
                     var dt = new Date(parseInt(bus.unix));
