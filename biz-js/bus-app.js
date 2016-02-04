@@ -358,6 +358,8 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
   if (!showRouteAlready){
     getRouteDots($scope.majorRoute);
 showRouteAlready=true;
+
+show123(obj.routeId);
   }
 
 
@@ -449,6 +451,109 @@ showRouteAlready=true;
         });
         initMap();
     }
+
+
+function show123DocX(route,x){
+  //https://bus-0119.firebaseio.com/buslistv8-docnum
+  ref.child('buslistv8-docnum').once("child_added", function (snapshot, prevChildKey) {
+    var num=parseInt(snapshot.val());
+    console.log("docnum is "+num)
+    if (num==x){
+      return;
+    }
+  ref.child('buslistv8-doc'+x).once("child_added", function (snapshot, prevChildKey) {
+    var key = snapshot.key();
+    var val = snapshot.val();
+    // console.log(key);
+    // console.log(val);
+
+  var array = val;
+
+  for (var i = 0; i < array.length; i++) {
+      var bus = array[i];
+
+
+      if (bus['route'] == route) {
+
+          var dt = new Date(parseInt(bus.unix));
+          var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+          var msg = ""
+          // + "<div><h4>"
+          + "<div>"
+          // + "<a target='_blank' href='" + obj.mapUrl + "' >"
+          //         + "<b>【" + obj.routeName + "】</b><br>"
+          //         // +obj.startStop
+          //         // +"<br>|"
+          //         // +"<br>"+obj.endStop
+          //         + obj.startStop
+          //         // + "<br>|"
+          //         + "<br>" + obj.endStop
+          //         + "</a>"
+                  // +"<br><b>#" + busCntNumber
+                  + "</b></div>"
+                  + "【" + bus.bus + "】"
+                  + "<br>" + dt2
+                  + "</div>"
+                  ;
+
+          // console.log("i=" + i);
+          makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, "img/red2.png", false, true, null, msg);
+//function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
+
+            // $scope.lat=bus.lat;
+            // $scope.lon=bus.lon;
+
+
+          // toOpen=false;
+
+      }
+  }
+  // if ($scope.busCnt==0){
+  //     showAnchor();
+  // }else{
+  //     map.setCenter({lat: $scope.lat, lng: $scope.lon});
+  // }
+
+}); // end of once
+  });
+
+
+
+
+
+
+}
+
+
+
+
+function show123(route){
+  show123DocX(route,1);
+  show123DocX(route,2);
+  show123DocX(route,3);
+  show123DocX(route,4);
+  // show123DocX(route,5);
+  // show123DocX(route,6);
+  // show123DocX(route,7);
+
+}
+
+// show123(118110);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //     // NOTE TO SHOW ALL MARKS
 //     $scope.showTracking = function (selectCar) {
