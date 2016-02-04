@@ -111,7 +111,8 @@ td {
           <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" ><div id="routeCnt">...載入中,請稍候</div></button>
                 <!-- <button ng-click=""  class="btn  btn-primary" >{{busCnt}}輛公車</button> -->
                   <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
-                    <option  ng-repeat="doc in routes" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option>
+                  <!-- <option  ng-repeat="doc in routes" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
+                    <option  ng-repeat="doc in routes" value="{{doc}}">{{doc.routeName}} &nbsp; &nbsp;{{doc.startStop}} => {{doc.endStop}}</option>
                 </select>
             </div>
               <div class="row">

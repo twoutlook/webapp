@@ -1,5 +1,5 @@
 {
-  "firebase": "nodejs2016",
+  "firebase": "mark001",
   "public": ".",
   "ignore": [
     "firebase.json",
