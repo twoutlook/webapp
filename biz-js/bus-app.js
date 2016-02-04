@@ -251,7 +251,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                   }else{
                       cnt++;
                       var temp=obj[key].split(" ");
-                      str+=" <tr><th>xxx"+cnt+"</th><td>"+key+"  "+"</td>"
+                      str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
                       +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
                       "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
                       // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length
