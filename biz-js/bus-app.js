@@ -387,7 +387,7 @@ show123(obj.routeId);
                     // console.log("i=" + i);
                     makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
 //function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
-
+                    toOpen=false;
                       $scope.lat=bus.lat;
                       $scope.lon=bus.lon;
 
