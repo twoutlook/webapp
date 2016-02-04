@@ -38,7 +38,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var refRoutes = ref.child("routesv5/");
     var refBuslist = ref.child("buslistv6/");
 
-
+$scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"three","code":3},{"$value":"four","code":4}];
     refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
         var key = snapshot.key();
         var val = snapshot.val();

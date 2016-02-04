@@ -44,6 +44,8 @@
                 /*background-color:#bfbfbf;*/
 
                 background-color: #D8D8D8;
+                /*background: url('../img/nodejs-01.jpg') no-repeat center center fixed;*/
+                background: url('../img/nodejs-01.jpg') ;
 
                 font-family: 'Droid Sans Mono' ;
             }
@@ -110,10 +112,16 @@ td {
                 <button ng-click="clearScreen()" class="btn btn-success " ><div id="busCnt">【路線】車輛數</div></button>
           <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" ><div id="routeCnt">...載入中,請稍候</div></button>
                 <!-- <button ng-click=""  class="btn  btn-primary" >{{busCnt}}輛公車</button> -->
-                  <select  class="form-control"  name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+                  <select class="form-control" style="font-size:110%"   name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
                   <!-- <option  ng-repeat="doc in routes" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
+ <option value="" disabled selected > === 請選擇路線 === </option>
                     <option  ng-repeat="doc in routes" value="{{doc}}">{{doc.routeName}} &nbsp; &nbsp;{{doc.startStop}} => {{doc.endStop}}</option>
+
                 </select>
+
+
+
+
             </div>
               <div class="row">
                 <div id="list"></div>
