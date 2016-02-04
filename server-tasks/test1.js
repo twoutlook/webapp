@@ -43,7 +43,11 @@ jsonfile.readFile(file, function(err, obj) {
   //  }
   // console.log(JSON.stringify(json));
   var fs = require('fs');
-  fs.writeFile("route-stopname-lat-lon.json", JSON.stringify(json), function(err) {
+
+var routeStops="var routeStops="+JSON.stringify(json)+";";
+
+
+  fs.writeFile("routeStops.js", routeStops, function(err) {
       if(err) {
           return console.log(err);
       }

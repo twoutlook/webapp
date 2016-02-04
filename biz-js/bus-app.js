@@ -308,6 +308,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
     var remLat;
     var remLon;
+    $scope.majorRoute=-1;
     function ddlRouteChange(doc) {
         $scope.busCnt = 0;
         var myDiv = document.getElementById("busCnt");
@@ -318,6 +319,13 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
 
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
+
+
+        // getRouteDots(11811);
+        // getRouteDots(route); // route major problem!!!
+
+
+        // var majorRoute=0;
 
         refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
             var key = snapshot.key();
@@ -333,6 +341,17 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
                     $scope.busCnt++;
                     var myDiv = document.getElementById("busCnt");
                     myDiv.innerHTML =$scope.busCnt+"輛公車";
+
+                    var temp=obj.mapUrl;
+                    var temp2=temp.split("=");
+                    // console.log ("DOING "+obj.mapUrl );
+                    // console.log ("DOING "+temp2[1] );
+                    $scope.majorRoute= parseInt(temp2[1]);
+  // console.log ("xxx??? $scope.majorRoute route is "+$scope.majorRoute)
+
+
+  // getRouteDots(11811);
+  getRouteDots($scope.majorRoute);
 
 
                     var dt = new Date(parseInt(bus.unix));
@@ -375,6 +394,13 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
             }
 
         }); // end of once
+
+        // by Mark, 02/04 14:06
+        // console.log ("xxx major route is "+$scope.majorRoute)
+        // getRouteDots($scope.majorRoute);
+
+
+
     }
 
 
