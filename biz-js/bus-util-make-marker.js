@@ -70,9 +70,9 @@ function makeMarker(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){//1
 
 
 function makeMarkerV2(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){
-  // var temp=parseInt(unix);
-  // var dt=new Date(temp);
-  // dt2=dt.format("mm/dd HH:MM");
+  var temp=parseInt(unix);
+  var dt=new Date(temp);
+  dt2=dt.format("mm/dd HH:MM");
 
   var myLatLng = {lat: lat, lng: lon};
 
@@ -81,7 +81,7 @@ function makeMarkerV2(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){
       map: map,
       icon: icon,//it can be null
       animation: google.maps.Animation.DROP,
-      // title:msg // html tag is bad here
+      title:bus +" "+dt2// html tag is bad here
   });
 
   var contentString = '<div id="content" style="background-color:#f9f9f9"> '+
