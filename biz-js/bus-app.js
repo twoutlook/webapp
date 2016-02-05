@@ -505,8 +505,9 @@ function show123DocX(route,x){
           //         + "<br>" + obj.endStop
           //         + "</a>"
                   // +"<br><b>#" + busCntNumber
-                  + "</b></div>"
-                  + "【" + bus.bus + "】"
+                  // + "</b>
+                  +"</div>"
+                  // + "【" + bus.bus + "】"
                   + "<br>" + dt2
                   + "</div>"
                   ;

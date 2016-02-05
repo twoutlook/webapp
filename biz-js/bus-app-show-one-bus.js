@@ -27,9 +27,10 @@ function showBusOneDot(busNum,x,img,toOpen,toCenter,showRoute){
               var msg = ""
 
                       + "<div>"
-                      + "</b></div>"
-                      + "【" + bus.bus + "】"
-                      + "<br>" + dt2
+                      // + "</b></div>"
+                      // + "【" + bus.bus + "】"
+                      // + "<br>"
+                      + dt2
                       + "</div>"
                       ;
               if (showRoute){
