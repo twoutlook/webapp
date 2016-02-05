@@ -362,13 +362,19 @@ showRouteAlready=true;
 show123(obj.routeId);
   }
 
-
+var mmm=obj.mapUrl.split("=");
+majorroute=mmm[1];
                     var dt = new Date(parseInt(bus.unix));
                     var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
                     var msg = ""
                     // + "<div><h4>"
                     + "<div>"
-                    + "<a target='_blank' href='" + obj.mapUrl + "' >"
+                    // + "<a target='_blank' href='" + obj.mapUrl + "' >"
+                    + "<a target='_blank' href='index-bus.html?route=" + obj.routeId
+                    +"&majorroute=" +majorroute
+                    +"&routestart=" +obj.startStop
+                    +"&routeend=" +obj.endStop
+                    +"&routename="+ obj.routeName +"' >"
                             + "<b>【" + obj.routeName + "】</b><br>"
                             // +obj.startStop
                             // +"<br>|"

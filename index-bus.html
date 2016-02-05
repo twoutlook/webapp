@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html ng-app="sampleApp">
+    <head>
+
+        <meta charset="utf-8">
+
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>走過必留痕跡! by 諾得捷思</title>
+
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+
+
+        <script src="biz-js/jquery.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+        <style>
+
+
+            html, body { height: 100%; margin: 0; padding: 0; }
+            #map { height: 88%; }
+            .firstHeading{ text-align: center}
+            body{
+                /*background-color:#F9f9f9;*/
+                /*background-color:black;//#0000b3*/
+                /*background-color:#bfbfbf;*/
+
+                /*background-color: #D8D8D8;*/
+                /*background: url('../img/nodejs-01.jpg') no-repeat center center fixed;*/
+                /*background: url('../img/background.jpg') ;*/
+                background: url('../img/bg200.png') ;
+                background-position: 0% 0%;
+
+                font-family: 'Droid Sans Mono' ;
+            }
+
+table th:first-child{
+  border-radius:10px 0 0 10px;
+}
+table th:last-child{
+  border-radius:0 10px 10px 0;
+}
+ table td:first-child{
+  border-radius:10px 0 0 10px;
+}
+table td:last-child{
+  border-radius:0 10px 10px 0;
+}
+
+/*  caption {*/
+/*  	 text-align: left;*/
+/*  	 color: white;*/
+/*    background-color: #3F51B5;*/
+/*     padding: 8px 12px;*/
+/* }*/
+table{
+	 /*padding: 8px 12px;*/
+     border:2;
+         border-style: solid;
+    border-color: #D8D8D8;
+}
+.flat-table {
+    border:2;
+  /*display: block;*/
+  font-size: 115%;
+  /*overflow: auto;*/
+  width: auto;
+}
+
+th {
+    background-color: #3F51B5;
+    color: white;
+    font-weight: 500;
+    font-weight: normal;
+/*//    padding: 20px 30px;*/
+        padding: 8px 12px;
+    text-align: center;
+}
+
+td {
+    background-color:  #E8EAF6;
+    font-weight: 400;
+    color: rgb(111, 111, 111);
+     padding: 8px 12px;
+}
+
+        </style>
+        <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body  ng-controller="SampleCtrl">
+        <div class="container">
+            <div class="row">
+                <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
+                <!-- <button ng-click="clearScreen()"  class="btn  btn-primary" >更新</button> -->
+                <button onclick="selectBus()" class="btn btn-success " >重新整理車輛痕跡</button>
+                <!-- <button id="showRouteBusList"   class="btn  btn-primary" >showRouteBuses</button> -->
+                <!-- <div id="routeCnt">showRouteBuses</div> -->
+                <!-- <button ng-click=""  class="btn  btn-primary" >{{busCnt}}輛公車</button> -->
+                <!-- <select class="form-control" style="font-size:110%"   name="selectRoute" id="selectRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+                    <option value="" disabled selected > === 請選擇路線 === </option>
+                    <option  ng-repeat="doc in routes" value="{{doc}}">{{doc.routeName}} &nbsp; &nbsp;{{doc.startStop}} => {{doc.endStop}}</option>
+                </select> -->
+
+            <div id="busddl">...正在載入車輛資訊,請稍候</div>
+
+
+            </div>
+              <div class="row">
+                <!-- <div id="list" ></div> -->
+                  </div>
+        </div>
+
+        <script>
+    $(document).ready(function(){
+        // $("button").click(function(){
+        //     $("p").toggle();
+        //       $("#list").toggle();
+        // });
+        $("#showRouteBusList").click(function(){
+            // $("p").toggle();
+            // $("#list").toggle();
+            $("#list").show();
+
+        });
+        $("#selectRoute").click(function(){
+            // $("p").toggle();
+            // $("#list").toggle();
+            $("#list").hide();
+
+        });
+    });
+    </script>
+<!-- <button>Toggle</button>
+
+<p>This is a paragraph with little content.</p>
+<p>This is another small paragraph.</p> -->
+
+
+        <div id="map"></div>
+
+        <script>
+                    var map;
+                    var anchorCnt = 0;
+                    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';  // if wrong here, no map shows
+                    // var initLatLng={lat: 25.033718, lng: 121.565512};
+                    var initLatLng = {lat: 25.033718, lng: 121.565512};
+                    function getItemHtml(src1, src2, src3) {
+                        return '<h5>' + src1 + '<a  target="_blank" href="' + src2 + '">' + src3 + '</a> </h5>';
+                    }
+
+                    function initMap() {
+
+                        function toggleBounce() {
+                            if (marker.getAnimation() !== null) {
+                                marker.setAnimation(null);
+                            } else {
+                                marker.setAnimation(google.maps.Animation.BOUNCE);
+                            }
+                        }
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: initLatLng,
+                            zoom: 14,
+                            disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+                        });
+
+                        var marker = new google.maps.Marker({
+                            position: initLatLng,
+                            map: map,
+                            // draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            icon: iconBase + 'marina.png', //marina.png
+
+
+                        });
+                        // marker.setAnimation(google.maps.Animation.BOUNCE);
+                        marker.addListener('click', toggleBounce);
+                        map.setCenter(marker.getPosition());
+
+                        var title = '<a  target="_blank" href="http://taipeiomg.bhuntr.com/">Data.Taipei & Taipei OMG <br>綠色交通應用開發大賽</a>';
+                        var itemTaipei = getItemHtml('※', 'http://data.taipei/', 'Data.Taipei臺北市政府資料開放平台');
+                        var itemSource = getItemHtml('※數據來源:&nbsp;', 'http://transportation-data.taipei', '交通即時資料開放資料專區');
+                        var itemTeam = getItemHtml('※作品主題:&nbsp;<a  target="_blank" href="https://nodejs2016.azurewebsites.net/">走過必留痕跡!</a>&nbsp;&nbsp;by 諾得捷思隊', '', '');
+                        var contentString = '<div id="content" style="background-color:#f9f9f9"> ' +
+                                '<h4 id="firstHeading" class="firstHeading"><b>' + title + '</b></h4>' +
+                                '<div id="bodyContent">' + itemTaipei + itemSource + itemTeam
+                                '</div>' +
+                                '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+
+                        console.log(" initMap, anchorCnt" + anchorCnt);
+                        // not bo open again when click title
+                        if (anchorCnt == 0) {
+                            infowindow.open(map, marker);
+                            anchorCnt++;
+                        }
+                        marker.addListener('click', function () {
+                            infowindow.open(map, marker);
+                        });
+                    }
+
+
+
+
+                    function initMapV2() {
+
+                        function toggleBounce() {
+                            if (marker.getAnimation() !== null) {
+                                marker.setAnimation(null);
+                            } else {
+                                marker.setAnimation(google.maps.Animation.BOUNCE);
+                            }
+                        }
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: initLatLng,
+                            zoom: 14,
+                            disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+                        });
+
+                        var marker = new google.maps.Marker({
+                            position: initLatLng,
+                            map: map,
+                            // draggable: true,
+                            animation: google.maps.Animation.DROP,
+                            icon: iconBase + 'marina.png', //marina.png
+
+
+                        });
+                        // marker.setAnimation(google.maps.Animation.BOUNCE);
+                        marker.addListener('click', toggleBounce);
+                        map.setCenter(marker.getPosition());
+
+                        var title = '<a  target="_blank" href="http://taipeiomg.bhuntr.com/">Data.Taipei & Taipei OMG <br>綠色交通應用開發大賽</a>';
+                        var itemTaipei = getItemHtml('※', 'http://data.taipei/', 'Data.Taipei臺北市政府資料開放平台');
+                        var itemSource = getItemHtml('※數據來源:&nbsp;', 'http://transportation-data.taipei', '交通即時資料開放資料專區');
+                        var itemTeam = getItemHtml('※作品主題:&nbsp;<a  target="_blank" href="https://nodejs2016.azurewebsites.net/">走過必留痕跡!</a>&nbsp;&nbsp;by 諾得捷思隊', '', '');
+                        var contentString = '<div id="content" style="background-color:#f9f9f9"> ' +
+                                '<h4 id="firstHeading" class="firstHeading"><b>' + title + '</b></h4>' +
+                                '<div id="bodyContent">' + itemTaipei + itemSource + itemTeam
+                                '</div>' +
+                                '</div>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+
+                        console.log(" initMap, anchorCnt" + anchorCnt);
+                        // not bo open again when click title
+                        // if (toOpen) {
+                        //     infowindow.open(map, marker);
+                        //     // anchorCnt++;
+                        // }
+                        marker.addListener('click', function () {
+                            infowindow.open(map, marker);
+                        });
+                    }
+
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8DY8o-Qzo6Yv9bYzP-cBO9cmgqAwXh0c&callback=initMapV2"
+        async defer></script>
+
+        <script src="biz-js/date.format.js"></script>
+        <!-- <script src="biz-js/mark-bus-0119-util.js"></script> -->
+        <script src="biz-js/bus-util-make-marker.js"></script>
+
+
+        <!-- <script src="biz-js/mark-bus-0119.js"></script> -->
+        <!-- <script src="biz-js/bus-v2-0128---busmin.js"></script> -->
+
+        <script src="biz-js/bus-firebase.js"></script>
+
+<!-- var urlFirebase = "https://bus-v2-0128.firebaseio.com/"; -->
+
+        <script src="server-tasks/routeStops.js"></script>
+        <script src="biz-js/bus-app-route.js"></script>
+        <script src="biz-js/bus-app-one-bus.js"></script>
+
+
+
+    </body>
+</html>
