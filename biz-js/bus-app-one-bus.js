@@ -54,7 +54,7 @@ function showBusOneDot(busNum,x,img,toOpen,toCenter,showRoute){
 
 
               var msg = ""
-            
+
                       + "<div>"
                       + "</b></div>"
                       + "【" + bus.bus + "】"
@@ -119,7 +119,7 @@ function showBusTracking(busNum) {
 
 function selectBus() {
     var busNum = document.getElementById("mySelect").value;
-    $("#list").hide();
+    // $("#list").hide();
     // document.getElementById("demo").innerHTML = "You selected: " + busNum;
 showBusTracking(busNum)
 

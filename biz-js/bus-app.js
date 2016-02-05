@@ -5,7 +5,12 @@ var iconBus = "img/bus.png";
 // var urlFirebase = "https://bus-0119.firebaseio.com/";
 
 // var urlFirebase = "https://bus-v2-0128.firebaseio.com/";
-
+function myFunction(busNum) {
+    // document.getElementById("demo").innerHTML =
+    // "Welcome " + name + ", the " + job + ".";
+    // alert(busNum);
+    showBusTracking(busNum);
+}
 
 //
 var app = angular.module("sampleApp", ["firebase"]);
@@ -369,12 +374,12 @@ majorroute=mmm[1];
                     var msg = ""
                     // + "<div><h4>"
                     + "<div>"
-                    // + "<a target='_blank' href='" + obj.mapUrl + "' >"
-                    + "<a target='_blank' href='index-bus.html?route=" + obj.routeId
-                    +"&majorroute=" +majorroute
-                    +"&routestart=" +obj.startStop
-                    +"&routeend=" +obj.endStop
-                    +"&routename="+ obj.routeName +"' >"
+                    + "<a target='_blank' href='" + obj.mapUrl + "' >"
+                    // + "<a target='_blank' href='index-bus.html?route=" + obj.routeId
+                    // +"&majorroute=" +majorroute
+                    // +"&routestart=" +obj.startStop
+                    // +"&routeend=" +obj.endStop
+                    // +"&routename="+ obj.routeName +"' >"
                             + "<b>【" + obj.routeName + "】</b><br>"
                             // +obj.startStop
                             // +"<br>|"
@@ -384,10 +389,14 @@ majorroute=mmm[1];
                             + "<br>" + obj.endStop
                             + "</a>"
                             +"<br><b>#" + busCntNumber
-                            + "</b></div>"
-                            + "【" + bus.bus + "】"
-                            + "<br>" + dt2
-                            + "</div>"
+                            + "</b>"
+                            +"</div>"
+                            // + "【" + bus.bus + "】"
+                            // + "<br>"
+                            + dt2
+
+                            + '<h4 style="cursor:crosshair; color:#1A237E" onclick="myFunction(\''+bus.bus+'\')">'+bus.bus+'</h4>'
+                              + "</div>"
                             ;
 
                     // console.log("i=" + i);
@@ -504,6 +513,9 @@ function show123DocX(route,x){
 
           // console.log("i=" + i);
           makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, "img/red2.png", false, true, null, msg);
+          // makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, "img/yellow.png", false, true, null, msg);
+
+
 //function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
 
             // $scope.lat=bus.lat;
