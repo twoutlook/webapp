@@ -546,13 +546,10 @@ function show123DocX(route,x){
 
 
 function show123(route){
-  show123DocX(route,1);
-  show123DocX(route,2);
-  show123DocX(route,3);
-  show123DocX(route,4);
-  // show123DocX(route,5);
-  // show123DocX(route,6);
-  // show123DocX(route,7);
+  // show123DocX(route,1);
+  // show123DocX(route,2);
+  // show123DocX(route,3);
+  // show123DocX(route,4);
 
 }
 
