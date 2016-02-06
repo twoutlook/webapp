@@ -34,6 +34,7 @@
                     <option    value="" disabled selected > === 請選擇路線 === </option>
                     <option  ng-repeat="doc in routes" value="{{doc}}">{{doc.routeName}} &nbsp; &nbsp;{{doc.startStop}} => {{doc.endStop}}</option>
                 </select>
+                  <div  id="ddlRoute2"></div>
             </div>
             <div class="row">
                 <div id="list"></div>
@@ -53,6 +54,7 @@
         <script src="biz-js/bus-app-route.js"></script>
         <script src="biz-js/bus-app-show-one-bus.js"></script>
         <script src="biz-js/bus-onclick.js"></script>
+        <script src="biz-js/bus-functions.js"></script>
         <script src="biz-js/bus-app.js"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 //http://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-url-parameter
 var params = {};
-var ref = new Firebase(urlFirebase);
+
 
 
 if (location.search) {
