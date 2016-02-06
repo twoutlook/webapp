@@ -51,11 +51,15 @@ function showBusTrackingX(busNum, x) {
     //https://bus-0119.firebaseio.com/buslistv8-docnum
     ref.child('buslistv9-docnum').once("child_added", function (snapshot, prevChildKey) {
         var num = parseInt(snapshot.val());
-        console.log("docnum is " + num)
+        console.log("x= " + x);
         if (num == x) {
             // showBusOneDot(busNum,x,"img/bus.png",true,true,true);
         }else{
+          if ((x==2)||(x==4)||(x==6)||(x==12)||(x==14)||(x==16)||(x==22)||(x==24)||(x==26)){
+            showBusOneDot(busNum,x,"img/red2.png",false,true,false); // DOING move center
+        }else{
             showBusOneDot(busNum,x,"img/red2.png",false,false,false);
+        }
         }
     });
 }
