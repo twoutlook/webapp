@@ -52,7 +52,7 @@
                     content: contentString
                 });
 
-                console.log(" initMap, anchorCnt" + anchorCnt);
+                // console.log(" initMap, anchorCnt" + anchorCnt);
                 // not bo open again when click title
                 if (anchorCnt == 0) {
                     infowindow.open(map, marker);

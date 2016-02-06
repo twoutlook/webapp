@@ -6,8 +6,8 @@ function resetRouteBuses() {
     watch_bus_index=1;
   }
 
-  console.log("resetRouteBuses, watch_bus_array:"+watch_bus_array);
-  console.log("resetRouteBuses, watch_bus_index:"+watch_bus_index);
+  // console.log("resetRouteBuses, watch_bus_array:"+watch_bus_array);
+  // console.log("resetRouteBuses, watch_bus_index:"+watch_bus_index);
 
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -32,7 +32,7 @@ function selectRoute() {
     watch_bus_index=-1;
 
     // alert(mySelect.value+" "+route_name[mySelect.value]);
-    console.log(mySelect.value + " " + route_name[mySelect.value]);
+    // console.log(mySelect.value + " " + route_name[mySelect.value]);
     $("#list").hide();
 
     var busCnt = 0;
@@ -95,8 +95,8 @@ mem_majorRouteId=majorRouteId;
         }
 
 
-        console.log(watch_bus_array);
-        console.log(watch_bus_index);
+        // console.log(watch_bus_array);
+        // console.log(watch_bus_index);
 
         // NOTE:當路線沒有車時,顯示地標
         if (busCnt == 0) {
@@ -114,18 +114,18 @@ function selectRouteByAddOne() {
 
 
     // alert(mySelect.value+" "+route_name[mySelect.value]);
-    console.log("selectRouteByAddOne");
+    // console.log("selectRouteByAddOne");
     $("#list").hide();
 
     // NOTE:路線上的站牌只要畫一次
         getRouteDots(mem_majorRouteId);
-        console.log(save_bus);
+        // console.log(save_bus);
 
 
         var toOpen=false;
         for (var i = 0; i < save_bus.length; i++) {
             var bus = save_bus[i];
-            console.log("DOING "+bus);
+            // console.log("DOING "+bus);
 
             toOpen=false;
             if ((1+i)==watch_bus_index){
@@ -159,8 +159,8 @@ function selectRouteByAddOne() {
         }
 
 
-        console.log(watch_bus_array);
-        console.log(watch_bus_index);
+        // console.log(watch_bus_array);
+        // console.log(watch_bus_index);
 
         // NOTE:當路線沒有車時,顯示地標
         if (busCnt == 0) {
