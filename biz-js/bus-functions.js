@@ -154,7 +154,7 @@ function selectRouteByAddOne() {
                         ;
                 makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
                 // toOpen = false;
-                document.getElementById("busCnt").innerHTML = watch_bus_array.length-1 + "輛公車第"+watch_bus_index+"輛";
+                document.getElementById("busCnt").innerHTML = watch_bus_array.length-1 + "輛第"+watch_bus_index+"輛";
 
         }
 
@@ -229,7 +229,7 @@ function prepareDdlRoute() {
         }
         byHand += ' </select>';
         document.getElementById("ddlRoute").innerHTML = byHand;
-        document.getElementById("routeCnt").innerHTML = "計有路線數:" + ttlRouteCnt;
+        document.getElementById("routeCnt").innerHTML = "路線:" + ttlRouteCnt;
         $("#ddlRoute").show(1000, function () {
             $("#map").show(1000, function () {
                 initMap();
