@@ -1,5 +1,12 @@
 
-
+function resetRouteBuses(){
+  map = new google.maps.Map(document.getElementById('map'), {
+      center: initLatLng,
+      zoom: 14,
+      disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
+  });
+  selectRoute();
+}
 
 function selectRoute(){
   // alert(mySelect.value+" "+route_name[mySelect.value]);
