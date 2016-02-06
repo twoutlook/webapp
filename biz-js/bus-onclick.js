@@ -7,6 +7,7 @@ function showAnchor() {
 }
 
 function showRouteBusListV2(){
+  routeCnt=0;
   console.log("DOING... showRouteBusListV2");
   refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
       var key = snapshot.key();
@@ -24,7 +25,7 @@ function showRouteBusListV2(){
       }
       var obj={};
       refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
-        $scope.routeCnt ++;
+        routeCnt ++;
 
           var key = snapshot.key();
           var val = snapshot.val();

@@ -11,7 +11,7 @@ function resetRouteBuses(){
 function selectRoute(){
   // alert(mySelect.value+" "+route_name[mySelect.value]);
   console.log(mySelect.value+" "+route_name[mySelect.value]);
-
+      $("#list").hide();
 
 
 
