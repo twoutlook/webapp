@@ -1,15 +1,36 @@
 // NOTE:清畫面,重畫路線和車輛
 function resetRouteBuses() {
+  // watch_bus_array=[];
+  watch_bus_index++;
+  if (watch_bus_index == watch_bus_array.length){
+    watch_bus_index=1;
+  }
+
+  console.log("resetRouteBuses, watch_bus_array:"+watch_bus_array);
+  console.log("resetRouteBuses, watch_bus_index:"+watch_bus_index);
+
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: initLatLng,
         zoom: 14,
         disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
     });
-    selectRoute();
+    selectRouteByAddOne();
 }
+
+var mem_majorRouteId=0;
+var mem_route_name;
+var mem_route_start;
+var mem_route_stop;
+var save_bus=[];
 
 // NOTE:重畫路線和車輛
 function selectRoute() {
+    anchorCnt=99;
+    initMap();
+    watch_bus_array=[];
+    watch_bus_index=-1;
+
     // alert(mySelect.value+" "+route_name[mySelect.value]);
     console.log(mySelect.value + " " + route_name[mySelect.value]);
     $("#list").hide();
@@ -27,12 +48,21 @@ function selectRoute() {
         for (var i = 0; i < array.length; i++) {
             var bus = array[i];
             if (bus['route'] == route) {
+
+              save_bus[busCnt]=bus;
+
                 busCnt++;
                 document.getElementById("busCnt").innerHTML = busCnt + "輛公車";
+
+                watch_bus_array[busCnt]=bus['bus'] ;
+                watch_bus_index=1;
 
                 // NOTE:MAP URL 的ID值,剛好就是 Major Route
                 var temp1 = route_url[mySelect.value].split("=");
                 var majorRouteId = parseInt(temp1[1]);
+
+mem_majorRouteId=majorRouteId;
+
 
                 // NOTE:路線上的站牌只要畫一次
                 if (!showRouteAlready) {
@@ -51,10 +81,11 @@ function selectRoute() {
                         + route_start[mySelect.value]
                         + "<br>" + route_stop[mySelect.value]
                         + "</a>"
-                        + "<br><b>#" + busCnt
+                        + "<br><b>第" + busCnt+"輛"
                         + "</b>"
                         + "</div>"
                         + dt2
+
                         + '<h4 style="cursor:crosshair; color:red" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
                         + "</div>"
                         ;
@@ -62,6 +93,11 @@ function selectRoute() {
                 toOpen = false;
             }
         }
+
+
+        console.log(watch_bus_array);
+        console.log(watch_bus_index);
+
         // NOTE:當路線沒有車時,顯示地標
         if (busCnt == 0) {
             showAnchor();
@@ -70,6 +106,72 @@ function selectRoute() {
         }
     }); // end of once
 }
+
+
+
+function selectRouteByAddOne() {
+
+
+
+    // alert(mySelect.value+" "+route_name[mySelect.value]);
+    console.log("selectRouteByAddOne");
+    $("#list").hide();
+
+    // NOTE:路線上的站牌只要畫一次
+        getRouteDots(mem_majorRouteId);
+        console.log(save_bus);
+
+
+        var toOpen=false;
+        for (var i = 0; i < save_bus.length; i++) {
+            var bus = save_bus[i];
+            console.log("DOING "+bus);
+
+            toOpen=false;
+            if ((1+i)==watch_bus_index){
+              toOpen=true;
+            }
+            // var mem_route_name;
+            // var mem_route_start;
+            // var mem_route_stop;
+                var dt = new Date(parseInt(bus.unix));
+                var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+                var msg = ""
+                        // + "<div><h4>"
+                        + "<div>"
+                        + "<a target='_blank' href='" + route_url[mySelect.value] + "' >"
+                        + "<b>【" + route_name[mySelect.value] + "】</b><br>"
+                        + route_start[mySelect.value]
+                        + "<br>" + route_stop[mySelect.value]
+                        + "</a>"
+                        // + "<br><b>#" + (1+i)
+                        + "<br><b>第" + (1+i)+"輛"
+                        + "</b>"
+                        + "</div>"
+                        + dt2
+                        + '<h4 style="cursor:crosshair; color:red" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
+                        + "</div>"
+                        ;
+                makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+                // toOpen = false;
+                document.getElementById("busCnt").innerHTML = watch_bus_array.length-1 + "輛公車第"+watch_bus_index+"輛";
+
+        }
+
+
+        console.log(watch_bus_array);
+        console.log(watch_bus_index);
+
+        // NOTE:當路線沒有車時,顯示地標
+        if (busCnt == 0) {
+            showAnchor();
+        } else {
+            // map.setCenter({lat: $scope.lat, lng: $scope.lon});
+        }
+
+}
+
+
 
 
 var route_name = [];

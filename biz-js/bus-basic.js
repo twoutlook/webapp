@@ -1,5 +1,7 @@
 
 var iconBus = "img/bus.png";
+var watch_bus_array=[];
+var watch_bus_cnt=0;
 
 
 var map;
