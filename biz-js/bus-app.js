@@ -60,6 +60,14 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
             // console.log(key+" "+obj[key].routeName);
         }
         document.getElementById("routeCnt").innerHTML =$scope.routeCnt+"個路線";
+        $("#ddlRoute").show(1000,function(){
+          $("#map").show(1000,function(){
+            initMap();
+          })
+        });
+        // $("#map").show(1000,,initMap());
+
+
     });
 
 
@@ -302,6 +310,8 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
     }
 
     $scope.ddlRouteChange = function (doc) {
+        $("#map").show();//ddlRoute
+      //
         map = new google.maps.Map(document.getElementById('map'), {
             center: initLatLng,
             zoom: 14,
