@@ -4,6 +4,7 @@ function showAnchor() {
     anchorCnt++; // it won't show info window again
     console.log("anchorCnt=" + anchorCnt);
     initMap();
+    $("#list").hide();
 }
 
 function showRouteBusListV2(){

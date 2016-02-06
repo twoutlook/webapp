@@ -79,6 +79,17 @@ var route_url = []; //mapUrl
 
 
 function prepareDdlRoute() {
+    var routeWithStop = [];
+
+    for (var key2 in routeStops) {
+      routeWithStop[key2]=true;
+      // console.log(key2);
+      // console.log(routeStops[key2]);
+
+    }
+  // console.log(routeWithStop);
+
+
     var favorites = []; // NOTE: 只有這內部使用
     refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
         var key = snapshot.key();
@@ -90,13 +101,23 @@ function prepareDdlRoute() {
         var ttlRouteCnt = 0;
         var a1 = [];
         for (var key in obj) {
-            ttlRouteCnt++;
+
             route_name[key] = obj[key].routeName;
             route_start[key] = obj[key].startStop;
             route_stop[key] = obj[key].endStop;
             route_url[key] = obj[key].mapUrl;
             var oneRoute = {route: key, routeName: obj[key].routeName, startStop: obj[key].startStop, endStop: obj[key].endStop};
-            favorites.push(oneRoute);
+
+            // console.log(oneRoute);
+            // console.log(routeStops[""+key]);
+            var temp1 = route_url[key].split("=");
+            var majorRouteId = parseInt(temp1[1]);
+// routeStops
+            if (routeWithStop[majorRouteId]){
+                ttlRouteCnt++;
+                favorites.push(oneRoute);
+            }
+
         }
 
         favorites.sort(compare);
