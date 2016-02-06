@@ -22,25 +22,25 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var busArray = [];
     var allRoutes = {};
 
-    refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
-        var key = snapshot.key();
-        var val = snapshot.val();
-        var obj = val;
-        var route_name = [];
-        for (var key in obj) {
-            $scope.routeCnt++;
-            // var attrName = key;
-            // var attrValue = obj[key];
-            route_name[key] = obj[key].routeName;
-            // console.log(key + " " + obj[key].routeName);
-        }
-        document.getElementById("routeCnt").innerHTML = $scope.routeCnt + "個路線";
-        $("#ddlRoute").show(1000, function () {
-            $("#map").show(1000, function () {
-                initMap();
-            })
-        });
-    });
+    // refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+    //     var key = snapshot.key();
+    //     var val = snapshot.val();
+    //     var obj = val;
+    //     var route_name = [];
+    //     for (var key in obj) {
+    //         $scope.routeCnt++;
+    //         // var attrName = key;
+    //         // var attrValue = obj[key];
+    //         route_name[key] = obj[key].routeName;
+    //         // console.log(key + " " + obj[key].routeName);
+    //     }
+    //     document.getElementById("routeCnt").innerHTML = $scope.routeCnt + "個路線";
+    //     $("#ddlRoute").show(1000, function () {
+    //         $("#map").show(1000, function () {
+    //             initMap();
+    //         })
+    //     });
+    // });
 
 
 
@@ -67,6 +67,7 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     var remLat;
     var remLon;
     $scope.majorRoute = -1;
+
     function ddlRouteChange(doc) {
         $scope.busCnt = 0;
         var myDiv = document.getElementById("busCnt");

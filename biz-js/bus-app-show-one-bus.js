@@ -51,7 +51,7 @@ function showBusTrackingX(busNum, x) {
     //https://bus-0119.firebaseio.com/buslistv8-docnum
     ref.child('buslistv9-docnum').once("child_added", function (snapshot, prevChildKey) {
         var num = parseInt(snapshot.val());
-        console.log("x= " + x);
+        // console.log("x= " + x);
         if (num == x) {
             // showBusOneDot(busNum,x,"img/bus.png",true,true,true);
         }else{
