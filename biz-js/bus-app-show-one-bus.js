@@ -65,7 +65,7 @@ function showBusTrackingX(busNum, x) {
 }
 
 
-function showBusTracking(busNum) {
+function show30Dots(busNum) {
   for (var i=1;i<=30;i++){
       showBusTrackingX(busNum, i);
   }

@@ -1,21 +1,12 @@
-// Mark, 2016/1/20 11:19
-var iconCircle = 'img/placemark_circle_highlight.png';
+
 var iconBus = "img/bus.png";
 
-// var urlFirebase = "https://bus-0119.firebaseio.com/";
 
-// var urlFirebase = "https://bus-v2-0128.firebaseio.com/";
-function myFunction(busNum) {
-    // document.getElementById("demo").innerHTML =
-    // "Welcome " + name + ", the " + job + ".";
-    // alert(busNum);
-    showBusTracking(busNum);
-}
 
-//
+// *** angular fire ***
 var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function ($scope, $firebaseArray) {
-    var ref = new Firebase(urlFirebase);
+//    var ref = new Firebase(urlFirebase);
     // NOTE
     // $scope.firstbus = "...資料載入中,請稍候";
     // $scope.bus = "";
@@ -405,7 +396,7 @@ majorroute=mmm[1];
                             // + "<br>"
                             + dt2
 
-                            + '<h4 style="cursor:crosshair; color:#1A237E" onclick="myFunction(\''+bus.bus+'\')">'+bus.bus+'</h4>'
+                            + '<h4 style="cursor:crosshair; color:#1A237E" onclick="show30Dots(\''+bus.bus+'\')">'+bus.bus+'</h4>'
                               + "</div>"
                             ;
 
