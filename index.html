@@ -1,110 +1,26 @@
 <!DOCTYPE html>
 <html ng-app="sampleApp">
     <head>
-
+        <title>走過必留痕跡! by 諾得捷思</title>
         <meta charset="utf-8">
-
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-
-
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>走過必留痕跡! by 諾得捷思</title>
-
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
         <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
         <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
 
-
-
         <script src="biz-js/jquery.js"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css">
+        <script src="bootstrap/bootstrap.min.js"></script>
 
 
-        <style>
-
-
-            html, body { height: 100%; margin: 0; padding: 0; }
-            #map { height: 88%; }
-            .firstHeading{ text-align: center}
-            body{
-                /*background-color:#F9f9f9;*/
-                /*background-color:black;//#0000b3*/
-                /*background-color:#bfbfbf;*/
-
-                /*background-color: #D8D8D8;*/
-                /*background: url('../img/nodejs-01.jpg') no-repeat center center fixed;*/
-                /*background: url('../img/background.jpg') ;*/
-                background: url('../img/bg200.png') ;
-                background-position: 0% 0%;
-
-                font-family: 'Droid Sans Mono' ;
-            }
-
-table th:first-child{
-  border-radius:10px 0 0 10px;
-}
-table th:last-child{
-  border-radius:0 10px 10px 0;
-}
- table td:first-child{
-  border-radius:10px 0 0 10px;
-}
-table td:last-child{
-  border-radius:0 10px 10px 0;
-}
-
-/*  caption {*/
-/*  	 text-align: left;*/
-/*  	 color: white;*/
-/*    background-color: #3F51B5;*/
-/*     padding: 8px 12px;*/
-/* }*/
-table{
-	 /*padding: 8px 12px;*/
-     border:2;
-         border-style: solid;
-    border-color: #D8D8D8;
-}
-.flat-table {
-    border:2;
-  /*display: block;*/
-  font-size: 115%;
-  /*overflow: auto;*/
-  width: auto;
-}
-
-th {
-    background-color: #3F51B5;
-    color: white;
-    font-weight: 500;
-    font-weight: normal;
-/*//    padding: 20px 30px;*/
-        padding: 8px 12px;
-    text-align: center;
-}
-
-td {
-    background-color:  #E8EAF6;
-    font-weight: 400;
-    color: rgb(111, 111, 111);
-     padding: 8px 12px;
-}
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="bus.css">
         <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 
     </head>
@@ -112,28 +28,18 @@ td {
         <div class="container">
             <div class="row">
                 <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
-                <!-- <button ng-click="clearScreen()"  class="btn  btn-primary" >更新</button> -->
                 <button ng-click="clearScreen()" class="btn btn-success " ><div id="busCnt">【路線】車輛數</div></button>
-          <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" ><div id="routeCnt">...載入中,請稍候</div></button>
-                <!-- <button ng-click=""  class="btn  btn-primary" >{{busCnt}}輛公車</button> -->
-                  <select  class="form-control" style="font-size:110%"   name="selectRoute" id="ddlRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
-                  <!-- <option  ng-repeat="doc in routes" value="{{doc}}"> 【{{doc.routeName}}】{{doc.startStop}}-{{doc.endStop}}</option> -->
- <option    value="" disabled selected > === 請選擇路線 === </option>
+                <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" ><div id="routeCnt">...載入中,請稍候</div></button>
+                <select  class="form-control" style="font-size:110%"   name="selectRoute" id="ddlRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
+                    <option    value="" disabled selected > === 請選擇路線 === </option>
                     <option  ng-repeat="doc in routes" value="{{doc}}">{{doc.routeName}} &nbsp; &nbsp;{{doc.startStop}} => {{doc.endStop}}</option>
-
                 </select>
-
-
-
-
             </div>
-              <div class="row">
+            <div class="row">
                 <div id="list"></div>
-                  </div>
+            </div>
         </div>
-
-      <div id="map"></div>
-
+        <div id="map"></div>
         <script src="biz-js/bus-debug.js"></script>
         <script src="biz-js/bus-hide-map.js"></script>
         <script src="biz-js/bus-init-map.js"></script>
@@ -145,8 +51,5 @@ td {
         <script src="biz-js/bus-app-route.js"></script>
         <script src="biz-js/bus-app-show-one-bus.js"></script>
         <script src="biz-js/bus-app.js"></script>
-
-
-
     </body>
 </html>
