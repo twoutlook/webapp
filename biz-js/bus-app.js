@@ -1,25 +1,11 @@
 
-var iconBus = "img/bus.png";
-
-
-
-// *** angular fire ***
 var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function ($scope, $firebaseArray) {
-//    var ref = new Firebase(urlFirebase);
-    // NOTE
-    // $scope.firstbus = "...資料載入中,請稍候";
-    // $scope.bus = "";
-    // // Taipei 101
-    // //lat: 25.033718, lng: 121.565512
     $scope.lat = 25.033718;
     $scope.lon = 121.565512;
-    // $scope.bus = "";
-    // $scope.unix = "";
-    // $scope.route = "";
-    // $scope.routeMsg = "...do nothing yet "
 
     // NOTE for bus dropdown list
+    // TODO TODAY
     $scope.routes = $firebaseArray(ref.child('routesv5/routes').orderByChild("routeName"));
 
 //ddlRouteChange
@@ -28,27 +14,22 @@ app.controller("SampleCtrl", function ($scope, $firebaseArray) {
     $scope.activeRoute = 0;
 
     var busArray = [];
-
     var allRoutes = {};
 
     var refRoutes = ref.child("routesv5/");
     var refBuslist = ref.child("buslistv6/");
 
-$scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"three","code":3},{"$value":"four","code":4}];
     refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
         var key = snapshot.key();
         var val = snapshot.val();
         var obj = val;
         var route_name=[];
-
-
         for(var key in obj){
           $scope.routeCnt++;
             // var attrName = key;
             // var attrValue = obj[key];
             route_name[key]=obj[key].routeName;
-
-            // console.log(key+" "+obj[key].routeName);
+            console.log(key+" "+obj[key].routeName);
         }
         document.getElementById("routeCnt").innerHTML =$scope.routeCnt+"個路線";
         $("#ddlRoute").show(1000,function(){
@@ -56,120 +37,7 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
             initMap();
           })
         });
-        // $("#map").show(1000,,initMap());
-
-
     });
-
-
-
-
-
-
-    function showRouteBusList(){
-      console.log("DOING... showRouteBusList");
-      refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
-          var key = snapshot.key();
-          var val = snapshot.val();
-          var obj = val;
-          var route_name=[];
-          var map_url=[];
-          for(var key in obj){
-              var attrName = key;
-              var attrValue = obj[key];
-              route_name[key]=obj[key].routeName;
-              map_url[key]=obj[key].mapUrl;
-              // console.log(key+" "+obj[key].routeName);
-          }
-          // console.log(key);
-          // console.log(val);
-          // console.log(val['810'].routeName);
-          // for (var i = 0; i < array.length; i++) {
-          //     var route = array[i];
-          //     console.log(i+" "+ JSON.stringify(route));
-          // }
-          // function getRouteName(route){
-          //     return val[route].routeName
-          // }
-          // console.log (getRouteName(810));
-
-          var obj={};
-          refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
-            $scope.routeCnt ++;
-
-              var key = snapshot.key();
-              var val = snapshot.val();
-              var array = val;
-              // console.log(val);
-              var route_bus=[];
-              var routeName_bus=[];
-
-              var toOpen = true;
-              for (var i = 0; i < array.length; i++) {
-                  var bus = array[i];
-
-                  // console.log(bus['route']);
-                  var routeId=parseInt(bus['route']);
-                  // var routeName=getRouteName(bus['routeId']);
-                  // console.log(routeId+ " "+routeName);
-
-
-                  // console.log("route "+bus['route']);
-                  // console.log("bus "+bus['bus']);
-                  // route_bus[bus['route']]+=bus['bus']+" ";
-                  if (  obj[bus['route']]===undefined){
-                      obj[bus['route']]=bus['bus']+" ";
-                  }else{
-                      obj[bus['route']]+=bus['bus']+" ";
-                  }
-
-              }
-
-              // console.log(JSON.stringify(obj));
-              var str="只列出現在資料有公車的路線<table class='flat-table'>";
-              // str+=" <tr><th>序號</th><th>路線編號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
-  // str+= "<tr><th colspan='4'>現有公車的路線</th></tr>";
-              str+=" <tr><th>序號</th><th>路線編號</th><th>車輛數</th><th align='left'>路線名稱</th></tr>";
-            var cnt=0;
-              for(var key in obj){
-                  var attrName = key;
-                  var attrValue = obj[key];
-                  // console.log(key+" 【"+route_name[key]+"】 "+obj[key]);
-                  // console.log(key+" ");
-                  // str+=" <br>"+key+"【"+route_name[key]+"】 "+obj[key];
-                  if (route_name[key]===undefined){
-                    // TODO WHY?
-                  }else{
-                      cnt++;
-                      var temp=obj[key].split(" ");
-                      // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td>【"+route_name[key]+"】</td><td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
-                      str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length
-                      +"</td><td> "
-                      // +"<button>【"+route_name[key]+"】</button></td></tr>";
-                        +"【"+route_name[key]+"】</td>"
-                        +"<td>"+map_url[key]+"</td>"
-                        +"</tr>";
-                  }
-
-
-              }
-              str+="</table>";
-
-              // NOTE working, 2/1 02:23
-              document.getElementById("list").innerHTML =str;
-
-
-          }); // en
-
-
-
-      });
-
-
-    }
-
-
-
 
     function showRouteBusListV2(){
       console.log("DOING... showRouteBusListV2");
@@ -178,13 +46,6 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
           var val = snapshot.val();
           var obj = val;
           var route_name=[];
-          // for(var key in obj){
-          //     var attrName = key;
-          //     var attrValue = obj[key];
-          //     route_name[key]=obj[key].routeName;
-          //     // console.log(key+" "+obj[key].routeName);
-          // }
-          //
 
           var map_url=[];
           for(var key in obj){
@@ -194,18 +55,6 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
               map_url[key]=obj[key].mapUrl;
               // console.log(key+" "+obj[key].routeName);
           }
-          // console.log(key);
-          // console.log(val);
-          // console.log(val['810'].routeName);
-          // for (var i = 0; i < array.length; i++) {
-          //     var route = array[i];
-          //     console.log(i+" "+ JSON.stringify(route));
-          // }
-          // function getRouteName(route){
-          //     return val[route].routeName
-          // }
-          // console.log (getRouteName(810));
-
           var obj={};
           refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
             $scope.routeCnt ++;
@@ -220,36 +69,19 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
               var toOpen = true;
               for (var i = 0; i < array.length; i++) {
                   var bus = array[i];
-
-                  // console.log(bus['route']);
                   var routeId=parseInt(bus['route']);
-                  // var routeName=getRouteName(bus['routeId']);
-                  // console.log(routeId+ " "+routeName);
-
-
-                  // console.log("route "+bus['route']);
-                  // console.log("bus "+bus['bus']);
-                  // route_bus[bus['route']]+=bus['bus']+" ";
                   if (  obj[bus['route']]===undefined){
-                      obj[bus['route']]=bus['bus']+" ";
+                      obj[bus['route']]=bus['bus']+" "; // FOR THE VERY FIRST TIME
                   }else{
                       obj[bus['route']]+=bus['bus']+" ";
                   }
-
               }
 
               // console.log(JSON.stringify(obj));
-              var str="只列出現在資料有公車的路線<table class='flat-table'>";
-              str+=" <tr><th>序號</th><th>路線編號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
-    // str+= "<tr><th colspan='4'>現有公車的路線</th></tr>";
-              // str+=" <tr><th>序號</th><th>路線編號</th><th>車輛數</th><th align='left'>路線名稱</th></tr>";
-            var cnt=0;
+              var str="備註: 只列出現在資料有公車的路線<table class='flat-table'>"
+                      +" <tr><th>序號</th><th>路線編號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
+              var cnt=0;
               for(var key in obj){
-                  var attrName = key;
-                  var attrValue = obj[key];
-                  // console.log(key+" 【"+route_name[key]+"】 "+obj[key]);
-                  // console.log(key+" ");
-                  // str+=" <br>"+key+"【"+route_name[key]+"】 "+obj[key];
                   if (route_name[key]===undefined){
                     // TODO WHY?
                   }else{
@@ -258,36 +90,18 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
                       str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
                       +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
                       "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
-                      // str+=" <tr><th>"+cnt+"</th><td>"+key+"</td><td align='center'>"+temp.length
-                      // +"</td><td> "
-                      // // +"<button>【"+route_name[key]+"】</button></td></tr>";
-                      //   +"【"+route_name[key]+"】</td></tr>";
                   }
-
-
               }
               str+="</table>";
-
               // NOTE working, 2/1 02:23
               document.getElementById("list").innerHTML =str;
+          }); // END OF refBuslist.once
+      }); // END OF refRoutes.once
+    } //
 
-
-          }); // en
-
-
-
-      });
-
-
-    }
     $scope.showRouteBusList = function () {
-      // showRouteBusList();
       showRouteBusListV2();
-
     }
-
-
-
 
     var docX;
     $scope.clearScreen = function () {
@@ -296,13 +110,10 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
             zoom: 14,
             disableDefaultUI: true //https://developers.google.com/maps/documentation/javascript/controls
         });
-
         ddlRouteChange(docX)
     }
 
     $scope.ddlRouteChange = function (doc) {
-        $("#map").show();//ddlRoute
-      //
         map = new google.maps.Map(document.getElementById('map'), {
             center: initLatLng,
             zoom: 14,
@@ -319,20 +130,8 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
         $scope.busCnt = 0;
         var myDiv = document.getElementById("busCnt");
         myDiv.innerHTML =$scope.busCnt+"輛公車";
-
-        // showAnchor();
-
-
         var obj = JSON.parse(doc); // index.html 傳過來的是String, 要先當成 json obj 好應用
         var route = parseInt(obj.routeId);// routeId 過來時是文本,要轉成 integer
-
-
-        // getRouteDots(11811);
-        // getRouteDots(route); // route major problem!!!
-
-
-        // var majorRoute=0;
-
         refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
             var key = snapshot.key();
             var val = snapshot.val();
@@ -344,8 +143,6 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
             var showRouteAlready=false;
             for (var i = 0; i < array.length; i++) {
                 var bus = array[i];
-
-
                 if (bus['route'] == obj.routeId) {
                     busCntNumber++;
                     $scope.busCnt++;
@@ -354,13 +151,8 @@ $scope.type  = [{"$value":"one","code":1},{"$value":"two","code":2},{"$value":"t
 
                     var temp=obj.mapUrl;
                     var temp2=temp.split("=");
-                    // console.log ("DOING "+obj.mapUrl );
-                    // console.log ("DOING "+temp2[1] );
                     $scope.majorRoute= parseInt(temp2[1]);
-  // console.log ("xxx??? $scope.majorRoute route is "+$scope.majorRoute)
 
-
-  // getRouteDots(11811);
   if (!showRouteAlready){
     getRouteDots($scope.majorRoute);
 showRouteAlready=true;
@@ -376,40 +168,21 @@ majorroute=mmm[1];
                     // + "<div><h4>"
                     + "<div>"
                     + "<a target='_blank' href='" + obj.mapUrl + "' >"
-                    // + "<a target='_blank' href='index-bus.html?route=" + obj.routeId
-                    // +"&majorroute=" +majorroute
-                    // +"&routestart=" +obj.startStop
-                    // +"&routeend=" +obj.endStop
-                    // +"&routename="+ obj.routeName +"' >"
                             + "<b>【" + obj.routeName + "】</b><br>"
-                            // +obj.startStop
-                            // +"<br>|"
-                            // +"<br>"+obj.endStop
                             + obj.startStop
-                            // + "<br>|"
                             + "<br>" + obj.endStop
                             + "</a>"
                             +"<br><b>#" + busCntNumber
                             + "</b>"
                             +"</div>"
-                            // + "【" + bus.bus + "】"
-                            // + "<br>"
                             + dt2
-
                             + '<h4 style="cursor:crosshair; color:#1A237E" onclick="show30Dots(\''+bus.bus+'\')">'+bus.bus+'</h4>'
-                              + "</div>"
+                            + "</div>"
                             ;
-
-                    // console.log("i=" + i);
                     makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
-//function makeMarkerV2            (bus     ,unix,     lat,     lon,     icon ,toOpenNow,toMoveCenterNow,cnt,msg){
                     toOpen=false;
-                      $scope.lat=bus.lat;
-                      $scope.lon=bus.lon;
-
-
-                    // toOpen=false;
-
+                      // $scope.lat=bus.lat;
+                      // $scope.lon=bus.lon;
                 }
             }
             if ($scope.busCnt==0){
@@ -417,41 +190,10 @@ majorroute=mmm[1];
             }else{
                 map.setCenter({lat: $scope.lat, lng: $scope.lon});
             }
-
         }); // end of once
-
-        // by Mark, 02/04 14:06
-        // console.log ("xxx major route is "+$scope.majorRoute)
-        // getRouteDots($scope.majorRoute);
-
-
-
     }
 
 
-    function showAnchor(){
-      map.setCenter(initLatLng);
-
-      // RESET ALL
-      anchorCnt++; // it won't show info window again
-      console.log("anchorCnt=" + anchorCnt);
-      //
-      var rulX = urlFirebase + 'buslist';
-      var refList = new Firebase(rulX);
-      var cnt = 0;
-      refList.on("child_added", function (snapshot, prevChildKey) {
-          var key = snapshot.key();
-          // console.log("key=" + key);
-          ref.child(key).off();
-      });
-      initMap();
-    }
-
-    $scope.showAnchor = function () {
-      showAnchor();
-    }
-        //  initMap();
-        // initLatLng
 
 
 

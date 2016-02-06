@@ -27,7 +27,7 @@
     <body  ng-controller="SampleCtrl">
         <div class="container">
             <div class="row">
-                <button ng-click="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
+                <button onclick="showAnchor()" class="btn btn-danger " >走過必留痕跡!</button>
                 <button ng-click="clearScreen()" class="btn btn-success " ><div id="busCnt">【路線】車輛數</div></button>
                 <button id="showRouteBusList" ng-click="showRouteBusList()"  class="btn  btn-primary" ><div id="routeCnt">...載入中,請稍候</div></button>
                 <select  class="form-control" style="font-size:110%"   name="selectRoute" id="ddlRoute" ng-model="selectRoute.selectedValue" ng-change="ddlRouteChange(selectRoute.selectedValue)"   >
@@ -41,6 +41,8 @@
         </div>
         <div id="map"></div>
         <script src="biz-js/bus-debug.js"></script>
+        <script src="biz-js/bus-basic.js"></script>
+
         <script src="biz-js/bus-hide-map.js"></script>
         <script src="biz-js/bus-init-map.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8DY8o-Qzo6Yv9bYzP-cBO9cmgqAwXh0c&callback=initMap"  async defer></script>
@@ -50,6 +52,7 @@
         <script src="server-tasks/routeStops.js"></script>
         <script src="biz-js/bus-app-route.js"></script>
         <script src="biz-js/bus-app-show-one-bus.js"></script>
+        <script src="biz-js/bus-onclick.js"></script>
         <script src="biz-js/bus-app.js"></script>
     </body>
 </html>
