@@ -9,7 +9,7 @@ function showAnchor() {
 
 function showRouteBusListV2(){
   routeCnt=0;
-  console.log("DOING... showRouteBusListV2");
+  var routeArray=[];
   refRoutes.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
       var key = snapshot.key();
       var val = snapshot.val();
@@ -58,12 +58,48 @@ function showRouteBusListV2(){
                   var temp=obj[key].split(" ");
                   str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
                   +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
-                  "<td> "+(temp.length-1)+"</td><td>"+obj[key]+"</td></tr>";
+                  "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
+
+                  var oneRoute={route:key,routeName:route_name[key],routeMapUrl: map_url[key],routeBuses:obj[key]};
+                  routeArray.push(oneRoute);
               }
           }
           str+="</table>";
           // NOTE working, 2/1 02:23
-          document.getElementById("list").innerHTML =str;
+          // document.getElementById("list").innerHTML =str;
+
+          console.log(routeArray);
+//http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+          routeArray.sort(function(x,y){
+            var z='routeName';
+            // return ((x['routeName']  == y['routeName']) ? 0 : ((x['routeName']>    y['routeName']) ? 1 : -1 ));
+            return ((x[z]  == y[z]) ? 0 : ((x[z]>    y[z]) ? 1 : -1 ));
+          });
+          console.log(routeArray);
+
+          var str2="備註: 只列出現在資料有公車的路線<table class='flat-table'>"
+                  +" <tr><th>序號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
+
+          for (var i=0;i<routeArray.length;i++){
+            var routeObj=routeArray[i];
+
+            var temp1 = routeObj['routeMapUrl'].split("=");
+            var majorRouteId = parseInt(temp1[1]);
+
+
+            // str2+=" <tr><th>"+(1+i)+"</th><td>"+key+"  "+"</td>"
+            str2+=" <tr><th>"+(1+i)+"</th>"
+            +"<td><a target='_blank' href='"+ routeObj['routeMapUrl']+"'>"+  "【"+routeObj['routeName']+"】</a></td>"
+            // +  "<td>"
+            //      + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="selectRouteByIdV2(\'' + routeObj['route'] +','+majorRouteId +'\')">' + routeObj['routeName'] + '</button></h4>'
+            // +  "</td>"+
+          +  "<td> "+(routeObj['routeBuses'].split(" ").length-1)+"</td><td>"+routeObj['routeBuses']+"</td></tr>";
+
+
+          }
+          str2+="</table>";
+  document.getElementById("list").innerHTML =str2;
+
       }); // END OF refBuslist.once
   }); // END OF refRoutes.once
 } //
