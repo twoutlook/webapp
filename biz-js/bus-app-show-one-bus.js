@@ -20,7 +20,8 @@ function showBusOneDot(busNum,x,img,toOpen,toCenter,showRoute){
               if (bus['bus'] == busNum) {
 
               var dt = new Date(parseInt(bus.unix));
-              var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+              // var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+              var dt2 = dt.format("<b>HH:MM</b>");
 
 
 
