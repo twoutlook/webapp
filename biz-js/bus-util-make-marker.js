@@ -116,3 +116,52 @@ function makeMarkerV2(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){
 
     }
 }
+
+
+function makeMarkerV3___toFro(bus,unix,lat,lon,icon,toOpenNow,toMoveCenterNow,cnt,msg){
+  var temp=parseInt(unix);
+  var dt=new Date(temp);
+  // dt2=dt.format("mm/dd HH:MM");
+  dt2=dt.format("HH:MM");
+
+
+  var myLatLng = {lat: lat, lng: lon};
+
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: icon,//it can be null
+      animation: google.maps.Animation.DROP,
+      title:dt2// html tag is bad here
+  });
+
+  var contentString = '<div id="content" style="background-color:#f9f9f9"> '+
+        '<div id="siteNotice">'+
+        '</div>'+
+        // '<h4 id="firstHeading" class="firstHeading">'+" <u> "+routeName+" </u> "+'</h4>'+
+        '<div id="bodyContent" class="firstHeading">'+
+        // '<p><b>'+$scope.unix+'</b>'+
+        // '<p><b>'+"【"+bus+"】"+cntStr+"<BR>"+dt2+'</b>'+msg+
+        '<p>'+msg+
+      '</div>'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    if (toOpenNow){
+      infowindow.open(map, marker);
+    }
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+
+    if (toMoveCenterNow){
+      // console.log("setCenter "+ myLatLng+" "+bus+ " "+lat+","+lon);
+      map.setCenter(myLatLng);//myLatLng
+      // map.setCenter({lat: lat, lng: lon});//myLatLng
+
+    }
+}

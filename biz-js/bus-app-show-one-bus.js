@@ -21,7 +21,7 @@ function showBusOneDot(busNum,x,img,toOpen,toCenter,showRoute){
 
               var dt = new Date(parseInt(bus.unix));
               // var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
-              var dt2 = dt.format("<b>HH:MM</b>");
+              var dt2 = dt.format("<b>HH:MM</b>:ss");
 
 
 
@@ -56,7 +56,9 @@ function showBusTrackingX(busNum, x) {
         if (num == x) {
             // showBusOneDot(busNum,x,"img/bus.png",true,true,true);
         }else{
-          if ((x==2)||(x==4)||(x==6)||(x==12)||(x==14)||(x==16)||(x==22)||(x==24)||(x==26)){
+          // if ((x==2)||(x==4)||(x==6)||(x==12)||(x==14)||(x==16)||(x==22)||(x==24)||(x==26)){
+            if (x==1){
+
             showBusOneDot(busNum,x,"img/red2.png",false,true,false); // DOING move center
         }else{
             showBusOneDot(busNum,x,"img/red2.png",false,false,false);

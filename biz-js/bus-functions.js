@@ -83,11 +83,12 @@ mem_majorRouteId=majorRouteId;
                         + "<div>"
                         + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
                         + dt2
-                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (busCnt)+"輛" + '</button></h4>'
                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
-                makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+                // makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+                makeMarkerV3___toFro(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
                 toOpen = false;
             }
         }

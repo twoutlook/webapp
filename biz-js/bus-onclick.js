@@ -42,7 +42,12 @@ function showRouteBusListV2(){
               if (  obj[bus['route']]===undefined){
                   obj[bus['route']]=bus['bus']+" "; // FOR THE VERY FIRST TIME
               }else{
+                //去返程 （0：去程、1：回程、2：未知）
+                if (bus['tofro']==2){
+                    console.log (bus['bus']+" "+bus['tofro']);
+                }else{
                   obj[bus['route']]+=bus['bus']+" ";
+                }
               }
           }
 
@@ -54,28 +59,31 @@ function showRouteBusListV2(){
               if (route_name[key]===undefined){
                 // TODO WHY?
               }else{
-                  cnt++;
-                  var temp=obj[key].split(" ");
-                  str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
-                  +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
-                  "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
-
+                  // cnt++;
+                  // var temp=obj[key].split(" ");
+                  // str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
+                  // +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
+                  // "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
+                  console.log ()
                   var oneRoute={route:key,routeName:route_name[key],routeMapUrl: map_url[key],routeBuses:obj[key]};
                   routeArray.push(oneRoute);
               }
           }
-          str+="</table>";
+          // str+="</table>";
           // NOTE working, 2/1 02:23
           // document.getElementById("list").innerHTML =str;
 
-          console.log(routeArray);
-//http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
+          // console.log(routeArray);
+
+
+
+          //http://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects
           routeArray.sort(function(x,y){
             var z='routeName';
             // return ((x['routeName']  == y['routeName']) ? 0 : ((x['routeName']>    y['routeName']) ? 1 : -1 ));
             return ((x[z]  == y[z]) ? 0 : ((x[z]>    y[z]) ? 1 : -1 ));
           });
-          console.log(routeArray);
+          // console.log(routeArray);
 
           var str2="備註: 只列出現在資料有公車的路線<table class='flat-table'>"
                   +" <tr><th>序號</th><th>路線名稱</th><th>車輛數</th><th>車牌號碼</th></tr>";
