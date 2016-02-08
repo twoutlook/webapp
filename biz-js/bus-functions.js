@@ -81,8 +81,11 @@ mem_majorRouteId=majorRouteId;
                         + route_start[mySelect.value]
                         + "<br>" + route_stop[mySelect.value]
                         + "</a>"
-                        + "<br><b>第" + busCnt+"輛"
-                        + "</b>"
+                        // + "<br><b>第" + busCnt+"輛"
+                        // + "</b>"
+
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1)+"輛" + '</button></h4>'
+
                         + "</div>"
                         + dt2
                         //#DC4108
@@ -147,8 +150,12 @@ function selectRouteByAddOne() {
                         + "<br>" + route_stop[mySelect.value]
                         + "</a>"
                         // + "<br><b>#" + (1+i)
-                        + "<br><b>第" + (1+i)+"輛"
-                        + "</b>"
+                        // + "<br><b>第" + (1+i)+"輛"
+                        // + "</b>"
+                        // green
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1+i)+"輛" + '</button></h4>'
+
+
                         + "</div>"
                         + dt2
                         // + '<h4 style="cursor:crosshair; color:red" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
