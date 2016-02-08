@@ -85,7 +85,9 @@ mem_majorRouteId=majorRouteId;
                         + "</b>"
                         + "</div>"
                         + dt2
-  + '<h4><button style="; border-radius: 6px; background-color:#DC4108; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
+                        //#DC4108
+                        //#D9544F
+  + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
                         // + '<h4 style="cursor:crosshair; color:red; border-radius: 25px;" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
                         + "</div>"
                         ;
