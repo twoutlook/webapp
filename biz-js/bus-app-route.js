@@ -6,7 +6,7 @@ function makeMarkerV3(stopName,lat,lon){
   var marker = new google.maps.Marker({
       position: myLatLng,
       map: map,
-      icon: "img/bus-stop.png",//it can be null
+      icon: "img/busstop8.png",//it can be null
       animation: google.maps.Animation.DROP,
        title:stopName // html tag is bad here
   });
