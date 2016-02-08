@@ -58,7 +58,7 @@ function showRouteBusListV2(){
                   var temp=obj[key].split(" ");
                   str+=" <tr><th>"+cnt+"</th><td>"+key+"  "+"</td>"
                   +"<td><a target='_blank' href='"+ map_url[key]+"'>"+  "【"+route_name[key]+"】</a></td>"+
-                  "<td> "+temp.length+"</td><td>"+obj[key]+"</td></tr>";
+                  "<td> "+(temp.length-1)+"</td><td>"+obj[key]+"</td></tr>";
               }
           }
           str+="</table>";
