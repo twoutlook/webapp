@@ -81,25 +81,10 @@ mem_majorRouteId=majorRouteId;
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        // #327DB4, blue
-                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
-
-                        // + "<a   target='_blank' href='" + route_url[mySelect.value] + "' >"
-                        // + "<b>【" + route_name[mySelect.value] + "】</b><br>"
-                        + route_start[mySelect.value]
-                        + "<br>" + route_stop[mySelect.value]
-                        // + "</a>"
-                        // + "<br><b>第" + busCnt+"輛"
-                        // + "</b>"
-
-                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1)+"輛" + '</button></h4>'
-
-                        + "</div>"
+                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
                         + dt2
-                        //#DC4108
-                        //#D9544F
-  + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
-                        // + '<h4 style="cursor:crosshair; color:red; border-radius: 25px;" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
                 makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
@@ -149,27 +134,14 @@ function selectRouteByAddOne() {
             // var mem_route_stop;
                 var dt = new Date(parseInt(bus.unix));
                 var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
-
-                       // + "<a   target='_blank' href='" + route_url[mySelect.value] + "' >"
-                       // + "<b>【" + route_name[mySelect.value] + "】</b><br>"
-                       + route_start[mySelect.value]
-                       + "<br>" + route_stop[mySelect.value]
-                   // + "<br><b>#" + (1+i)
-                        // + "<br><b>第" + (1+i)+"輛"
-                        // + "</b>"
-                        // green
-                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1+i)+"輛" + '</button></h4>'
-
-
-                        + "</div>"
-                        + dt2
-                        // + '<h4 style="cursor:crosshair; color:red" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</h4>'
                         + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
-
+                        + dt2
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (1+i)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
                 makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
@@ -249,10 +221,12 @@ function prepareDdlRoute() {
         }
         byHand += ' </select>';
         document.getElementById("ddlRoute").innerHTML = byHand;
-        document.getElementById("routeCnt").innerHTML = "路線:" + ttlRouteCnt;
+        document.getElementById("routeCnt").innerHTML = "共載入路線數" + ttlRouteCnt;
+
         $("#ddlRoute").show(1000, function () {
             $("#map").show(1000, function () {
                 initMap();
+                document.getElementById("routeCnt").innerHTML = "路線" ;
             })
         });
     });
