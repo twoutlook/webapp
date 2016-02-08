@@ -1,4 +1,9 @@
 // NOTE:清畫面,重畫路線和車輛
+
+function openMapUrl(url){
+  window.open(url,'popUpWindow','height=400,width=600,left=10,top=10');
+}
+
 function resetRouteBuses() {
   // watch_bus_array=[];
   watch_bus_index++;
@@ -76,11 +81,14 @@ mem_majorRouteId=majorRouteId;
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        + "<a target='_blank' href='" + route_url[mySelect.value] + "' >"
-                        + "<b>【" + route_name[mySelect.value] + "】</b><br>"
+                        // #327DB4, blue
+                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
+
+                        // + "<a   target='_blank' href='" + route_url[mySelect.value] + "' >"
+                        // + "<b>【" + route_name[mySelect.value] + "】</b><br>"
                         + route_start[mySelect.value]
                         + "<br>" + route_stop[mySelect.value]
-                        + "</a>"
+                        // + "</a>"
                         // + "<br><b>第" + busCnt+"輛"
                         // + "</b>"
 
@@ -144,12 +152,13 @@ function selectRouteByAddOne() {
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        + "<a target='_blank' href='" + route_url[mySelect.value] + "' >"
-                        + "<b>【" + route_name[mySelect.value] + "】</b><br>"
-                        + route_start[mySelect.value]
-                        + "<br>" + route_stop[mySelect.value]
-                        + "</a>"
-                        // + "<br><b>#" + (1+i)
+                        + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
+
+                       // + "<a   target='_blank' href='" + route_url[mySelect.value] + "' >"
+                       // + "<b>【" + route_name[mySelect.value] + "】</b><br>"
+                       + route_start[mySelect.value]
+                       + "<br>" + route_stop[mySelect.value]
+                   // + "<br><b>#" + (1+i)
                         // + "<br><b>第" + (1+i)+"輛"
                         // + "</b>"
                         // green
