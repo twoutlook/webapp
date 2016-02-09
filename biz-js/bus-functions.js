@@ -10,6 +10,7 @@ function resetRouteBuses() {
   console.log("DOING...resetRouteBuses");
     //
   // watch_bus_array=[];
+  return;
   watch_bus_index++;
   if (watch_bus_index == watch_bus_array.length){
     watch_bus_index=1;
