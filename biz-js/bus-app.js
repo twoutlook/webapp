@@ -2,5 +2,5 @@
 // var allRoutes = {};
 // var ttlRouteCnt=0;
 
-
-prepareDdlRoute();
+//
+prepareDdlRoute(); // NOTE bus-functions.js

@@ -28,6 +28,10 @@ var mem_route_name;
 var mem_route_start;
 var mem_route_stop;
 var save_bus=[];
+var save_lat=[];
+var save_lon=[];
+var save_unix=[];
+
 
 // NOTE:重畫路線和車輛
 function selectRoute() {
@@ -54,7 +58,12 @@ function selectRoute() {
             var bus = array[i];
             if (bus['route'] == route) {
 
-              save_bus[busCnt]=bus;
+              save_bus[busCnt]=bus['bus'];
+              save_lat[busCnt]=parseFloat(bus['lat']);
+              save_lon[busCnt]=parseFloat(bus['lon']);
+              save_unix[busCnt]=parseInt(bus['unix']);
+
+
 
                 busCnt++;
                 document.getElementById("busCnt").innerHTML = busCnt + "輛公車";
@@ -84,6 +93,7 @@ mem_majorRouteId=majorRouteId;
                         + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
                         + dt2
                         + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="selectRouteAndSelectBus(\'' + busCnt + '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
@@ -105,6 +115,7 @@ mem_majorRouteId=majorRouteId;
         }
     }); // end of once
 }
+
 
 
 
@@ -145,6 +156,7 @@ function selectRouteByAddOne() {
                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
+      //function makeMarkerV2(bus,unix,lat,lon,icon,                    toOpenNow,toMoveCenterNow,cnt,msg){
                 makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
                 // toOpen = false;
                 document.getElementById("busCnt").innerHTML = watch_bus_array.length-1 + "輛第"+watch_bus_index+"輛";
@@ -231,4 +243,143 @@ function prepareDdlRoute() {
             })
         });
     });
+}
+
+
+
+
+function selectRouteAndSelectBus(selectBus) {
+    console.log("DOING...selectRouteAndSelectBus "+selectBus);
+    selectBus=parseInt(selectBus);
+    selectBus++;
+    console.log("DOING...selectRouteAndSelectBus "+selectBus);
+
+    anchorCnt=99;
+    initMap();
+    watch_bus_array=[];
+    watch_bus_index=-1;
+
+    // alert(mySelect.value+" "+route_name[mySelect.value]);
+    // console.log(mySelect.value + " " + route_name[mySelect.value]);
+    $("#list").hide();
+
+    var busCnt = 0;
+    document.getElementById("busCnt").innerHTML = busCnt + "輛公車";
+    var route = parseInt(mySelect.value);// routeId 過來時是文本,要轉成 integer
+    // route=selectRoute;
+
+    refBuslist.once("child_added", function (snapshot, prevChildKey) { // 就只有一個doc
+        var key = snapshot.key();
+        var val = snapshot.val();
+        var array = val;
+        var toOpen = true;
+        var showRouteAlready = false;
+        for (var i = 0; i < array.length; i++) {
+            var bus = array[i];
+            if (bus['route'] == route) {
+
+              save_bus[busCnt]=bus;
+                // NOTE: this is the busCnt belonging to this route
+                busCnt++;
+                document.getElementById("busCnt").innerHTML = busCnt + "輛公車";
+
+                watch_bus_array[busCnt]=bus['bus'] ;
+                watch_bus_index=1;
+
+                // NOTE:MAP URL 的ID值,剛好就是 Major Route
+                var temp1 = route_url[mySelect.value].split("=");
+                var majorRouteId = parseInt(temp1[1]);
+
+mem_majorRouteId=majorRouteId;
+
+
+                // NOTE:路線上的站牌只要畫一次
+                if (!showRouteAlready) {
+                    getRouteDots(majorRouteId);
+                    showRouteAlready = true;
+                }
+
+
+                var dt = new Date(parseInt(bus.unix));
+                var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+                var msg = ""
+                        // + "<div><h4>"
+                        + "<div>"
+                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
+                        + dt2
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                        + '***<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="selectRouteAndSelectBus(\'' + busCnt + '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
+                        + "</div>"
+                        ;
+                // makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+
+                if (busCnt==selectBus){
+                    toOpen = true;
+                      console.log("DOING...selectRouteAndSelectBus "+selectBus+" busCnt="+busCnt+" toOpen="+toOpen);
+                }else{
+                    toOpen = false;
+                      console.log("DOING...selectRouteAndSelectBus "+selectBus+" busCnt="+busCnt+" toOpen="+toOpen);
+                }
+                makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+
+            }
+        }
+
+
+        // console.log(watch_bus_array);
+        // console.log(watch_bus_index);
+
+        // NOTE:當路線沒有車時,顯示地標
+        if (busCnt == 0) {
+            showAnchor();
+        } else {
+            for (var i=0;i<busCnt;i++){
+              var busNum=save_bus[i];
+              console.log(save_bus[i]);
+
+
+              //
+              // // NOTE:MAP URL 的ID值,剛好就是 Major Route
+              // var temp1 = route_url[mySelect.value].split("=");
+              // var majorRouteId = parseInt(temp1[1]);
+              //
+            // mem_majorRouteId=majorRouteId;
+
+
+              // NOTE:路線上的站牌只要畫一次
+              if (!showRouteAlready) {
+                  getRouteDots(majorRouteId);
+                  showRouteAlready = true;
+              }
+
+
+              var dt = new Date(parseInt(bus.unix));
+              var dt2 = dt.format("yyyy-mm-dd<br><b>HH:MM</b>:ss");
+              var msg = ""
+                      // + "<div><h4>"
+                      + "<div>"
+                      + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' +busNum + '\')">' + busNum + '</button></h4>'
+                      + dt2
+                      + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses()">' +"第" + (999)+"輛" + '</button></h4>'
+                      + '***<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="selectRouteAndSelectBus(\'' + (1+i) + '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                      + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + mem_majorRouteId + '\')">' + route_name[mySelect.value] + '</button></h4>'
+                      + "</div>"
+                      ;
+              // makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
+
+              if ((1+i)==selectBus){
+                  toOpen = true;
+                    console.log("DOING...selectRouteAndSelectBus "+selectBus+" busCnt="+busCnt+" toOpen="+toOpen);
+              }else{
+                  toOpen = false;
+                    console.log("DOING...selectRouteAndSelectBus "+selectBus+" busCnt="+busCnt+" toOpen="+toOpen);
+              }
+              makeMarkerV2(save_bus[i], save_unix[i],  save_unix[i], save_unix[i], iconBus, toOpen, true, null, msg);
+
+
+
+            }
+        }
+    }); // end of once
 }

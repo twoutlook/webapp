@@ -36,7 +36,7 @@ function makeMarkerV3(stopName,lat,lon){
 
     // if (toMoveCenterNow){
       // console.log("setCenter "+ myLatLng+" "+bus+ " "+lat+","+lon);
-      map.setCenter(myLatLng);//myLatLng
+      // map.setCenter(myLatLng);//myLatLng
       // infowindow.open(map, marker);
       // map.setCenter({lat: lat, lng: lon});//myLatLng
 
