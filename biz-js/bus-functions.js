@@ -7,8 +7,8 @@ function openMapUrl(url){
 
 //中間按鈕
 function resetRouteBuses(num) {
-  console.log("DOING...resetRouteBuses===>"+num);
-  selectRouteAndBus(num);
+  console.log("DOING...車牌號碼===>"+num);
+  selectRouteAndBus(num);//車牌號碼
 
   //DOING
   // watch_bus_array=[];
@@ -88,9 +88,11 @@ mem_majorRouteId=majorRouteId;
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
+                        // + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + "查看痕跡" + '</button></h4>'
                         + dt2
-                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses(\'' + busCnt + '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses(\'' +bus.bus + '\')">' +bus.bus + '</button></h4>'
+                        // + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses(\'' + busCnt + '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
@@ -121,7 +123,7 @@ function selectRouteAndBus(num) {
     watch_bus_index=-1;
 
     // alert(mySelect.value+" "+route_name[mySelect.value]);
-    console.log("selectRouteAndBus()");
+    console.log("selectRouteAndBus()"+num);
     $("#list").hide();
 
     var busCnt = 0;
@@ -165,16 +167,16 @@ mem_majorRouteId=majorRouteId;
                 var msg = ""
                         // + "<div><h4>"
                         + "<div>"
-                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + bus.bus + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#D9544F; color:white" type="button" onclick="show30Dots(\'' + bus.bus + '\')">' + "查看痕跡" + '</button></h4>'
                         + dt2
-                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses(\'' +(busCnt)+ '\')">' +"第" + (busCnt)+"輛" + '</button></h4>'
+                        + '<h4><button style="; border-radius: 6px; background-color:#5BB85D; color:white" type="button" onclick="resetRouteBuses(\'' +bus.bus + '\')">'  + bus.bus  + '</button></h4>'
                         + '<h4><button style="; border-radius: 6px; background-color:#327DB4; color:white" type="button" onclick="openMapUrl(\'' + route_url[mySelect.value] + '\')">' + route_name[mySelect.value] + '</button></h4>'
                         + "</div>"
                         ;
                 // makeMarkerV2(bus.bus, bus.unix, bus.lat, bus.lon, iconBus, toOpen, true, null, msg);
                 toOpen = false;
 
-                if (busCnt==num) {
+                if (bus.bus==num) {
 
                  toOpen = true;
                 }
